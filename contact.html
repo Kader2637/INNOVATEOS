@@ -233,10 +233,63 @@
     </div>
 </main>
 
-    <footer class="bg-white text-slate-900 py-10 text-center border-t border-slate-200 w-full mt-auto relative z-20">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <h2 class="text-xl font-black italic text-slate-900">INNOVATE<span class="text-emerald-500">OS</span></h2>
-            <p class="text-[10px] font-bold uppercase text-slate-400 tracking-widest">© 2026 Environmental Intelligence System</p>
+    <footer class="relative bg-white border-t border-slate-200 pt-16 pb-8 overflow-hidden z-10">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-1/2 bg-green-50 rounded-[100%] blur-3xl -z-10 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-globe-asia text-lg animate-pulse"></i>
+                        </div>
+                        <h2 class="text-2xl font-black tracking-tighter leading-none text-slate-900">INNOVATE<span class="text-green-600">OS</span></h2>
+                    </div>
+                    <p class="text-slate-500 leading-relaxed max-w-sm font-medium">
+                        Sistem intelijen lingkungan real-time. Melindungi ekosistem bumi dengan analisis data dan pemantauan satelit 24/7.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-3 space-y-6">
+                    <h3 class="font-black text-slate-900 uppercase tracking-widest text-xs">Menu Platform</h3>
+                    <ul class="space-y-4 text-slate-500 font-bold text-sm">
+                        <li><a href="#home" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i> Home</a></li>
+                        <li><a href="simulator.html" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>Simulasi Bencana</a></li>
+                        <li><a href="bencana.html" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i> Crisis Archive</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 space-y-6">
+                    <h3 class="font-black text-slate-900 uppercase tracking-widest text-xs">System Status</h3>
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl flex items-start gap-4 shadow-sm hover:border-green-300 hover:shadow-md transition-all cursor-default">
+                        <div class="mt-1 relative flex h-3 w-3 shrink-0">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-black text-slate-800">All Systems Operational</p>
+                            <p class="text-xs text-slate-500 mt-1 font-medium">Satelit LEO tersinkronisasi. Last update: <span class="text-green-600 font-bold">12ms ago</span></p>
+                        </div>
+                    </div>
+                    <button onclick="scrollToId('contact')" class="w-full py-4 px-4 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Buat Laporan Darurat
+                    </button>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] md:text-xs font-black uppercase text-slate-400 tracking-widest text-center md:text-left">© 2026 INNOVATE OS. Environmental Intelligence.</p>
+                <div class="flex gap-6 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <a href="#" class="hover:text-slate-900 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-slate-900 transition-colors">Terms</a>
+                    <a href="#" class="hover:text-slate-900 transition-colors">API Docs</a>
+                </div>
+            </div>
         </div>
     </footer>
 

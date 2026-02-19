@@ -4,15 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crisis Archive | INNOVATE OS v5.0 Intelligence</title>
+    <title>Crisis Archive | INNOVATE OS v5.1 Intelligence</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -28,23 +26,13 @@
             overflow-x: hidden;
         }
 
-        h1,
-        h2,
-        h3,
-        .font-heading {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        h1, h2, h3, .font-heading { font-family: 'Space Grotesk', sans-serif; }
 
         /* --- DYNAMIC BACKGROUND MESH --- */
         .mesh-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.5;
-            background-image:
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.5;
+            background-image: 
                 radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
                 radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
                 radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
@@ -53,316 +41,257 @@
             animation: meshMove 20s infinite alternate;
         }
 
-        @keyframes meshMove {
-            0% {
-                transform: scale(1);
-            }
+        @keyframes meshMove { 0% { transform: scale(1); } 100% { transform: scale(1.2); } }
 
-            100% {
-                transform: scale(1.2);
-            }
-        }
-
-        /* --- PREMIUM GLASS NAVIGATION --- */
         .glass-nav {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(25px);
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* --- DATA CARD HOVER EFFECTS --- */
+        /* --- SKELETON LOADING ANIMATION --- */
+        .skeleton {
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        /* --- DATA CARD --- */
         .data-card {
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .data-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 40px 80px -20px rgba(15, 23, 42, 0.1);
             border-color: var(--primary);
         }
 
-        .data-card img {
-            transition: transform 1s ease;
-        }
+        .data-card img { transition: transform 1s ease; }
+        .data-card:hover img { transform: scale(1.1); }
 
-        .data-card:hover img {
-            transform: scale(1.15);
-        }
-
-        /* --- PULSING INDICATOR --- */
         .pulse-live {
-            width: 8px;
-            height: 8px;
-            background: #ef4444;
-            border-radius: 50%;
-            box-shadow: 0 0 0 rgba(239, 68, 68, 0.4);
+            width: 8px; height: 8px;
+            background: #ef4444; border-radius: 50%;
             animation: pulseLive 2s infinite;
         }
 
-        @keyframes pulseLive {
-            0% {
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
-            }
+        @keyframes pulseLive { 0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); } 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); } }
 
-            70% {
-                box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
-            }
-        }
-
-        /* --- PAGINATION BUTTONS --- */
         .page-btn {
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            font-weight: 800;
-            transition: all 0.4s ease;
-            background: white;
-            border: 1px solid #e2e8f0;
-            color: #94a3b8;
+            width: 45px; height: 45px; display: flex; align-items: center; justify-content: center;
+            border-radius: 12px; font-weight: 800; transition: all 0.3s ease;
+            background: white; border: 1px solid #e2e8f0;
         }
 
         .page-btn.active {
-            background: #0f172a;
-            color: white;
-            border-color: #0f172a;
-            box-shadow: 0 15px 30px -10px rgba(15, 23, 42, 0.4);
-            transform: scale(1.1);
+            background: #0f172a; color: white; border-color: #0f172a;
+            box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.3);
         }
 
-        #mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        #detailModal { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); }
 
-        #mobile-menu.open {
-            transform: translateX(0);
-        }
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        #mobile-menu.open { transform: translateX(0); }
     </style>
 </head>
 
 <body class="antialiased flex flex-col min-h-screen">
     <div class="mesh-bg"></div>
 
-        <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
-            <div
-                class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
-                        <i class="fas fa-globe-asia text-lg animate-pulse"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl md:text-2xl font-black tracking-tighter leading-none">INNOVATE<span
-                                class="text-green-600">OS</span></h1>
-                    </div>
+    <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
+        <div class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg relative">
+                    <i class="fas fa-globe-asia text-lg animate-pulse"></i>
                 </div>
-
-                <div
-                    class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500">
-                    <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
-                    <a href="about.html" class="hover:text-green-600 transition-colors">About</a>
-                    <a href="simulator.html" class="hover:text-green-600 transition-colors">Simulasi</a>
-                    <a href="bencana.html" class="hover:text-green-600 transition-colors text-green-500">Data</a>
-                    <a href="contact.html" class="hover:text-green-600 transition-colors ">Contact</a>
-                </div>
-
-                <div class="flex items-center gap-4">
-                    <button onclick="toggleMobileMenu()"
-                        class="lg:hidden w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+                <h1 class="text-xl md:text-2xl font-black tracking-tighter leading-none text-slate-900 uppercase">Innovate<span class="text-emerald-500">OS</span></h1>
             </div>
-        </nav>
 
-        <div id="mobile-menu" class="fixed inset-0 z-[1001] bg-white flex flex-col p-8 lg:hidden">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-2xl font-black">MENU</h2>
-                <button onclick="toggleMobileMenu()"
-                    class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl">
-                    <i class="fas fa-times"></i>
+            <div class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                <a href="index.html" class="hover:text-emerald-500 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-emerald-500 transition-colors">About</a>
+                <a href="simulator.html" class="hover:text-emerald-500 transition-colors">Simulasi</a>
+                <a href="bencana.html" class="text-emerald-500">Data</a>
+                <a href="contact.html" class="hover:text-emerald-500 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button onclick="toggleMobileMenu()" class="lg:hidden w-10 h-10 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-900 shadow-sm">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
-            <div class="flex flex-col gap-6 text-xl font-bold text-slate-600">
-                <a href="index.html" onclick="toggleMobileMenu()">Home</a>
-                <a href="about.html" onclick="toggleMobileMenu()">About</a>
-                <a href="simulator.html" onclick="toggleMobileMenu()">Simulasi</a>
-                <a href="bencana.html" onclick="toggleMobileMenu()" class="text-green-500">Data Bencana</a>
-                <a href="contact.html" onclick="toggleMobileMenu()" >Contact</a>
-            </div>
         </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 z-[1001] bg-white flex flex-col p-8 lg:hidden">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-2xl font-black italic">MENU.</h2>
+            <button onclick="toggleMobileMenu()" class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="flex flex-col gap-6 text-xl font-bold text-slate-600 uppercase">
+            <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+            <a href="about.html" onclick="toggleMobileMenu()">About</a>
+            <a href="simulator.html" onclick="toggleMobileMenu()">Simulasi</a>
+            <a href="bencana.html" class="text-emerald-500" onclick="toggleMobileMenu()">Data Bencana</a>
+            <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+        </div>
+    </div>
 
     <main class="flex-grow pt-40 pb-24 px-4 md:px-6 relative">
         <div class="max-w-7xl mx-auto">
-
+            
             <div class="mb-16 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 gs-reveal">
                 <div class="max-w-2xl">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="pulse-live"></div>
-                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-red-500">Live Satellite
-                            Uplink</span>
+                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-red-500">Satelit Uplink: Aktif</span>
                     </div>
-                    <h2 class="text-5xl md:text-7xl font-black italic text-slate-900 leading-[0.9] tracking-tighter">
-                        Arsip <br><span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">Intelijen
-                            Krisis.</span></h2>
-                    <p class="text-slate-500 mt-6 font-medium text-lg leading-relaxed">Menyediakan akses terbuka ke data
-                        validasi satelit LEO dan laporan sensor IoT untuk mitigasi krisis lingkungan nasional.</p>
+                    <h2 class="text-5xl md:text-7xl font-black italic text-slate-900 leading-[0.9] tracking-tighter">Arsip <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">Intelijen Krisis.</span></h2>
+                    <p class="text-slate-500 mt-6 font-medium text-lg leading-relaxed">Menampilkan validasi data satelit real-time dan sensor lapangan untuk mitigasi nasional.</p>
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-4 w-full lg:w-auto">
-                    <div
-                        class="bg-white/70 backdrop-blur p-2 rounded-[1.5rem] flex items-center shadow-lg border border-white w-full md:w-80 group focus-within:border-emerald-500 transition-all">
+                    <div class="bg-white/70 backdrop-blur p-2 rounded-[1.5rem] flex items-center shadow-lg border border-white w-full md:w-80 group focus-within:border-emerald-500 transition-all">
                         <i class="fas fa-search px-4 text-slate-300 group-focus-within:text-emerald-500"></i>
-                        <input type="text" id="searchInput" onkeyup="handleSearch()"
-                            placeholder="Cari koordinat atau wilayah..."
-                            class="bg-transparent outline-none w-full text-sm font-bold h-12 text-slate-700">
+                        <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Cari wilayah..." class="bg-transparent outline-none w-full text-sm font-bold h-12 text-slate-700">
                     </div>
                     <div class="bg-white/70 backdrop-blur rounded-[1.5rem] p-1 shadow-lg border border-white">
-                        <select id="typeFilter" onchange="handleSearch()"
-                            class="bg-transparent px-6 py-3 rounded-[1.2rem] font-black text-[10px] uppercase tracking-[0.15em] border-none outline-none cursor-pointer h-12 hover:text-emerald-600 transition-colors">
-                            <option value="all">Semua Tipe Data</option>
-                            <option value="Banjir">🌊 Banjir</option>
-                            <option value="Kebakaran">🔥 Kebakaran</option>
-                            <option value="Gempa">🌋 Gempa</option>
-                            <option value="Polusi">🌫️ Polusi</option>
+                        <select id="typeFilter" onchange="handleSearch()" class="bg-transparent px-6 py-3 rounded-[1.2rem] font-black text-[10px] uppercase tracking-widest border-none outline-none cursor-pointer h-12 hover:text-emerald-600 transition-colors">
+                            <option value="all">Semua Tipe</option>
+                            <option value="Banjir">Banjir</option>
+                            <option value="Kebakaran">Kebakaran</option>
+                            <option value="Gempa">Gempa</option>
+                            <option value="Polusi">Polusi</option>
                         </select>
                     </div>
                 </div>
             </div>
 
             <div id="dataGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 min-h-[600px]">
-            </div>
+                </div>
 
-            <div id="paginationBox" class="flex justify-center items-center gap-4 mt-20 gs-reveal">
-            </div>
-
+            <div id="paginationBox" class="flex justify-center items-center gap-4 mt-16 gs-reveal">
+                </div>
         </div>
     </main>
+    <footer class="relative bg-white border-t border-slate-200 pt-16 pb-8 overflow-hidden z-10">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-1/2 bg-green-50 rounded-[100%] blur-3xl -z-10 pointer-events-none"></div>
 
-    <footer class="bg-slate-900 text-white py-16 px-6 relative overflow-hidden">
-        <div
-            class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
-        </div>
-        <div
-            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 relative z-10 text-center md:text-left">
-            <div>
-                <h2 class="text-3xl font-black italic mb-2 tracking-tighter">INNOVATE<span
-                        class="text-emerald-500">OS</span></h2>
-                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">© 2026 Database Intelijen
-                    Lingkungan Indonesia</p>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+                <div class="md:col-span-5 space-y-6">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+                            <i class="fas fa-globe-asia text-lg animate-pulse"></i>
+                        </div>
+                        <h2 class="text-2xl font-black tracking-tighter leading-none text-slate-900">INNOVATE<span class="text-green-600">OS</span></h2>
+                    </div>
+                    <p class="text-slate-500 leading-relaxed max-w-sm font-medium">
+                        Sistem intelijen lingkungan real-time. Melindungi ekosistem bumi dengan analisis data dan pemantauan satelit 24/7.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-3 space-y-6">
+                    <h3 class="font-black text-slate-900 uppercase tracking-widest text-xs">Menu Platform</h3>
+                    <ul class="space-y-4 text-slate-500 font-bold text-sm">
+                        <li><a href="#home" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i> Home</a></li>
+                        <li><a href="simulator.html" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>Simulasi Bencana</a></li>
+                        <li><a href="bencana.html" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i> Crisis Archive</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-4 space-y-6">
+                    <h3 class="font-black text-slate-900 uppercase tracking-widest text-xs">System Status</h3>
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl flex items-start gap-4 shadow-sm hover:border-green-300 hover:shadow-md transition-all cursor-default">
+                        <div class="mt-1 relative flex h-3 w-3 shrink-0">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-black text-slate-800">All Systems Operational</p>
+                            <p class="text-xs text-slate-500 mt-1 font-medium">Satelit LEO tersinkronisasi. Last update: <span class="text-green-600 font-bold">12ms ago</span></p>
+                        </div>
+                    </div>
+                    <button onclick="scrollToId('contact')" class="w-full py-4 px-4 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Buat Laporan Darurat
+                    </button>
+                </div>
             </div>
-            <div class="flex gap-10 font-black text-[10px] uppercase tracking-widest text-slate-400">
-                <a href="#" class="hover:text-emerald-500 transition-colors">Security Protocol</a>
-                <a href="#" class="hover:text-emerald-500 transition-colors">API Docs</a>
-                <a href="#" class="hover:text-emerald-500 transition-colors">Privacy</a>
+
+            <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] md:text-xs font-black uppercase text-slate-400 tracking-widest text-center md:text-left">© 2026 INNOVATE OS. Environmental Intelligence.</p>
+                <div class="flex gap-6 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    <a href="#" class="hover:text-slate-900 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-slate-900 transition-colors">Terms</a>
+                    <a href="#" class="hover:text-slate-900 transition-colors">API Docs</a>
+                </div>
             </div>
         </div>
     </footer>
 
     <div id="detailModal" class="fixed inset-0 z-[10000] hidden flex items-center justify-center p-4">
-        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-xl" onclick="closeModal()"></div>
-
-        <div id="modalCard"
-            class="relative bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-[3rem] shadow-[0_0_100px_rgba(0,0,0,0.5)] transition-all duration-500 transform scale-90 opacity-0">
-            <button onclick="closeModal()"
-                class="absolute top-8 right-8 w-14 h-14 bg-slate-50 rounded-full flex items-center justify-center shadow-xl hover:bg-red-500 hover:text-white transition-all z-[101] text-xl">
+        <div class="absolute inset-0" onclick="closeModal()"></div>
+        <div id="modalCard" class="relative bg-white w-full max-w-6xl max-h-[90vh] overflow-y-auto rounded-[3rem] shadow-2xl transition-all duration-500 transform scale-95 opacity-0">
+            <button onclick="closeModal()" class="absolute top-8 right-8 w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center shadow-lg hover:bg-red-500 hover:text-white transition-all z-50">
                 <i class="fas fa-times"></i>
             </button>
 
-            <div class="grid lg:grid-cols-2 gap-0 h-full">
-                <div class="bg-slate-50 p-10 border-r border-slate-100 flex flex-col">
-                    <div class="h-80 md:h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl relative mb-10 group">
+            <div class="grid lg:grid-cols-2 gap-0">
+                <div class="bg-slate-50 p-8 border-r border-slate-100 flex flex-col">
+                    <div class="h-80 rounded-[2.5rem] overflow-hidden shadow-2xl relative mb-8">
                         <img id="m-img" src="" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                        <div class="absolute top-6 left-6 bg-white/90 backdrop-blur-md px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest text-slate-900"
-                            id="m-type">Banjir</div>
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-900" id="m-type">TYPE</div>
                     </div>
-
-                    <div class="grid grid-cols-2 gap-6">
-                        <div
-                            class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl">
-                                <i class="fas fa-location-crosshairs"></i></div>
-                            <div>
-                                <p class="text-[9px] font-black text-slate-400 uppercase">Latitude / Longitude</p>
-                                <p class="text-sm font-bold text-slate-900 tracking-tight" id="m-coord">0.00, 0.00</p>
-                            </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200">
+                            <p class="text-[9px] font-black text-slate-400 uppercase">GPS Koordinat</p>
+                            <p class="text-sm font-bold text-slate-900" id="m-coord">-</p>
                         </div>
-                        <div
-                            class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm flex items-center gap-4">
-                            <div
-                                class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
-                                <i class="fas fa-satellite-dish"></i></div>
-                            <div>
-                                <p class="text-[9px] font-black text-slate-400 uppercase">Validasi Terakhir</p>
-                                <p class="text-sm font-bold text-slate-900 tracking-tight" id="m-time">02:24 AM</p>
-                            </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-200">
+                            <p class="text-[9px] font-black text-slate-400 uppercase">Timestamp</p>
+                            <p class="text-sm font-bold text-slate-900" id="m-time">-</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-10 lg:p-16 flex flex-col justify-center">
-                    <div class="flex items-center gap-3 mb-4">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                        <span id="m-city"
-                            class="text-emerald-600 font-black tracking-[0.2em] uppercase text-xs">PROVINSI JAWA
-                            TENGAH</span>
-                    </div>
-                    <h2 id="m-title"
-                        class="text-4xl md:text-5xl font-black italic text-slate-900 leading-none mb-8 tracking-tighter">
-                        Analisis Sektor Krisis.</h2>
+                <div class="p-10 flex flex-col justify-center">
+                    <span id="m-city" class="text-emerald-600 font-black tracking-[0.3em] uppercase text-xs mb-3 block">WILAYAH LOKASI</span>
+                    <h2 id="m-title" class="text-4xl font-black italic text-slate-900 leading-tight mb-6">Judul Kejadian</h2>
+                    <p id="m-desc" class="text-slate-500 text-lg leading-relaxed mb-8">Deskripsi lengkap kejadian...</p>
 
-                    <p id="m-desc" class="text-slate-500 text-lg leading-relaxed mb-10 font-medium">Memproses data dari
-                        3 sensor berbeda...</p>
-
-                    <div class="grid grid-cols-2 gap-6 mb-12">
-                        <div class="bg-red-50 p-6 rounded-[2rem] border border-red-100 flex flex-col">
-                            <span class="text-[10px] font-black text-red-400 uppercase mb-2">Estimasi Korban</span>
-                            <span id="m-victims" class="text-2xl font-black text-red-600">-</span>
+                    <div class="grid grid-cols-2 gap-6 mb-10">
+                        <div class="bg-red-50 p-6 rounded-3xl">
+                            <p class="text-[10px] font-black text-red-400 uppercase mb-1">Dampak Korban</p>
+                            <p id="m-victims" class="text-2xl font-black text-red-600">-</p>
                         </div>
-                        <div class="bg-blue-50 p-6 rounded-[2rem] border border-blue-100 flex flex-col">
-                            <span class="text-[10px] font-black text-blue-400 uppercase mb-2">Kerugian Finansial</span>
-                            <span id="m-loss" class="text-2xl font-black text-blue-600">-</span>
+                        <div class="bg-emerald-50 p-6 rounded-3xl">
+                            <p class="text-[10px] font-black text-emerald-400 uppercase mb-1">Kerugian Ekonomi</p>
+                            <p id="m-loss" class="text-2xl font-black text-emerald-600">-</p>
                         </div>
                     </div>
 
-                    <div class="bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 mb-10">
-                        <h4 class="text-[10px] font-black uppercase text-slate-400 mb-6 tracking-widest text-center">
-                            Trend Intensitas Krisis (7 Hari)</h4>
-                        <div class="h-44 w-full">
-                            <canvas id="detailChart"></canvas>
-                        </div>
+                    <div class="bg-slate-50 p-6 rounded-[2rem] border border-slate-100">
+                        <div class="h-44 w-full"><canvas id="detailChart"></canvas></div>
                     </div>
-
-                    <button
-                        class="w-full bg-slate-900 text-white py-6 rounded-3xl font-black uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-2xl hover:-translate-y-1 group">
-                        Akses Laporan PDF Lengkap <i
-                            class="fas fa-file-pdf ml-2 group-hover:rotate-12 transition-transform"></i>
-                    </button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        function toggleMobileMenu() {
-            const m = document.getElementById('mobile-menu');
-            m.classList.toggle('open');
-        }
-        // --- DYNAMIC DATABASE GENERATOR ---
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+
         const CITIES = ["Jakarta", "Riau", "Semarang", "Cianjur", "Makassar", "Papua", "Aceh", "Bali", "Padang", "Banjarmasin", "Palu", "Ambon", "Medan", "Surabaya", "Malang", "Jogja", "Lombok", "Manado"];
         const TYPES = ["Banjir", "Kebakaran", "Gempa", "Polusi"];
         const IMGS = [
@@ -377,86 +306,91 @@
             const type = TYPES[i % 4];
             const city = CITIES[i % 18];
             DB_MASTER.push({
-                id: i,
-                type: type,
-                city: city,
-                title: `${type} Kritikal di Sektor ${city} #${100 + i}`,
-                desc: `Sistem deteksi satelit LEO-INNOVATE mendeteksi pergerakan anomali pada sensor lapangan di wilayah ${city}. Diperlukan koordinasi cepat antar instansi untuk mencegah eskalasi krisis yang lebih luas di pemukiman warga terdekat.`,
+                id: i, type: type, city: city, title: `${type} Kritikal di Sektor ${city} #${100 + i}`,
+                desc: `Analisis satelit mendeteksi anomali kritis pada sensor lingkungan di ${city}. Dibutuhkan tindakan mitigasi tingkat lanjut segera.`,
                 victims: (Math.floor(Math.random() * 15000) + 1200).toLocaleString() + " Jiwa",
                 loss: (Math.random() * 95 + 5).toFixed(1) + " Miliar",
                 coord: `${(Math.random() * 5).toFixed(4)}°S, ${(Math.random() * 10 + 105).toFixed(4)}°E`,
                 date: `${Math.floor(Math.random() * 28) + 1} Feb 2026`,
-                img: IMGS[i % 4],
-                level: (i % 3 === 0) ? "Extreme" : "High"
+                img: IMGS[i % 4], level: (i % 3 === 0) ? "Extreme" : "High"
             });
         }
 
-        let state = {
-            currentPage: 1,
-            limit: 6,
-            filtered: [...DB_MASTER],
-            chart: null
-        };
+        let state = { currentPage: 1, limit: 6, filtered: [...DB_MASTER], chart: null };
 
-        // --- CORE RENDER GRID ---
-        function renderGrid() {
+        // --- RENDER SKELETON ---
+        function renderSkeletons() {
             const grid = document.getElementById('dataGrid');
             grid.innerHTML = "";
-
-            const start = (state.currentPage - 1) * state.limit;
-            const end = start + state.limit;
-            const items = state.filtered.slice(start, end);
-
-            if (items.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center py-40 font-black text-slate-300 italic text-2xl">Daftar Arsip Tidak Ditemukan...</div>';
-                return;
-            }
-
-            items.forEach((item, idx) => {
-                const card = document.createElement('div');
-                card.className = "data-card rounded-[2.5rem] p-4 cursor-pointer flex flex-col h-full opacity-0 translate-y-10";
-                card.onclick = () => openModal(item.id);
-
-                card.innerHTML = `
-                    <div class="h-60 relative overflow-hidden rounded-[2rem] bg-slate-200 mb-6">
-                        <img src="${item.img}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="absolute top-4 left-4 bg-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-900 shadow-xl border border-white">${item.type}</div>
-                        <div class="absolute bottom-4 left-6 text-white text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2"><i class="fas fa-map-pin text-emerald-400"></i> ${item.city}, ID</div>
-                    </div>
-                    <div class="px-4 pb-6 flex flex-col flex-1">
-                        <div class="flex items-center gap-2 mb-3">
-                            <span class="text-[9px] font-black uppercase tracking-widest text-emerald-500 bg-emerald-50 px-2 py-0.5 rounded">${item.level} Severity</span>
-                            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">${item.date}</span>
-                        </div>
-                        <h3 class="text-2xl font-black text-slate-900 leading-tight mb-4 group-hover:text-emerald-600 transition-colors tracking-tighter">${item.title}</h3>
-                        <p class="text-sm text-slate-500 leading-relaxed line-clamp-2 mb-8 font-medium">${item.desc}</p>
-                        
-                        <div class="mt-auto pt-6 border-t border-slate-100 flex justify-between items-center">
-                            <div>
-                                <p class="text-[9px] font-black text-slate-400 uppercase mb-1">Impact Analysis</p>
-                                <p class="text-sm font-black text-slate-900">IDR ${item.loss}</p>
-                            </div>
-                            <div class="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-white transition-all shadow-lg hover:bg-emerald-600"><i class="fas fa-chevron-right text-xs"></i></div>
+            for (let i = 0; i < 6; i++) {
+                grid.innerHTML += `
+                    <div class="rounded-[2.5rem] p-4 bg-white/50 border border-slate-100 flex flex-col h-full">
+                        <div class="h-60 rounded-[2rem] skeleton mb-6"></div>
+                        <div class="px-4 pb-6 space-y-4">
+                            <div class="h-4 w-24 skeleton rounded"></div>
+                            <div class="h-8 w-full skeleton rounded"></div>
+                            <div class="h-4 w-full skeleton rounded"></div>
+                            <div class="h-12 w-full skeleton rounded-xl mt-6"></div>
                         </div>
                     </div>
                 `;
-                grid.appendChild(card);
+            }
+        }
 
-                // --- STAGGERED GSAP ENTRANCE ---
-                gsap.to(card, { opacity: 1, y: 0, duration: 0.8, delay: idx * 0.1, ease: "power4.out" });
-            });
+        function renderGrid() {
+            renderSkeletons(); // Tampilkan skeleton dulu
+            
+            // Simulasi "loading" selama 800ms
+            setTimeout(() => {
+                const grid = document.getElementById('dataGrid');
+                grid.innerHTML = "";
+                const start = (state.currentPage - 1) * state.limit;
+                const end = start + state.limit;
+                const items = state.filtered.slice(start, end);
 
-            renderPagination();
+                if (items.length === 0) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-40 font-black text-slate-300 italic text-2xl uppercase">No Intelligence Data Found...</div>';
+                    return;
+                }
+
+                items.forEach((item, idx) => {
+                    const card = document.createElement('div');
+                    card.className = "data-card rounded-[2.5rem] p-4 cursor-pointer flex flex-col h-full opacity-0 translate-y-10";
+                    card.onclick = () => openModal(item.id);
+                    card.innerHTML = `
+                        <div class="h-60 relative overflow-hidden rounded-[2rem] bg-slate-200 mb-6">
+                            <img src="${item.img}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="absolute top-4 left-4 bg-white px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-900 shadow-xl border border-white">${item.type}</div>
+                            <div class="absolute bottom-4 left-6 text-white text-[10px] font-bold uppercase tracking-[0.2em] flex items-center gap-2"><i class="fas fa-map-pin text-emerald-400"></i> ${item.city}, ID</div>
+                        </div>
+                        <div class="px-4 pb-6 flex flex-col flex-1">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="text-[9px] font-black uppercase tracking-widest ${item.level === 'Extreme' ? 'text-red-500 bg-red-50' : 'text-emerald-500 bg-emerald-50'} px-2 py-0.5 rounded">${item.level} Severity</span>
+                                <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">${item.date}</span>
+                            </div>
+                            <h3 class="text-2xl font-black text-slate-900 leading-tight mb-4 group-hover:text-emerald-600 transition-colors tracking-tighter">${item.title}</h3>
+                            <div class="mt-auto pt-6 border-t border-slate-100 flex justify-between items-center">
+                                <div>
+                                    <p class="text-[9px] font-black text-slate-400 uppercase mb-1">Impact Analysis</p>
+                                    <p class="text-sm font-black text-slate-900">IDR ${item.loss}</p>
+                                </div>
+                                <div class="w-12 h-12 rounded-2xl bg-slate-900 flex items-center justify-center text-white transition-all shadow-lg hover:bg-emerald-600"><i class="fas fa-chevron-right text-xs"></i></div>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                    gsap.to(card, { opacity: 1, y: 0, duration: 0.8, delay: idx * 0.1, ease: "power4.out" });
+                });
+                renderPagination();
+            }, 800);
         }
 
         function renderPagination() {
             const box = document.getElementById('paginationBox');
             box.innerHTML = "";
             const total = Math.ceil(state.filtered.length / state.limit);
-
-            if (total <= 1 && state.filtered.length > 0) return;
-
+            if (total <= 1) return;
             for (let i = 1; i <= total; i++) {
                 const btn = document.createElement('button');
                 btn.className = `page-btn ${state.currentPage === i ? 'active' : ''}`;
@@ -474,22 +408,17 @@
             const s = document.getElementById('searchInput').value.toLowerCase();
             const t = document.getElementById('typeFilter').value;
             state.currentPage = 1;
-            state.filtered = DB_MASTER.filter(x =>
-                (x.city.toLowerCase().includes(s) || x.title.toLowerCase().includes(s)) &&
-                (t === 'all' || x.type === t)
-            );
+            state.filtered = DB_MASTER.filter(x => (x.city.toLowerCase().includes(s) || x.title.toLowerCase().includes(s)) && (t === 'all' || x.type === t));
             renderGrid();
         }
 
-        // --- MODAL POPUP LOGIC ---
         function openModal(id) {
             const item = DB_MASTER.find(x => x.id === id);
             if (!item) return;
-
             document.getElementById('m-title').innerText = item.title;
             document.getElementById('m-desc').innerText = item.desc;
             document.getElementById('m-type').innerText = item.type;
-            document.getElementById('m-city').innerText = "PROVINSI " + item.city.toUpperCase() + ", INDONESIA";
+            document.getElementById('m-city').innerText = "PROVINSI " + item.city.toUpperCase() + ", ID";
             document.getElementById('m-victims').innerText = item.victims;
             document.getElementById('m-loss').innerText = "IDR " + item.loss;
             document.getElementById('m-coord').innerText = item.coord;
@@ -499,10 +428,7 @@
             const modal = document.getElementById('detailModal');
             const card = document.getElementById('modalCard');
             modal.classList.remove('hidden');
-            setTimeout(() => {
-                card.classList.add('opacity-100', 'scale-100');
-            }, 50);
-
+            setTimeout(() => { card.classList.add('opacity-100', 'scale-100'); }, 50);
             renderDetailChart();
         }
 
@@ -516,49 +442,29 @@
         function renderDetailChart() {
             const ctx = document.getElementById('detailChart').getContext('2d');
             if (state.chart) state.chart.destroy();
-
             const gradient = ctx.createLinearGradient(0, 0, 0, 150);
             gradient.addColorStop(0, 'rgba(16, 185, 129, 0.4)');
             gradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
-
             state.chart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: ['H-6', 'H-5', 'H-4', 'H-3', 'H-2', 'H-1', 'HARI H'],
+                    labels: ['H-6', 'H-5', 'H-4', 'H-3', 'H-2', 'H-1', 'TODAY'],
                     datasets: [{
-                        label: 'Skala Krisis',
                         data: Array.from({ length: 7 }, () => Math.floor(Math.random() * 80 + 20)),
-                        borderColor: '#10b981',
-                        backgroundColor: gradient,
-                        fill: true,
-                        tension: 0.5,
-                        borderWidth: 5,
-                        pointRadius: 6,
-                        pointBackgroundColor: '#fff',
-                        pointBorderColor: '#10b981',
-                        pointBorderWidth: 3
+                        borderColor: '#10b981', backgroundColor: gradient, fill: true, tension: 0.5, borderWidth: 4, pointRadius: 4, pointBackgroundColor: '#fff'
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { display: false }, ticks: { font: { size: 9, weight: 'bold' }, color: '#94a3b8' } },
-                        y: { display: false }
-                    }
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { font: { size: 9, weight: 'bold' }, color: '#94a3b8' } }, y: { display: false } } }
             });
         }
 
         window.onload = () => {
             gsap.registerPlugin(ScrollTrigger);
-            gsap.utils.toArray('.gs-reveal').forEach((elem, i) => {
+            gsap.utils.toArray('.gs-reveal').forEach((elem) => {
                 gsap.from(elem, { y: 50, opacity: 0, duration: 1.2, ease: "power4.out" });
             });
             renderGrid();
         };
     </script>
 </body>
-
 </html>
