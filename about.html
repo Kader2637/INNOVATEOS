@@ -9,9 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
@@ -27,13 +27,25 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, .font-heading {
-            font-family: 'Space Grotesk', sans-serif;
-        }
+        h1, h2, h3, .font-heading { font-family: 'Space Grotesk', sans-serif; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        /* --- SMOOTH SCROLL LENIS --- */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+
+        /* --- SKELETON LOADING ANIMATION --- */
+        .skeleton {
+            background: #e2e8f0;
+            background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+            background-size: 200% 100%;
+            animation: skeletonShimmer 1.5s infinite linear;
+        }
+        @keyframes skeletonShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
 
         /* --- LIGHT GLASSMORPHISM --- */
         .glass-nav {
@@ -50,7 +62,7 @@
             box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
         }
 
-        /* --- LIGHT BACKGROUND BLOBS --- */
+        /* --- ANIMASI FLOATING --- */
         .blob {
             position: absolute;
             filter: blur(80px);
@@ -64,67 +76,39 @@
             100% { transform: translateY(-30px) scale(1.1); }
         }
 
-        /* --- 3D EARTH DALAM BENTO BOX --- */
         .earth-container {
-            width: 220px;
-            height: 220px;
-            position: relative;
-            border-radius: 50%;
+            width: 220px; height: 220px; position: relative; border-radius: 50%;
             background-color: #0f172a;
             box-shadow: inset 10px 0 40px rgba(0, 0, 0, 0.5), 0 20px 40px -10px rgba(16, 185, 129, 0.3);
-            overflow: hidden;
-            margin: 0 auto;
+            overflow: hidden; margin: 0 auto;
         }
 
         .earth-map {
-            width: 200%;
-            height: 100%;
+            width: 200%; height: 100%;
             background: url('https://raw.githubusercontent.com/turban/webgl-earth/master/images/2_no_clouds_4k.jpg');
-            background-size: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0.95;
+            background-size: cover; position: absolute; top: 0; left: 0; opacity: 0.95;
             animation: rotateEarth 25s linear infinite;
         }
 
         .earth-shine {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 50%;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3) 0%, rgba(0, 0, 0, 0.2) 60%, rgba(0, 0, 0, 0.8) 100%);
             z-index: 10;
         }
 
-        @keyframes rotateEarth {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes rotateEarth { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* BENTO GRID HOVER */
         .bento-item { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .bento-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px -15px rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.3);
-        }
+        .bento-item:hover { transform: translateY(-5px); box-shadow: 0 30px 60px -15px rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); }
 
-        /* AI SCANNER EFFECT */
         .scanner-line {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: #10b981;
-            box-shadow: 0 0 20px #10b981, 0 20px 20px rgba(16, 185, 129, 0.3);
-            animation: scan 3s ease-in-out infinite alternate;
-            z-index: 20;
+            position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: #10b981; box-shadow: 0 0 20px #10b981, 0 20px 20px rgba(16, 185, 129, 0.3);
+            animation: scan 3s ease-in-out infinite alternate; z-index: 20;
         }
 
-        @keyframes scan {
-            0% { top: 0%; }
-            100% { top: 100%; }
-        }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
 
-        /* LIGHT GRID PATTERN */
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
@@ -133,15 +117,10 @@
 
         .text-gradient {
             background: linear-gradient(135deg, #059669 0%, #10b981 50%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        #mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         #mobile-menu.open { transform: translateX(0); }
     </style>
 </head>
@@ -152,7 +131,6 @@
         <div class="absolute inset-0 pointer-events-none z-0 bg-grid"></div>
         <div class="blob bg-emerald-200 w-[500px] h-[500px] rounded-full top-[-10%] left-[-10%] z-0"></div>
         <div class="blob bg-blue-100 w-[600px] h-[600px] rounded-full bottom-[10%] right-[-10%] z-0" style="animation-delay: -5s;"></div>
-
 
         <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
             <div class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
@@ -328,10 +306,10 @@
                             <p class="text-slate-500 mt-4">Data pantauan insiden terbaru dari satelit dan laporan lapangan.</p>
                         </div>
                         <div class="flex items-center gap-3 mt-6 md:mt-0">
-                            <button onclick="prevPage()" id="prev-btn" class="w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button onclick="prevPage()" id="prev-btn" class="w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm disabled:opacity-50">
                                 <i class="fas fa-arrow-left"></i>
                             </button>
-                            <button onclick="nextPage()" id="next-btn" class="w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                            <button onclick="nextPage()" id="next-btn" class="w-12 h-12 rounded-2xl border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-900 hover:text-white transition-all shadow-sm disabled:opacity-50">
                                 <i class="fas fa-arrow-right"></i>
                             </button>
                         </div>
@@ -348,79 +326,68 @@
                 </div>
             </section>
 
-           <section class="py-24 px-6 relative mb-10 z-10">
-    <div class="max-w-7xl mx-auto">
-        
-        <div class="text-center mb-20 gs-reveal">
-            <span class="text-emerald-500 font-bold tracking-[0.2em] text-[10px] uppercase mb-3 block">Development Core</span>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Otak di <span class="italic text-slate-400">Sistem.</span></h2>
-        </div>
+            <section class="py-24 px-6 relative mb-10 z-10">
+                <div class="max-w-7xl mx-auto">
+                    <div class="text-center mb-20 gs-reveal">
+                        <span class="text-emerald-500 font-bold tracking-[0.2em] text-[10px] uppercase mb-3 block">Development Core</span>
+                        <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Otak di <span class="italic text-slate-400">Sistem.</span></h2>
+                    </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 px-4 md:px-0 pt-10">
-            
-            <div class="group relative bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 hover:border-emerald-200 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-emerald-500/10 gs-grid">
-                <div class="absolute -top-14 left-1/2 -translate-x-1/2">
-                    <div class="relative w-28 h-28 rounded-full p-1.5 bg-white shadow-xl">
-                        <img src="image/kader.png" onerror="this.src='https://ui-avatars.com/api/?name=Abdul+Kader&background=10b981&color=fff'" class="w-full h-full object-cover rounded-full">
-                        <div class="absolute inset-0 rounded-full border-2 border-emerald-500 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 px-4 md:px-0 pt-10">
+                        <div class="group relative bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 hover:border-emerald-200 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-emerald-500/10 gs-grid">
+                            <div class="absolute -top-14 left-1/2 -translate-x-1/2">
+                                <div class="relative w-28 h-28 rounded-full p-1.5 bg-white shadow-xl">
+                                    <img src="image/kader.png" onerror="this.src='https://ui-avatars.com/api/?name=Abdul+Kader&background=10b981&color=fff'" class="w-full h-full object-cover rounded-full">
+                                    <div class="absolute inset-0 rounded-full border-2 border-emerald-500 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                                </div>
+                            </div>
+                            <div class="pt-16">
+                                <span class="inline-block px-3 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">Team Lead</span>
+                                <h3 class="text-xl font-black text-slate-900 mb-2">Abdul Kader</h3>
+                                <p class="text-sm text-slate-500 leading-relaxed">System Architect & Frontend.</p>
+                                <div class="flex justify-center gap-3 mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                                    <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 hover:border-blue-200 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 gs-grid mt-16 md:mt-0">
+                            <div class="absolute -top-14 left-1/2 -translate-x-1/2">
+                                <div class="relative w-28 h-28 rounded-full p-1.5 bg-white shadow-xl">
+                                    <img src="image/rio.png" onerror="this.src='https://ui-avatars.com/api/?name=Rio+Andhika&background=3b82f6&color=fff'" class="w-full h-full object-cover rounded-full">
+                                    <div class="absolute inset-0 rounded-full border-2 border-blue-500 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                                </div>
+                            </div>
+                            <div class="pt-16">
+                                <span class="inline-block px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">Member</span>
+                                <h3 class="text-xl font-black text-slate-900 mb-2">Rio Andhika P.</h3>
+                                <p class="text-sm text-slate-500 leading-relaxed">Frontend & UI/UX Designer.</p>
+                                <div class="flex justify-center gap-3 mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                                    <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group relative bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 hover:border-amber-200 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-amber-500/10 gs-grid mt-16 md:mt-0">
+                            <div class="absolute -top-14 left-1/2 -translate-x-1/2">
+                                <div class="relative w-28 h-28 rounded-full p-1.5 bg-white shadow-xl">
+                                    <img src="image/dimas.png" onerror="this.src='https://ui-avatars.com/api/?name=Viktorinus+D&background=f59e0b&color=fff'" class="w-full h-full object-cover rounded-full">
+                                    <div class="absolute inset-0 rounded-full border-2 border-amber-500 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
+                                </div>
+                            </div>
+                            <div class="pt-16">
+                                <span class="inline-block px-3 py-1.5 bg-amber-50 text-amber-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">Member</span>
+                                <h3 class="text-xl font-black text-slate-900 mb-2">Viktorinus Dimas S.</h3>
+                                <p class="text-sm text-slate-500 leading-relaxed">Frontend & UI/UX Designer.</p>
+                                <div class="flex justify-center gap-3 mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                                    <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors"><i class="fab fa-github"></i></a>
+                                    <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="pt-16">
-                    <span class="inline-block px-3 py-1.5 bg-emerald-50 text-emerald-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">Team Lead</span>
-                    <h3 class="text-xl font-black text-slate-900 mb-2">Abdul Kader</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">System Architect & Frontend.</p>
-                    
-                    <div class="flex justify-center gap-3 mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"><i class="fab fa-github"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:bg-emerald-50 transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group relative bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 hover:border-blue-200 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 gs-grid mt-16 md:mt-0">
-                <div class="absolute -top-14 left-1/2 -translate-x-1/2">
-                    <div class="relative w-28 h-28 rounded-full p-1.5 bg-white shadow-xl">
-                        <img src="image/rio.png" onerror="this.src='https://ui-avatars.com/api/?name=Rio+Andhika&background=3b82f6&color=fff'" class="w-full h-full object-cover rounded-full">
-                        <div class="absolute inset-0 rounded-full border-2 border-blue-500 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
-                    </div>
-                </div>
-                
-                <div class="pt-16">
-                    <span class="inline-block px-3 py-1.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">Member</span>
-                    <h3 class="text-xl font-black text-slate-900 mb-2">Rio Andhika P.</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Frontend & UI/UX Designer.</p>
-                    
-                    <div class="flex justify-center gap-3 mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"><i class="fab fa-github"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="group relative bg-white rounded-[2.5rem] p-8 text-center border border-slate-100 hover:border-amber-200 transition-all duration-500 shadow-sm hover:shadow-2xl hover:shadow-amber-500/10 gs-grid mt-16 md:mt-0">
-                <div class="absolute -top-14 left-1/2 -translate-x-1/2">
-                    <div class="relative w-28 h-28 rounded-full p-1.5 bg-white shadow-xl">
-                        <img src="image/dimas.png" onerror="this.src='https://ui-avatars.com/api/?name=Viktorinus+D&background=f59e0b&color=fff'" class="w-full h-full object-cover rounded-full">
-                        <div class="absolute inset-0 rounded-full border-2 border-amber-500 scale-110 opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all duration-500"></div>
-                    </div>
-                </div>
-                
-                <div class="pt-16">
-                    <span class="inline-block px-3 py-1.5 bg-amber-50 text-amber-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-4">Member</span>
-                    <h3 class="text-xl font-black text-slate-900 mb-2">Viktorinus Dimas S.</h3>
-                    <p class="text-sm text-slate-500 leading-relaxed">Frontend & UI/UX Designer.</p>
-                    
-                    <div class="flex justify-center gap-3 mt-6 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors"><i class="fab fa-github"></i></a>
-                        <a href="#" class="w-9 h-9 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
+            </section>
 
         </main>
 
@@ -444,6 +411,14 @@
     </div>
 
     <script>
+        // --- SMOOTH SCROLL INIT (LENIS) ---
+        const lenis = new Lenis();
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
         function toggleMobileMenu() {
             document.getElementById('mobile-menu').classList.toggle('open');
         }
@@ -452,7 +427,10 @@
         gsap.registerPlugin(ScrollTrigger);
 
         gsap.utils.toArray('.gs-reveal').forEach((elem, i) => {
-            gsap.from(elem, { y: 40, opacity: 0, duration: 1, delay: i * 0.15, ease: "power3.out" });
+            gsap.from(elem, { 
+                scrollTrigger: { trigger: elem, start: "top 90%" },
+                y: 40, opacity: 0, duration: 1, ease: "power3.out" 
+            });
         });
 
         gsap.utils.toArray('.gs-grid').forEach((elem, i) => {
@@ -486,7 +464,6 @@
                 typeIndex++;
                 const terminal = document.getElementById('terminal-content');
                 terminal.scrollTop = terminal.scrollHeight;
-
                 setTimeout(typeWriter, 40);
             } else {
                 if(!typingElement.innerHTML.includes("|")) {
@@ -525,23 +502,46 @@
         const itemsPerPage = 3;
         const totalPages = Math.ceil(dummyLaporan.length / itemsPerPage);
 
-      function renderLaporan() {
+        function renderLaporan(showSkeleton = false) {
             const container = document.getElementById('laporan-container');
             
+            if (showSkeleton) {
+                let skeletonHTML = "";
+                for (let i = 0; i < 3; i++) {
+                    skeletonHTML += `
+                        <div class="bento-item glass-card p-6 md:p-8 rounded-[2rem] flex flex-col justify-between bg-white border border-slate-100 min-h-[300px]">
+                            <div>
+                                <div class="flex justify-between items-center mb-5">
+                                    <div class="w-20 h-6 skeleton rounded-full"></div>
+                                    <div class="w-12 h-6 skeleton rounded"></div>
+                                </div>
+                                <div class="w-2/3 h-7 skeleton rounded mb-2"></div>
+                                <div class="w-1/3 h-4 skeleton rounded mb-4"></div>
+                                <div class="w-full h-4 skeleton rounded mb-2"></div>
+                                <div class="w-full h-4 skeleton rounded mb-2"></div>
+                                <div class="w-4/5 h-4 skeleton rounded"></div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center gap-2">
+                                <div class="w-4 h-4 skeleton rounded-full"></div>
+                                <div class="w-24 h-3 skeleton rounded"></div>
+                            </div>
+                        </div>
+                    `;
+                }
+                container.innerHTML = skeletonHTML;
+                return;
+            }
+
             const start = (currentPage - 1) * itemsPerPage;
             const end = start + itemsPerPage;
             const paginatedData = dummyLaporan.slice(start, end);
 
-            // 1. Buat wadah penampung teks HTML sementara
             let cardsHTML = "";
-
-            paginatedData.forEach((item, index) => {
-                // Atur warna berdasarkan status
+            paginatedData.forEach((item) => {
                 let statusColor = "bg-emerald-100 text-emerald-700";
                 if (item.status === 'Kritis') statusColor = "bg-red-100 text-red-600";
                 if (item.status === 'Waspada') statusColor = "bg-amber-100 text-amber-600";
 
-                // 2. Tambahkan ke wadah sementara (TIDAK langsung ke DOM)
                 cardsHTML += `
                     <div class="bento-item glass-card p-6 md:p-8 rounded-[2rem] flex flex-col justify-between bg-white border border-slate-100 gs-report-card shadow-sm">
                         <div>
@@ -561,15 +561,11 @@
                 `;
             });
 
-            // 3. Masukkan ke layar (DOM) sekaligus
             container.innerHTML = cardsHTML;
-
-            // Update UI Pagination
             document.getElementById('page-indicator').innerText = `Halaman ${currentPage} dari ${totalPages}`;
             document.getElementById('prev-btn').disabled = currentPage === 1;
             document.getElementById('next-btn').disabled = currentPage === totalPages;
 
-            // 4. Gunakan fromTo agar GSAP tidak bingung (Mulai dari 0, Pasti Berakhir di 1)
             gsap.fromTo('.gs-report-card', 
                 { y: 40, opacity: 0 }, 
                 { y: 0, opacity: 1, duration: 0.6, stagger: 0.15, ease: "power2.out" }
@@ -579,18 +575,19 @@
         function nextPage() {
             if (currentPage < totalPages) {
                 currentPage++;
-                renderLaporan();
+                renderLaporan(true);
+                setTimeout(() => renderLaporan(false), 800);
             }
         }
 
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
-                renderLaporan();
+                renderLaporan(true);
+                setTimeout(() => renderLaporan(false), 800);
             }
         }
 
-        // Panggil render pertama kali saat halaman siap
         document.addEventListener('DOMContentLoaded', () => {
             renderLaporan();
         });
