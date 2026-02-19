@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Simulation Lab | INNOVATE</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f0fdf4;
+            color: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+
+        /* HIDE SCROLLBAR FOR HORIZONTAL MENU ON MOBILE */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* SCROLLBAR GENERAL */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+        /* --- GLASSMORPHISM --- */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.05);
+        }
+
+        /* --- BACKGROUND GRID --- */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(16, 185, 129, 0.05) 1px, transparent 1px), 
+                              linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+        }
+
+        /* --- SIDEBAR BUTTONS --- */
+        .sim-menu-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+        .sim-menu-btn:hover {
+            background: white;
+            border-color: #e2e8f0;
+        }
+        .sim-menu-btn.active {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            border-color: #0f172a;
+            box-shadow: 0 15px 25px -5px rgba(15, 23, 42, 0.3);
+        }
+        .sim-menu-btn.active .icon-bg {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+        }
+
+        /* SCANNER ANIMATION */
+        .scanner {
+            position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+            background: #10b981;
+            box-shadow: 0 0 15px #10b981, 0 15px 20px rgba(16,185,129,0.3);
+            animation: scanVideo 4s infinite linear alternate;
+            z-index: 10; pointer-events: none;
+        }
+        @keyframes scanVideo { 0% { top: 0; } 100% { top: 100%; } }
+
+        /* BENTO STATS CARDS */
+        .stat-card { transition: all 0.3s ease; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px -10px rgba(16, 185, 129, 0.2); }
+
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        #mobile-menu.open { transform: translateX(0); }
+    </style>
+</head>
+
+<body class="antialiased flex flex-col min-h-screen relative">
+
+    <div class="fixed inset-0 pointer-events-none -z-10 bg-grid"></div>
+    <div class="fixed top-[-20%] right-[-10%] w-[600px] h-[600px] bg-emerald-200 rounded-full blur-[120px] opacity-40 -z-10"></div>
+    <div class="fixed bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-blue-200 rounded-full blur-[100px] opacity-30 -z-10"></div>
+
+
+        <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
+            <div
+                class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-globe-asia text-lg animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-black tracking-tighter leading-none">INNOVATE<span
+                                class="text-green-600">OS</span></h1>
+                    </div>
+                </div>
+
+                <div
+                    class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                    <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-green-600 transition-colors">About</a>
+                    <a href="simulator.html" class="hover:text-green-600 transition-colors text-green-500">Simulasi</a>
+                    <a href="bencana.html" class="hover:text-green-600 transition-colors">Data</a>
+                    <a href="contact.html" class="hover:text-green-600 transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleMobileMenu()"
+                        class="lg:hidden w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="fixed inset-0 z-[1001] bg-white flex flex-col p-8 lg:hidden">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl font-black">MENU</h2>
+                <button onclick="toggleMobileMenu()"
+                    class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6 text-xl font-bold text-slate-600">
+                <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+                <a href="about.html" onclick="toggleMobileMenu()">About</a>
+                <a href="simulator.html" onclick="toggleMobileMenu()" class="text-green-500">Simulasi</a>
+                <a href="bencana.html" onclick="toggleMobileMenu()">Data Bencana</a>
+                <a href="contact.html" onclick="toggleMobileMenu()">Contact</a>
+            </div>
+        </div>
+
+    <main class="flex-1 pt-32 pb-10 md:pt-48 md:pb-20 px-4 md:px-6 relative z-10">
+        <div class="max-w-[1400px] mx-auto">
+            
+            <div class="mb-6 md:mb-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 gs-reveal">
+                <div>
+                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-[10px] font-black uppercase tracking-widest mb-2 border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Neural Engine
+                    </span>
+                    <h2 class="text-3xl md:text-5xl font-black italic text-slate-900 leading-tight">Pusat <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500">Simulasi AI.</span></h2>
+                </div>
+                <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+                    <div class="text-right">
+                        <p class="text-[9px] font-bold text-slate-400 uppercase">AI Confidence Score</p>
+                        <p class="font-black text-emerald-600 text-lg">98.4%</p>
+                    </div>
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-full border-4 border-emerald-100 border-t-emerald-500 animate-spin"></div>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-6">
+                
+                <div class="lg:col-span-3 flex flex-row lg:flex-col gap-3 gs-reveal overflow-x-auto lg:overflow-y-auto lg:max-h-[800px] pb-4 lg:pb-10 snap-x snap-mandatory hide-scrollbar">
+                    
+                    <h3 class="hidden lg:block text-xs font-black uppercase tracking-widest text-slate-400 mb-2 ml-2">Pilih Skenario</h3>
+
+                    <button onclick="loadSimulation('tsunami')" id="btn-tsunami" class="sim-menu-btn active bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 flex-shrink-0">
+                            <i class="fas fa-water text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Banjir Bandang</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Simulasi hidrologi pesisir</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('longsor')" id="btn-longsor" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-100 flex items-center justify-center text-orange-600 flex-shrink-0">
+                            <i class="fas fa-mountain text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Tanah Longsor</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Pergeseran massa tanah</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('gempa')" id="btn-gempa" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-100 flex items-center justify-center text-red-600 flex-shrink-0">
+                            <i class="fas fa-house-crack text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Gempa Tektonik</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Analisis patahan & sesar</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('kebakaran')" id="btn-kebakaran" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-yellow-100 flex items-center justify-center text-yellow-600 flex-shrink-0">
+                            <i class="fas fa-fire text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Kebakaran Hutan</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Penyebaran titik api</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('limbah')" id="btn-limbah" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 flex-shrink-0">
+                            <i class="fas fa-biohazard text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Limbah Beracun</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Kontaminasi air tanah</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('badai')" id="btn-badai" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-cyan-100 flex items-center justify-center text-cyan-600 flex-shrink-0">
+                            <i class="fas fa-hurricane text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Badai Siklon</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Kecepatan angin & pusaran</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('erupsi')" id="btn-erupsi" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 flex-shrink-0">
+                            <i class="fas fa-volcano text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Erupsi Vulkanik</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Awan panas & lahar</p>
+                        </div>
+                    </button>
+
+                    <button onclick="loadSimulation('polusi')" id="btn-polusi" class="sim-menu-btn bg-transparent p-3 rounded-2xl flex items-center gap-3 text-left flex-shrink-0 w-[240px] lg:w-full snap-center">
+                        <div class="icon-bg w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gray-200 flex items-center justify-center text-gray-600 flex-shrink-0">
+                            <i class="fas fa-smog text-lg md:text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-xs md:text-sm">Polusi Udara</h3>
+                            <p class="text-[9px] md:text-[10px] text-slate-500 mt-0.5 line-clamp-1">Lonjakan partikulat PM2.5</p>
+                        </div>
+                    </button>
+
+                </div>
+
+                <div class="lg:col-span-9 flex flex-col gap-6 scroll-mt-24" id="sim-content-area">
+                    
+                    <div class="glass-panel p-5 md:p-6 rounded-[2rem] gs-reveal flex flex-col gap-4 md:gap-6">
+                        
+                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                            <div>
+                                <h3 class="font-black text-2xl md:text-3xl text-slate-900 tracking-tight" id="sim-title">Banjir & Tsunami Model</h3>
+                                <p class="text-slate-500 text-xs md:text-sm mt-1 flex items-center gap-2"><i class="fas fa-satellite text-emerald-500 animate-pulse"></i> Satelit Rendering: Aktif</p>
+                            </div>
+                            <div class="px-3 py-1.5 md:px-4 md:py-2 bg-red-50 text-red-600 border border-red-200 rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest text-center shadow-sm w-full md:w-auto" id="sim-badge">
+                                ⚠️ STATUS: EXTREME RISK
+                            </div>
+                        </div>
+                        
+                        <div class="relative w-full aspect-video overflow-hidden border-2 md:border-4 border-slate-900 rounded-2xl md:rounded-[1.5rem] group bg-black shadow-inner">
+                            <div class="scanner"></div>
+                            <video id="sim-video" class="w-full h-full object-cover opacity-90" autoplay loop muted playsinline>
+                                <source id="sim-video-src" src="https://media.istockphoto.com/id/1266391321/id/video/bencana-di-india-gangga-himalaya.mp4?s=mp4-640x640-is&k=20&c=bdP2bGG_0TZDzszLfRtiQ00WoIctLifZ4gQeGqYxgTI=" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                            <div class="absolute inset-0 bg-emerald-500/10 pointer-events-none group-hover:bg-transparent transition-all"></div>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 border-l-4 border-l-emerald-500">
+                            <p class="text-xs md:text-sm text-slate-700 leading-relaxed font-medium" id="sim-desc">
+                                Simulasi ini menunjukkan pergerakan gelombang air akibat anomali hidrologi. Algoritma memprediksi radius genangan air yang menembus hingga 10 KM ke daratan pesisir dalam waktu kurang dari 30 menit. Evakuasi segera diperlukan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-2 gap-6 gs-reveal">
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-3 md:gap-4">
+                            <div class="stat-card bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-red-50 flex items-center justify-center text-red-500 text-lg md:text-xl flex-shrink-0"><i class="fas fa-users-slash"></i></div>
+                                <div>
+                                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Potensi Korban</p>
+                                    <h4 class="text-xl md:text-2xl font-black text-slate-900 leading-none" id="stat-korban">15,420 <span class="text-xs font-bold text-slate-400">Jiwa</span></h4>
+                                </div>
+                            </div>
+                            <div class="stat-card bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-500 text-lg md:text-xl flex-shrink-0"><i class="fas fa-money-bill-trend-up"></i></div>
+                                <div>
+                                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Kerugian Ekonomi</p>
+                                    <h4 class="text-xl md:text-2xl font-black text-slate-900 leading-none" id="stat-kerugian">Rp 2.5 <span class="text-xs font-bold text-slate-400">Triliun</span></h4>
+                                </div>
+                            </div>
+                            <div class="stat-card bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 text-lg md:text-xl flex-shrink-0"><i class="fas fa-map-location-dot"></i></div>
+                                <div>
+                                    <p class="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">Area Rusak</p>
+                                    <h4 class="text-xl md:text-2xl font-black text-slate-900 leading-none" id="stat-radius">450 <span class="text-xs font-bold text-slate-400">KM²</span></h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-[1.5rem] border border-slate-200 shadow-sm flex flex-col">
+                            <div class="flex justify-between items-center mb-4">
+                                <div>
+                                    <h4 class="font-bold text-sm text-slate-900">Proyeksi Eskalasi</h4>
+                                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Garis Waktu 6 Jam</p>
+                                </div>
+                                <div class="px-2 py-1 bg-slate-100 rounded text-[9px] font-black text-slate-500"><i class="fas fa-robot text-emerald-500"></i> AI</div>
+                            </div>
+                            <div class="relative w-full min-h-[180px] md:min-h-[200px] flex-1">
+                                <canvas id="simChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white text-slate-900 py-8 text-center border-t border-slate-200 w-full mt-auto relative z-20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-3">
+            <h2 class="text-lg md:text-xl font-black italic text-slate-900">INNOVATE<span class="text-emerald-500">OS</span></h2>
+            <p class="text-[9px] md:text-[10px] font-bold uppercase text-slate-400 tracking-widest">© 2026 Environmental Intelligence System</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+
+        // --- DATABASE SIMULASI (MP4 Native Tag Video) ---
+        const simData = {
+            'tsunami': {
+                title: 'Banjir & Tsunami Model',
+                badge: '⚠️ STATUS: EXTREME RISK',
+                badgeColor: 'bg-red-50 text-red-600 border-red-200',
+                video: 'https://media.istockphoto.com/id/1266391321/id/video/bencana-di-india-gangga-himalaya.mp4?s=mp4-640x640-is&k=20&c=bdP2bGG_0TZDzszLfRtiQ00WoIctLifZ4gQeGqYxgTI=',
+                desc: 'Simulasi pergerakan gelombang air akibat anomali hidrologi. Algoritma memprediksi radius genangan air menembus hingga 10 KM ke daratan pesisir dalam waktu < 30 menit. Evakuasi segera diperlukan.',
+                korban: '15,420', kerugian: 'Rp 2.5', radius: '450',
+                chartLabel: 'Ketinggian Air (Meter)', chartData: [0.5, 2.1, 5.4, 8.2, 7.5, 4.0], chartColor: '#3b82f6'
+            },
+            'longsor': {
+                title: 'Pemodelan Tanah Longsor',
+                badge: '⚠️ STATUS: TINGGI',
+                badgeColor: 'bg-orange-50 text-orange-600 border-orange-200',
+                video: 'https://cdn.pixabay.com/video/2019/04/17/22795-330440316_tiny.mp4', 
+                desc: 'Prediksi pergerakan massa tanah di area tebing bersudut miring tinggi. Analisis AI menunjukkan penggundulan hutan mempercepat laju longsoran hingga 60km/jam saat curah hujan ekstrem.',
+                korban: '3,200', kerugian: 'Rp 850', radius: '15',
+                chartLabel: 'Volume Material (Ribuan Ton)', chartData: [0, 5, 20, 80, 150, 150], chartColor: '#f97316'
+            },
+            'gempa': {
+                title: 'Simulasi Gempa Tektonik',
+                badge: '⚠️ STATUS: KRITIS',
+                badgeColor: 'bg-red-50 text-red-600 border-red-200',
+                video: 'https://cdn.pixabay.com/video/2022/11/04/137681-768194488_tiny.mp4',
+                desc: 'Kalkulasi pelepasan energi seismik berkekuatan 7.2 SR di zona patahan aktif. Menunjukkan bagaimana perambatan gelombang seismik menghancurkan struktur bangunan di area padat penduduk.',
+                korban: '45,000', kerugian: 'Rp 12.0', radius: '1200',
+                chartLabel: 'Intensitas Guncangan (MMI)', chartData: [2, 8, 7, 5, 4, 2], chartColor: '#ef4444'
+            },
+            'kebakaran': {
+                title: 'Penyebaran Kebakaran Hutan',
+                badge: '⚠️ STATUS: WASPADA',
+                badgeColor: 'bg-yellow-50 text-yellow-600 border-yellow-200',
+                video: 'https://cdn.pixabay.com/video/2021/08/19/85549-590632345_tiny.mp4',
+                desc: 'Berdasarkan kecepatan angin, AI memodelkan sebaran titik api di lahan gambut. Menghasilkan proyeksi indeks polusi (PM2.5) yang menyebar ke wilayah pemukiman.',
+                korban: '120,000', kerugian: 'Rp 4.2', radius: '8,500',
+                chartLabel: 'Luas Terbakar (Hektar)', chartData: [100, 350, 900, 2100, 4500, 8000], chartColor: '#eab308'
+            },
+            'limbah': {
+                title: 'Pencemaran Limbah Beracun',
+                badge: '⚠️ STATUS: BERBAHAYA',
+                badgeColor: 'bg-purple-50 text-purple-600 border-purple-200',
+                video: 'https://cdn.pixabay.com/video/2020/04/17/36423-411327181_tiny.mp4',
+                desc: 'Simulasi rembesan limbah kimia (B3) ke aliran sungai. Konsentrasi logam berat diprediksi mencemari sumber air baku dan mematikan biota sungai dalam radius 50 KM.',
+                korban: '8,500', kerugian: 'Rp 1.1', radius: '50',
+                chartLabel: 'Kadar Toksin (PPM)', chartData: [50, 150, 300, 450, 400, 250], chartColor: '#a855f7'
+            },
+            'badai': {
+                title: 'Pergerakan Badai Siklon',
+                badge: '⚠️ STATUS: SIAGA 1',
+                badgeColor: 'bg-cyan-50 text-cyan-600 border-cyan-200',
+                video: 'https://cdn.pixabay.com/video/2021/04/01/70008-533477382_tiny.mp4',
+                desc: 'Menganalisis anomali tekanan udara yang memicu siklon. Kecepatan angin diprediksi mencapai 120km/jam saat menyentuh daratan, berpotensi merusak infrastruktur atap.',
+                korban: '1,200', kerugian: 'Rp 1.8', radius: '300',
+                chartLabel: 'Kecepatan Angin (Km/h)', chartData: [40, 65, 120, 110, 80, 50], chartColor: '#06b6d4'
+            },
+            'erupsi': {
+                title: 'Erupsi Gunung Berapi',
+                badge: '⚠️ STATUS: AWAS',
+                badgeColor: 'bg-amber-50 text-amber-600 border-amber-200',
+                video: 'https://cdn.pixabay.com/video/2020/03/15/33719-396590204_tiny.mp4',
+                desc: 'Pemetaan arah aliran awan panas dan lahar dingin. Zona merah evakuasi wajib dikosongkan dalam waktu 2 jam sebelum letusan utama terjadi.',
+                korban: '22,000', kerugian: 'Rp 5.5', radius: '25',
+                chartLabel: 'Aktivitas Seismik (Tremor)', chartData: [10, 25, 80, 200, 180, 100], chartColor: '#d97706'
+            },
+            'polusi': {
+                title: 'Krisis Polusi Udara',
+                badge: '⚠️ STATUS: TIDAK SEHAT',
+                badgeColor: 'bg-slate-100 text-slate-600 border-slate-300',
+                video: 'https://cdn.pixabay.com/video/2021/08/04/83896-584742798_tiny.mp4',
+                desc: 'Emisi gas rumah kaca menciptakan kubah asap (smog) di area metropolitan. Jarak pandang menurun hingga 500m. Rumah sakit bersiap menerima lonjakan pasien ISPA.',
+                korban: '250,000', kerugian: 'Rp 7.0', radius: '600',
+                chartLabel: 'Indeks AQI (PM2.5)', chartData: [150, 180, 250, 320, 310, 290], chartColor: '#64748b'
+            }
+        };
+
+        let chartInstance = null;
+
+        function renderChart(label, data, color) {
+            const ctx = document.getElementById('simChart').getContext('2d');
+            
+            if(chartInstance) {
+                chartInstance.destroy();
+            }
+
+            const gradient = ctx.createLinearGradient(0, 0, 0, 200);
+            gradient.addColorStop(0, color);
+            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['1 Jam', '2 Jam', '3 Jam', '4 Jam', '5 Jam', '6 Jam'],
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        borderColor: color,
+                        borderWidth: 3,
+                        backgroundColor: gradient,
+                        fill: true,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: color,
+                        pointBorderWidth: 2,
+                        pointRadius: 3,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { borderDash: [5, 5], color: '#f1f5f9' }, ticks: { color: '#94a3b8', font: {size: 9} } },
+                        x: { grid: { display: false }, ticks: { color: '#94a3b8', font: {size: 9} } }
+                    },
+                    animation: {
+                        duration: 1000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        }
+
+        function loadSimulation(type) {
+            // Update Active Sidebar Menu
+            document.querySelectorAll('.sim-menu-btn').forEach(btn => {
+                btn.classList.remove('active');
+                const icon = btn.querySelector('.icon-bg');
+                icon.style.backgroundColor = '';
+                icon.style.color = '';
+                icon.classList.remove('shadow-[0_0_15px_rgba(16,185,129,0.5)]');
+                btn.querySelector('h3').classList.replace('text-white', 'text-slate-900');
+                btn.querySelector('p').classList.replace('text-slate-300', 'text-slate-500');
+            });
+            
+            const activeBtn = document.getElementById(`btn-${type}`);
+            activeBtn.classList.add('active');
+            activeBtn.querySelector('h3').classList.replace('text-slate-900', 'text-white');
+            activeBtn.querySelector('p').classList.replace('text-slate-500', 'text-slate-300');
+
+            const activeIcon = activeBtn.querySelector('.icon-bg');
+            activeIcon.style.backgroundColor = '#10b981';
+            activeIcon.style.color = '#fff';
+            activeIcon.classList.add('shadow-[0_0_15px_rgba(16,185,129,0.5)]');
+
+            // ANIMASI GANTI KONTEN
+            gsap.to("#sim-content-area", {
+                opacity: 0, 
+                scale: 0.98,
+                duration: 0.2, 
+                onComplete: () => {
+                    const data = simData[type];
+                    
+                    document.getElementById('sim-title').innerText = data.title;
+                    document.getElementById('sim-desc').innerText = data.desc;
+                    document.getElementById('stat-korban').innerHTML = `${data.korban} <span class="text-xs font-bold text-slate-400">Jiwa</span>`;
+                    document.getElementById('stat-kerugian').innerHTML = `${data.kerugian} <span class="text-xs font-bold text-slate-400">Triliun</span>`;
+                    document.getElementById('stat-radius').innerHTML = `${data.radius} <span class="text-xs font-bold text-slate-400">KM²</span>`;
+                    
+                    const videoEl = document.getElementById('sim-video');
+                    const sourceEl = document.getElementById('sim-video-src');
+                    if(sourceEl.src !== data.video) {
+                        sourceEl.src = data.video;
+                        videoEl.load(); 
+                        videoEl.play(); 
+                    }
+
+                    const badge = document.getElementById('sim-badge');
+                    badge.innerText = data.badge;
+                    badge.className = `px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-[10px] md:text-xs font-black uppercase tracking-widest text-center shadow-sm animate-pulse border ${data.badgeColor} w-full md:w-auto`;
+
+                    renderChart(data.chartLabel, data.chartData, data.chartColor);
+
+                    gsap.to("#sim-content-area", { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
+
+                    // AUTO-SCROLL UNTUK MOBILE SAAT TOMBOL DIKLIK
+                    if(window.innerWidth < 1024) {
+                        document.getElementById('sim-content-area').scrollIntoView({behavior: 'smooth'});
+                    }
+                }
+            });
+        }
+
+        // --- INIT ON LOAD ---
+        window.onload = () => {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.gs-reveal').forEach((elem, i) => {
+                gsap.from(elem, { y: 20, opacity: 0, duration: 0.6, delay: i * 0.1, ease: "power2.out" });
+            });
+
+            renderChart(simData['tsunami'].chartLabel, simData['tsunami'].chartData, simData['tsunami'].chartColor);
+        };
+    </script>
+</body>
+</html>

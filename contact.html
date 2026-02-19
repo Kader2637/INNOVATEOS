@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact & Report | INNOVATE OS v4.7</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #0f172a;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: var(--secondary);
+        }
+
+        h1, h2, h3, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Glass Nav Effect */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Upload Area Styling */
+        .upload-area {
+            border: 2px dashed #cbd5e1;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: var(--primary);
+            background-color: #f0fdf4;
+        }
+
+        /* Card Hover */
+        .contact-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        #mobile-menu.open { transform: translateX(0); }
+    </style>
+</head>
+
+<body class="antialiased flex flex-col min-h-screen">
+
+    
+        <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
+            <div
+                class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+                        <i class="fas fa-globe-asia text-lg animate-pulse"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-black tracking-tighter leading-none">INNOVATE<span
+                                class="text-green-600">OS</span></h1>
+                    </div>
+                </div>
+
+                <div
+                    class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500">
+                    <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
+                    <a href="about.html" class="hover:text-green-600 transition-colors">About</a>
+                    <a href="simulator.html" class="hover:text-green-600 transition-colors">Simulasi</a>
+                    <a href="bencana.html" class="hover:text-green-600 transition-colors">Data</a>
+                    <a href="contact.html" class="hover:text-green-600 transition-colors text-green-500">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleMobileMenu()"
+                        class="lg:hidden w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="fixed inset-0 z-[1001] bg-white flex flex-col p-8 lg:hidden">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-2xl font-black">MENU</h2>
+                <button onclick="toggleMobileMenu()"
+                    class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex flex-col gap-6 text-xl font-bold text-slate-600">
+                <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+                <a href="about.html" onclick="toggleMobileMenu()">About</a>
+                <a href="simulator.html" onclick="toggleMobileMenu()">Simulasi</a>
+                <a href="bencana.html" onclick="toggleMobileMenu()">Data Bencana</a>
+                <a href="contact.html" onclick="toggleMobileMenu()" class="text-green-500">Contact</a>
+            </div>
+        </div>
+
+    <main class="flex-grow pt-32 pb-20 px-4 md:px-6">
+        <div class="max-w-7xl mx-auto">
+            
+            <div class="mb-16 text-center md:text-left gs-reveal">
+                <span class="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-lg text-[10px] font-black uppercase tracking-widest mb-4">
+                    <i class="fas fa-headset"></i> Support & Response Center
+                </span>
+                <h2 class="text-4xl md:text-6xl font-black italic text-slate-900 leading-none">Hubungi <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-500">Kami.</span></h2>
+                <p class="text-slate-500 mt-4 font-medium max-w-2xl">Punya pertanyaan teknis atau ingin melaporkan anomali lingkungan di sekitar Anda? Tim kami siap memvalidasi laporan Anda 24/7.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-12">
+                
+                <div class="lg:col-span-5 space-y-6 gs-reveal">
+                    
+                    <div class="contact-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-md flex items-start gap-6">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl flex-shrink-0"><i class="fas fa-phone-alt"></i></div>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Emergency Call</h3>
+                            <p class="text-xl font-black text-slate-900">0800-1-INNOVATE</p>
+                            <p class="text-sm text-slate-500">Layanan bebas pulsa darurat.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-md flex items-start gap-6">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl flex-shrink-0"><i class="fas fa-envelope-open-text"></i></div>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">Official Email</h3>
+                            <p class="text-xl font-black text-slate-900">support@innovateos.id</p>
+                            <p class="text-sm text-slate-500">Waktu respon rata-rata: 15 menit.</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card bg-white p-8 rounded-[2rem] border border-slate-100 shadow-md flex items-start gap-6">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl flex-shrink-0"><i class="fas fa-map-marked-alt"></i></div>
+                        <div>
+                            <h3 class="text-xs font-black text-slate-400 uppercase tracking-widest mb-1">HQ Office</h3>
+                            <p class="text-xl font-black text-slate-900">Jakarta Intelligence Tower</p>
+                            <p class="text-sm text-slate-500">Lantai 77, Kawasan Mega Kuningan.</p>
+                        </div>
+                    </div>
+
+                    <div class="rounded-[2.5rem] overflow-hidden h-64 border-4 border-white shadow-xl relative gs-reveal">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.24103134633!2d106.77412469490214!3d-6.229746450638531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e945e34b9d%3A0x5371bfdf6a5d4a6!2sJakarta%20Selatan%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1700000000000" 
+                            class="w-full h-full grayscale opacity-80" allowfullscreen="" loading="lazy"></iframe>
+                        <div class="absolute inset-0 pointer-events-none border-[12px] border-white/20 rounded-[2.5rem]"></div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 gs-reveal">
+                    <div class="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-slate-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-emerald-50 rounded-full blur-3xl -z-10"></div>
+                        
+                        <h3 class="text-2xl font-black italic text-slate-900 mb-8 uppercase tracking-tighter">Formulir Laporan Kejadian</h3>
+                        
+                        <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Nama Pelapor</label>
+                                    <input type="text" required class="w-full bg-slate-50 p-4 rounded-xl border border-slate-200 font-bold outline-none focus:border-emerald-500 transition-all text-slate-700" placeholder="Nama Lengkap">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Lokasi Spesifik</label>
+                                    <input type="text" required class="w-full bg-slate-50 p-4 rounded-xl border border-slate-200 font-bold outline-none focus:border-emerald-500 transition-all text-slate-700" placeholder="Kecamatan, Kota">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Kategori Bencana</label>
+                                <select required class="w-full bg-slate-50 p-4 rounded-xl border border-slate-200 font-bold outline-none focus:border-emerald-500 cursor-pointer text-slate-700">
+                                    <option value="">Pilih Kategori...</option>
+                                    <option value="banjir">Banjir / Genangan</option>
+                                    <option value="kebakaran">Kebakaran Lahan</option>
+                                    <option value="gempa">Gempa / Kerusakan Struktur</option>
+                                    <option value="polusi">Pencemaran Lingkungan</option>
+                                    <option value="longsor">Tanah Longsor</option>
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Detail Kejadian</label>
+                                <textarea required class="w-full bg-slate-50 p-4 rounded-xl border border-slate-200 font-bold outline-none focus:border-emerald-500 h-32 transition-all text-slate-700" placeholder="Jelaskan kondisi terkini dan waktu kejadian..."></textarea>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Bukti Visual (Maks. 4 Foto)</label>
+                                <div class="upload-area p-10 rounded-2xl text-center" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-camera-retro text-4xl text-slate-300 mb-3"></i>
+                                    <p class="text-sm font-bold text-slate-500">Klik untuk Pilih Foto</p>
+                                    <p class="text-[9px] text-slate-400 font-bold uppercase mt-1">Format: JPG, PNG | Max: 5MB/file</p>
+                                    <input type="file" id="fileInput" class="hidden" multiple accept="image/*" onchange="previewImages()">
+                                </div>
+                                <div id="imagePreviewGrid" class="grid grid-cols-4 gap-4 mt-6">
+                                    </div>
+                            </div>
+
+                            <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-xl flex items-center justify-center gap-3">
+                                <span>Kirim Laporan</span>
+                                <i class="fas fa-paper-plane text-xs"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-white text-slate-900 py-10 text-center border-t border-slate-200 w-full mt-auto relative z-20">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <h2 class="text-xl font-black italic text-slate-900">INNOVATE<span class="text-emerald-500">OS</span></h2>
+            <p class="text-[10px] font-bold uppercase text-slate-400 tracking-widest">© 2026 Environmental Intelligence System</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+
+        // --- MULTI IMAGE PREVIEW LOGIC ---
+        function previewImages() {
+            const input = document.getElementById('fileInput');
+            const grid = document.getElementById('imagePreviewGrid');
+            grid.innerHTML = "";
+
+            if (input.files) {
+                const filesArray = Array.from(input.files).slice(0, 4); // Limit to 4 images
+                filesArray.forEach((file, index) => {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const div = document.createElement('div');
+                        div.className = "h-20 md:h-24 rounded-xl overflow-hidden border border-slate-200 shadow-sm relative group animate-fade-in";
+                        div.innerHTML = `
+                            <img src="${e.target.result}" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all cursor-pointer" onclick="this.parentElement.remove()">
+                                <i class="fas fa-trash-alt text-white"></i>
+                            </div>
+                        `;
+                        grid.appendChild(div);
+                    }
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        // --- FORM SUBMIT SIMULATION ---
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalContent = btn.innerHTML;
+            
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> <span>Mengirim Laporan...</span>';
+            btn.classList.replace('bg-slate-900', 'bg-emerald-500');
+
+            setTimeout(() => {
+                alert('Laporan Berhasil Terkirim! Sistem Intelijen INNOVATE OS akan memverifikasi bukti visual Anda segera.');
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+                btn.classList.replace('bg-emerald-500', 'bg-slate-900');
+                e.target.reset();
+                document.getElementById('imagePreviewGrid').innerHTML = "";
+            }, 2000);
+        }
+
+        // --- GSAP REVEAL ---
+        window.onload = () => {
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.gs-reveal').forEach((elem, i) => {
+                gsap.from(elem, {
+                    scrollTrigger: { trigger: elem, start: "top 90%" },
+                    y: 30, opacity: 0, duration: 0.8, delay: i * 0.1, ease: "power2.out"
+                });
+            });
+        };
+    </script>
+</body>
+</html>
