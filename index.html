@@ -603,33 +603,15 @@
         let DB_MASTER = [];
         // Generate 60 Items Dummy Data
         for (let i = 1; i <= 60; i++) {
-
             const t = TIPE[Math.floor(Math.random() * TIPE.length)];
             const k = KOTA[Math.floor(Math.random() * KOTA.length)];
-
-            let imgPath = "";
-
-            if (t === "Buang Sampah") {
-                const r = Math.floor(Math.random() * 4) + 1;
-                imgPath = "image/sampah" + r + ".jpg";
-            }
-            else if (t === "Kebakaran") {
-                imgPath = "image/kebakaran.jpg";
-            }
-            else if (t === "Gempa") {
-                imgPath = "image/gempa.jpg";
-            }
-            else if (t === "Polusi") {
-                imgPath = "image/polusi.jpg";
-            }
-            else {
-                imgPath = "image/default.jpg";
-            }
+            let idx = 0;
+            if (t === "Kebakaran") idx = 1; if (t === "Gempa") idx = 2; if (t === "Polusi") idx = 3;
             DB_MASTER.push({
                 id: i, tipe: t, kota: k, judul: `${t} di Sektor ${k} #${1000 + i}`,
                 desc: `Laporan masuk dari sensor satelit. Terdeteksi anomali pada koordinat X-Y yang membutuhkan verifikasi tim lapangan secepatnya.`,
                 ekonomi: (Math.random() * 50).toFixed(1) + " Miliar", damage: Math.floor(Math.random() * 100) + " Jiwa Terancam",
-                img: imgPath, time: Math.floor(Math.random() * 24) + " jam lalu"
+                img: IMGS[idx], time: Math.floor(Math.random() * 24) + " jam lalu"
             });
         }
 
