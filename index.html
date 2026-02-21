@@ -1080,43 +1080,28 @@
             document.getElementById('modalLoc').innerText = loc;
             document.getElementById('modalEco').innerText = cost;
             document.getElementById('modalDamage').innerText = dam;
-            document.getElementById('modalTypeBadge').innerText = type;
-
-            let defaultImageSrc = d.img;
-            document.getElementById('modalImg').src = defaultImageSrc;
 
             const gal = document.getElementById('modalGallery');
-            let images = "";
+            let imagesArray = [];
 
-
-                if (type === "Buang Sampah") {
-                images = createImageGallery(['sampah1.jpg', 'sampah2.jpg', 'sampah3.jpg', 'sampah4.jpg']);
-                defaultImageSrc = 'image/sampah1.jpg'; 
+            // Tentukan gambar berdasarkan tipe
+            if (type === "Buang Sampah") {
+                imagesArray = ['sampah1.jpg', 'sampah2.jpg', 'sampah3.jpg', 'sampah4.jpg'];
             } else if (type === "Limbah Pabrik") {
-                images = createImageGallery(['limbah1.jpg', 'limbah2.jpg', 'limbah3.jpeg', 'limbah4.jpg']);
-                defaultImageSrc = 'image/limbah1.jpg';
+                imagesArray = ['limbah1.jpg', 'limbah2.jpg', 'limbah3.jpeg', 'limbah4.jpg'];
             } else if (type === "Deforestasi") {
-                images = createImageGallery(['deforestasi1.jpg', 'deforestasi2.jpeg', 'deforestasi3.jpg', 'deforestasi4.jpg']);
-                defaultImageSrc = 'image/deforestasi1.jpg';
+                imagesArray = ['deforestasi1.jpg', 'deforestasi2.jpeg', 'deforestasi3.jpg', 'deforestasi4.jpg'];
             } else if (type === "Kebakaran") {
-                images = createImageGallery(['kebakaran1.jpeg', 'kebakaran2.webp', 'kebakaran3.jpg', 'kebakaran4.webp']);
-                defaultImageSrc = 'image/kebakaran1.jpeg';
-            } else if (type === "Tambahan Illegal") {
-                 images = createImageGallery(['kebakaran1.jpeg', 'kebakaran2.webp', 'kebakaran3.jpg', 'kebakaran4.webp']);
-                defaultImageSrc = 'image/kebakaran1.jpeg';
-            } else if (type === "Emisi Kendaraan") {
-                images = createImageGallery(['kebakaran1.jpeg', 'kebakaran2.webp', 'kebakaran3.jpg', 'kebakaran4.webp']);
-                defaultImageSrc = 'image/kebakaran1.jpeg';
-            } else if (type === "Tumpahan Minyak") {
-                images = createImageGallery(['kebakaran1.jpeg', 'kebakaran2.webp', 'kebakaran3.jpg', 'kebakaran4.webp']);
-                defaultImageSrc = 'image/kebakaran1.jpeg';
-            } else if (type === "Overfishing") {
-                images = createImageGallery(['kebakaran1.jpeg', 'kebakaran2.webp', 'kebakaran3.jpg', 'kebakaran4.webp']);
-                defaultImageSrc = 'image/kebakaran1.jpeg';
+                imagesArray = ['kebakaran1.jpeg', 'kebakaran2.webp', 'kebakaran3.jpg', 'kebakaran4.webp'];
             }
 
-            gal.innerHTML = images;
-            document.getElementById('modalImg').src = defaultImageSrc;
+            // Render gallery
+            gal.innerHTML = createImageGallery(imagesArray);
+
+            // Set default gambar = gambar pertama
+            if (imagesArray.length > 0) {
+                document.getElementById('modalImg').src = `image/${imagesArray[0]}`;
+            }
 
             const modal = document.getElementById('detailModal');
             const card = document.getElementById('modalCard');
@@ -1126,6 +1111,7 @@
                 card.classList.remove('scale-95', 'opacity-0');
                 card.classList.add('scale-100', 'opacity-100');
             }, 10);
+
             renderChart();
         }
 
