@@ -166,23 +166,22 @@
 
 
     <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
-        <div class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
+        <div
+            class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-8 py-4 rounded-[2.5rem] shadow-2xl border border-white/20">
             <div class="flex items-center gap-4">
                 <div
-                    class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
-                    <i class="fas fa-globe-asia text-lg animate-pulse"></i>
+                    class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white shadow-lg relative overflow-hidden">
+                    <div class="absolute inset-0 bg-emerald-500 opacity-20 animate-pulse"></div>
+                    <i class="fas fa-globe-asia text-lg relative z-10"></i>
                 </div>
-                <div>
-                    <h1 class="text-xl md:text-2xl font-black tracking-tighter leading-none">INNOVATE<span
-                            class="text-green-600">OS</span></h1>
-                </div>
+                <h1 class="text-xl md:text-2xl font-black tracking-tighter text-slate-900 uppercase">Innovate<span
+                        class="text-emerald-500">OS</span></h1>
             </div>
 
             <div
-                class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500">
-                <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
-                <a href="about.html" class="hover:text-green-600 transition-colors">About</a>
-
+                class="hidden lg:flex items-center gap-10 font-black text-[10px] uppercase tracking-[0.3em] text-slate-500">
+                <a href="index.html" class="hover:text-emerald-500 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-emerald-600 transition-colors">About</a>
                 <div class="relative group">
                     <button
                         class="text-green-500 flex items-center gap-2 uppercase tracking-[0.2em] font-bold focus:outline-none py-2">
@@ -225,13 +224,13 @@
 
                     </div>
                 </div>
-                <a href="bencana.html" class="hover:text-green-600 transition-colors">Data</a>
-                <a href="contact.html" class="hover:text-green-600 transition-colors">Contact</a>
+                <a href="bencana.html" class="hover:text-emerald-500 transition-colors">Data</a>
+                <a href="contact.html" class="hover:text-emerald-500 transition-colors">Contact</a>
             </div>
 
             <div class="flex items-center gap-4">
                 <button onclick="toggleMobileMenu()"
-                    class="lg:hidden w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
+                    class="lg:hidden w-11 h-11 bg-white border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 shadow-sm active:scale-90 transition-transform">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
