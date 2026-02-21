@@ -1084,6 +1084,7 @@
             document.getElementById('modalTypeBadge').innerText = type;
 
             const gal = document.getElementById('modalGallery');
+            gal.innerHTML = images;
             let images = "";
 
 
@@ -1145,7 +1146,6 @@
                 `;
             }
 
-            gal.innerHTML = images;
 
             const modal = document.getElementById('detailModal');
             const card = document.getElementById('modalCard');
