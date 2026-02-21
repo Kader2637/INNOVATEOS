@@ -845,7 +845,6 @@
             document.getElementById('modalTypeBadge').innerText = type;
 
             const gal = document.getElementById('modalGallery');
-            const tipe = d.tipe.toLowerCase().trim(); 
 
             if (d.tipe === "Buang Sampah") {
                 gal.innerHTML = `
@@ -858,10 +857,10 @@
 
             else if (d.tipe === "Deforestasi") {
                 gal.innerHTML = `
-                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/hutan1.jpg" class="w-full h-full object-cover"></div>
-                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/hutan2.jpg" class="w-full h-full object-cover"></div>
-                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/hutan3.jpg" class="w-full h-full object-cover"></div>
-                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/hutan4.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/deforestasi1.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/deforestasi2.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/deforestasi3.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/deforestasi4.jpg" class="w-full h-full object-cover"></div>
                 `;
             }
 
@@ -873,6 +872,52 @@
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/kebakaran4.webp" class="w-full h-full object-cover"></div>
                 `;
             }
+
+            else if (d.tipe === "Limbah Pabrik") {
+                gal.innerHTML = `
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/limbah1.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/limbah2.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/limbah3.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/limbah4.jpg" class="w-full h-full object-cover"></div>
+                `;
+            }
+
+             else if (d.tipe === "Tambang Ilegal") {
+                gal.innerHTML = `
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/tambang1.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/tambang2.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/tambang3.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/tambang4.jpg" class="w-full h-full object-cover"></div>
+                `;
+            }
+
+             else if (d.tipe === "Emisi Kendaraan") {
+                gal.innerHTML = `
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/emisi1.jpg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/emisi2.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/emisi3.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/emisi4.jpg" class="w-full h-full object-cover"></div>
+                `;
+            }
+
+             else if (d.tipe === "Tumpahan Minyak") {
+                gal.innerHTML = `
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/minyak1.jpeg" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/minyak2.png" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/minyak3.png" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/minyak4.webp" class="w-full h-full object-cover"></div>
+                `;
+            }
+
+             else if (d.tipe === "Overfishing") {
+                gal.innerHTML = `
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/overfishing1.webp" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/overfishing2.webp" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/overfishing3.webp" class="w-full h-full object-cover"></div>
+                    <div class="aspect-square rounded-xl overflow-hidden"><img src="image/overfishing4.jpg" class="w-full h-full object-cover"></div>
+                `;
+            }
+
             const modal = document.getElementById('detailModal');
             const card = document.getElementById('modalCard');
             
