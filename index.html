@@ -844,13 +844,56 @@
             document.getElementById('modalImg').src = d.img;
             document.getElementById('modalTypeBadge').innerText = type;
 
-            const gal = document.getElementById('modalGallery'); 
-            gal.innerHTML = `
-                <div class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/sampah1.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/sampah2.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/sampah3.jpg" class="w-full h-full object-cover"></div>
-                <div class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/sampah4.jpg" class="w-full h-full object-cover"></div>
-            `;
+            const gal = document.getElementById('modalGallery');
+             let images = "";
+
+
+            if (type === "Buang Sampah") {
+                images = `
+                    <div onclick="changeImage('image/sampah1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarBuangSampah1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/sampah2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarBuangSampah2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/sampah3.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarBuangSampah2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/sampah4.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarBuangSampah2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Limbah Pabrik") {
+                images = `
+                    <div onclick="changeImage('image/gambarLimbahPabrik1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarLimbahPabrik1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarLimbahPabrik2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarLimbahPabrik2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Deforestasi") {
+                images = `
+                    <div onclick="changeImage('image/gambarDeforestasi1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarDeforestasi1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarDeforestasi2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarDeforestasi2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Kebakaran") {
+                images = `
+                    <div onclick="changeImage('image/gambarKebakaran1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarKebakaran2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Tambahan Illegal") {
+                images = `
+                    <div onclick="changeImage('image/gambarTambahanIllegal1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTambahanIllegal1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarTambahanIllegal2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTambahanIllegal2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Emisi Kendaraan") {
+                images = `
+                    <div onclick="changeImage('image/gambarEmisiKendaraan1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarEmisiKendaraan1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarEmisiKendaraan2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarEmisiKendaraan2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Tumpahan Minyak") {
+                images = `
+                    <div onclick="changeImage('image/gambarTumpahanMinyak1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTumpahanMinyak1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarTumpahanMinyak2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTumpahanMinyak2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            } else if (type === "Overfishing") {
+                images = `
+                    <div onclick="changeImage('image/gambarOverfishing1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarOverfishing1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarOverfishing2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarOverfishing2.jpg" class="w-full h-full object-cover"></div>
+                `;
+            }
+
+            gal.innerHTML = images;
+
             const modal = document.getElementById('detailModal');
             const card = document.getElementById('modalCard');
             
@@ -860,6 +903,10 @@
                 card.classList.add('scale-100', 'opacity-100');
             }, 10);
             renderChart();
+        }
+
+        function changeImage(src) {
+            document.getElementById('modalImg').src = src;
         }
 
         function closeModal() {
