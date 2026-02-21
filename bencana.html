@@ -244,7 +244,8 @@
                             class="p-4 hover:bg-slate-50 hover:text-emerald-600 transition-colors flex items-center gap-4 border-b border-slate-50 group/item">
                             <div
                                 class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                                <i class="fas fa-vr-cardboard text-lg"></i></div>
+                                <i class="fas fa-vr-cardboard text-lg"></i>
+                            </div>
                             <div>
                                 <span class="block text-xs font-black uppercase tracking-widest text-slate-900">Lab
                                     Simulasi</span>
@@ -257,7 +258,8 @@
                             class="p-4 hover:bg-slate-50 hover:text-blue-600 transition-colors flex items-center gap-4 group/item">
                             <div
                                 class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
-                                <i class="fas fa-leaf text-lg"></i></div>
+                                <i class="fas fa-leaf text-lg"></i>
+                            </div>
                             <div>
                                 <span
                                     class="block text-xs font-black uppercase tracking-widest text-slate-900">Kalkulator
@@ -308,37 +310,78 @@
     <main class="flex-grow pt-40 pb-24 px-4 md:px-6 relative">
         <div class="max-w-7xl mx-auto">
 
-            <div class="mb-16 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 gs-reveal">
-                <div class="max-w-2xl">
+          <div class="mb-16 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 gs-reveal relative z-[100]">
+                
+                <div class="max-w-2xl relative z-10">
                     <div class="flex items-center gap-3 mb-4">
                         <div class="pulse-live"></div>
-                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-red-500">Satelit Uplink:
-                            Aktif</span>
+                        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-red-500">Satelit Uplink: Aktif</span>
                     </div>
                     <h2 class="text-5xl md:text-7xl font-black italic text-slate-900 leading-[0.9] tracking-tighter">
-                        Arsip <br><span
-                            class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">Intelijen
-                            Krisis.</span></h2>
-                    <p class="text-slate-500 mt-6 font-medium text-lg leading-relaxed">Menampilkan validasi data satelit
-                        real-time dan sensor lapangan untuk mitigasi nasional.</p>
+                        Arsip <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-blue-600">Intelijen Krisis.</span>
+                    </h2>
+                    <p class="text-slate-500 mt-6 font-medium text-lg leading-relaxed">Menampilkan validasi data satelit real-time dan sensor lapangan untuk mitigasi nasional.</p>
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-4 w-full lg:w-auto">
-                    <div
-                        class="bg-white/70 backdrop-blur p-2 rounded-[1.5rem] flex items-center shadow-lg border border-white w-full md:w-80 group focus-within:border-emerald-500 transition-all">
-                        <i class="fas fa-search px-4 text-slate-300 group-focus-within:text-emerald-500"></i>
-                        <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Cari wilayah..."
-                            class="bg-transparent outline-none w-full text-sm font-bold h-12 text-slate-700">
+                <div class="flex flex-col md:flex-row gap-5 w-full lg:w-auto relative z-[100]">
+                    
+                    <div class="relative w-full md:w-[380px] group">
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-500 to-blue-500 rounded-[1.5rem] blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
+                        
+                        <div class="relative bg-white/80 backdrop-blur-xl p-1.5 rounded-[1.5rem] flex items-center shadow-xl border border-white">
+                            <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-400 group-focus-within:bg-emerald-500 group-focus-within:text-white transition-all duration-300">
+                                <i class="fas fa-satellite-dish animate-pulse"></i>
+                            </div>
+                            
+                            <input type="text" id="searchInput" onkeyup="handleSearch()" placeholder="Lacak koordinat / wilayah..." class="bg-transparent outline-none w-full text-sm font-bold h-12 px-4 text-slate-800 placeholder:text-slate-400">
+                            
+                            <div class="hidden sm:flex items-center gap-2 mr-2 px-4 py-2 bg-emerald-50 rounded-xl border border-emerald-100 text-[9px] font-black text-emerald-600 tracking-widest pointer-events-none">
+                                <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-ping"></div> LIVE
+                            </div>
+                        </div>
                     </div>
-                    <div class="bg-white/70 backdrop-blur rounded-[1.5rem] p-1 shadow-lg border border-white">
-                        <select id="typeFilter" onchange="handleSearch()"
-                            class="bg-transparent px-6 py-3 rounded-[1.2rem] font-black text-[10px] uppercase tracking-widest border-none outline-none cursor-pointer h-12 hover:text-emerald-600 transition-colors">
-                            <option value="all">Semua Tipe</option>
-                            <option value="Banjir">Banjir</option>
-                            <option value="Kebakaran">Kebakaran</option>
-                            <option value="Gempa">Gempa</option>
-                            <option value="Polusi">Polusi</option>
-                        </select>
+
+                    <div class="relative w-full md:w-auto z-[100] group" tabindex="0">
+                        <input type="hidden" id="typeFilter" value="all">
+                        
+                        <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-[1.5rem] blur opacity-0 group-focus-within:opacity-30 transition duration-500"></div>
+                        
+                        <button type="button" class="relative w-full md:w-[220px] bg-white/80 backdrop-blur-xl pl-4 pr-3 py-1.5 rounded-[1.5rem] shadow-xl border border-white flex items-center justify-between gap-4 h-[56px] focus:outline-none cursor-pointer">
+                            <div class="flex items-center gap-3">
+                                <div id="activeIconBox" class="w-9 h-9 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 transition-colors shrink-0">
+                                    <i id="activeIcon" class="fas fa-layer-group text-xs"></i>
+                                </div>
+                                <span id="dropdownText" class="font-black text-[10px] md:text-xs uppercase tracking-widest text-slate-800 text-left truncate">Semua Data</span>
+                            </div>
+                            <div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 group-focus-within:rotate-180 transition-transform duration-300 shrink-0">
+                                <i class="fas fa-chevron-down text-[10px]"></i>
+                            </div>
+                        </button>
+
+                        <div class="absolute right-0 md:left-0 top-full mt-3 w-full md:w-[260px] bg-white/95 backdrop-blur-2xl border border-white rounded-[2rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] p-3 opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible translate-y-4 group-focus-within:translate-y-0 transition-all duration-300 z-[105]">
+                            <div class="flex flex-col gap-1">
+                                <div onclick="selectFilter('all', 'Semua Data', 'fa-layer-group', 'text-blue-500', 'bg-blue-50')" class="cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-50 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-blue-500 group-hover/item:scale-110 group-hover/item:bg-blue-500 group-hover/item:text-white transition-all"><i class="fas fa-layer-group text-sm"></i></div>
+                                    <span class="text-xs font-bold text-slate-700 uppercase tracking-widest">Semua Kategori</span>
+                                </div>
+                                <div onclick="selectFilter('Banjir', 'Banjir', 'fa-water', 'text-blue-500', 'bg-blue-50')" class="cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-blue-50 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-blue-500 group-hover/item:scale-110 group-hover/item:bg-blue-500 group-hover/item:text-white transition-all"><i class="fas fa-water text-sm"></i></div>
+                                    <span class="text-xs font-bold text-slate-700 uppercase tracking-widest">Banjir</span>
+                                </div>
+                                <div onclick="selectFilter('Kebakaran', 'Kebakaran', 'fa-fire', 'text-orange-500', 'bg-orange-50')" class="cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-orange-50 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-orange-500 group-hover/item:scale-110 group-hover/item:bg-orange-500 group-hover/item:text-white transition-all"><i class="fas fa-fire text-sm"></i></div>
+                                    <span class="text-xs font-bold text-slate-700 uppercase tracking-widest">Kebakaran</span>
+                                </div>
+                                <div onclick="selectFilter('Gempa', 'Gempa Bumi', 'fa-mountain', 'text-amber-700', 'bg-amber-100')" class="cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-amber-50 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-amber-700 group-hover/item:scale-110 group-hover/item:bg-amber-600 group-hover/item:text-white transition-all"><i class="fas fa-mountain text-sm"></i></div>
+                                    <span class="text-xs font-bold text-slate-700 uppercase tracking-widest">Gempa Bumi</span>
+                                </div>
+                                <div onclick="selectFilter('Polusi', 'Polusi Udara', 'fa-smog', 'text-slate-500', 'bg-slate-100')" class="cursor-pointer flex items-center gap-4 p-3 rounded-2xl hover:bg-slate-100 transition-colors group/item">
+                                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-500 group-hover/item:scale-110 group-hover/item:bg-slate-600 group-hover/item:text-white transition-all"><i class="fas fa-smog text-sm"></i></div>
+                                    <span class="text-xs font-bold text-slate-700 uppercase tracking-widest">Polusi Udara</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -351,7 +394,7 @@
         </div>
     </main>
 
-      <footer class="relative bg-white border-t border-slate-200 pt-16 pb-8 overflow-hidden z-10">
+    <footer class="relative bg-white border-t border-slate-200 pt-16 pb-8 overflow-hidden z-10">
         <div
             class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-1/2 bg-green-50 rounded-[100%] blur-3xl -z-10 pointer-events-none">
         </div>
@@ -414,7 +457,8 @@
                         <div>
                             <p class="text-sm font-black text-slate-800">All Systems Operational</p>
                             <p class="text-xs text-slate-500 mt-1 font-medium">Satelit LEO tersinkronisasi. Last update:
-                                <span class="text-green-600 font-bold">12ms ago</span></p>
+                                <span class="text-green-600 font-bold">12ms ago</span>
+                            </p>
                         </div>
                     </div>
                     <button onclick="scrollToId('contact')"
@@ -719,6 +763,19 @@
             });
             renderGrid();
         };
+        function selectFilter(value, text, iconClass, textColor, bgColor) {
+            document.getElementById('typeFilter').value = value;
+            
+            document.getElementById('dropdownText').innerText = text;
+            
+            const iconBox = document.getElementById('activeIconBox');
+            iconBox.className = `w-9 h-9 rounded-xl flex items-center justify-center transition-colors ${bgColor} ${textColor}`;
+            document.getElementById('activeIcon').className = `fas ${iconClass} text-xs`;
+            
+            document.activeElement.blur();
+            
+            handleSearch();
+        }
     </script>
 </body>
 
