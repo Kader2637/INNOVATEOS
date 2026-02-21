@@ -846,7 +846,7 @@
 
             const gal = document.getElementById('modalGallery');
 
-            if (d.tipe === "Buang Sampah") {
+            if (type === "Buang Sampah") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/sampah1.jpg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/sampah2.jpg" class="w-full h-full object-cover"></div>
@@ -855,7 +855,7 @@
                 `;
             }
 
-            else if (d.tipe === "Deforestasi") {
+            else if (type === "Deforestasi") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/deforestasi1.jpg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/deforestasi2.jpeg" class="w-full h-full object-cover"></div>
@@ -864,7 +864,7 @@
                 `;
             }
 
-            else if (d.tipe === "Kebakaran") {
+            else if (type === "Kebakaran") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/kebakaran1.jpeg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/kebakaran2.webp" class="w-full h-full object-cover"></div>
@@ -873,7 +873,7 @@
                 `;
             }
 
-            else if (d.tipe === "Limbah Pabrik") {
+            else if (type === "Limbah Pabrik") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/limbah1.jpg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/limbah2.jpg" class="w-full h-full object-cover"></div>
@@ -882,7 +882,7 @@
                 `;
             }
 
-             else if (d.tipe === "Tambang Ilegal") {
+             else if (type === "Tambang Ilegal") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/tambang1.jpeg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/tambang2.jpg" class="w-full h-full object-cover"></div>
@@ -891,7 +891,7 @@
                 `;
             }
 
-             else if (d.tipe === "Emisi Kendaraan") {
+             else if (type === "Emisi Kendaraan") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/emisi1.jpg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/emisi2.jpeg" class="w-full h-full object-cover"></div>
@@ -900,7 +900,7 @@
                 `;
             }
 
-             else if (d.tipe === "Tumpahan Minyak") {
+             else if (type === "Tumpahan Minyak") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/minyak1.jpeg" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/minyak2.png" class="w-full h-full object-cover"></div>
@@ -909,7 +909,7 @@
                 `;
             }
 
-             else if (d.tipe === "Overfishing") {
+             else if (type === "Overfishing") {
                 gal.innerHTML = `
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/overfishing1.webp" class="w-full h-full object-cover"></div>
                     <div class="aspect-square rounded-xl overflow-hidden"><img src="image/overfishing2.webp" class="w-full h-full object-cover"></div>
