@@ -4,33 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact & Report | INNOVATE OS </title>
+    <title>Contact & Report | INNOVATE OS</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
             --primary: #10b981;
             --secondary: #0f172a;
+            --bg-light: #ffffff;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #f8fafc;
+            background-color: var(--bg-light);
             color: var(--secondary);
+            overflow-x: hidden;
         }
 
-        h1, h2, h3, .font-heading { font-family: 'Space Grotesk', sans-serif; }
+        h1,
+        h2,
+        h3,
+        .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-        /* Glass Nav Effect */
+        /* --- DYNAMIC MESH BACKGROUND --- */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+            filter: blur(80px);
+            animation: meshMove 20s infinite alternate linear;
+        }
+
+        @keyframes meshMove {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+        /* NAV & MENU */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
         }
 
         /* Upload Area Styling */
@@ -39,251 +92,492 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
+
         .upload-area:hover {
             border-color: var(--primary);
-            background-color: #f0fdf4;
+            background-color: rgba(16, 185, 129, 0.05);
         }
 
         /* Card Hover */
         .contact-card {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .contact-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.1);
+            box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.1);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        /* --- AI SCANNER ANIMATION --- */
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #10b981;
+            box-shadow: 0 0 15px #10b981, 0 15px 20px rgba(16, 185, 129, 0.4);
+            animation: scanAI 2.5s ease-in-out infinite alternate;
+            z-index: 10;
+        }
 
-        #mobile-menu { transform: translateX(100%); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        #mobile-menu.open { transform: translateX(0); }
+        @keyframes scanAI {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+
+        .modal-scale-up {
+            transform: scale(1) !important;
+            opacity: 1 !important;
+        }
+
+        /* --- MODAL BACKDROP: ONLY BLUR --- */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            /* Nyaris transparan */
+            backdrop-filter: blur(20px);
+            /* Fokus pada blur */
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .modal-active {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Modal Content Glass */
+        .glass-modal {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Scanner Line Green */
+        .scanner-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #10b981;
+            box-shadow: 0 0 15px #10b981;
+            animation: scanAI 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes scanAI {
+            0% {
+                top: 0%;
+            }
+
+            100% {
+                top: 100%;
+            }
+        }
+
+        /* --- BACKGROUND STYLE (SAME AS ABOUT) --- */
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            opacity: 0.5;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+            filter: blur(80px);
+            animation: meshMove 20s infinite alternate linear;
+        }
+
+        @keyframes meshMove {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.2);
+            }
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            z-index: -9;
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .blob {
+            position: fixed;
+            filter: blur(80px);
+            z-index: -8;
+            animation: float 10s infinite ease-in-out alternate;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+
+            100% {
+                transform: translateY(-30px) scale(1.1);
+            }
+        }
     </style>
 </head>
 
-<body class="antialiased flex flex-col min-h-screen">
+<body class="antialiased flex flex-col min-h-screen selection:bg-emerald-100 selection:text-emerald-900">
+    <div class="mesh-bg"></div>
 
-    
-        <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
-            <div
-                class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-6 py-4 rounded-[2rem] shadow-xl">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
-                        <i class="fas fa-globe-asia text-lg animate-pulse"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl md:text-2xl font-black tracking-tighter leading-none">INNOVATE<span
-                                class="text-green-600">OS</span></h1>
-                    </div>
-                </div>
-
+    <nav id="main-nav" class="fixed top-0 w-full z-[1000] p-4 md:p-6 transition-all duration-500">
+        <div
+            class="max-w-7xl mx-auto flex justify-between items-center glass-nav px-8 py-4 rounded-[2.5rem] shadow-2xl border border-white/20">
+            <div class="flex items-center gap-4">
                 <div
-                    class="hidden lg:flex items-center gap-8 font-bold text-[11px] uppercase tracking-[0.2em] text-slate-500">
-                    <a href="index.html" class="hover:text-green-600 transition-colors">Home</a>
-                    <a href="about.html" class="hover:text-green-600 transition-colors">About</a>
-                    <a href="simulator.html" class="hover:text-green-600 transition-colors">Simulasi</a>
-                    <a href="bencana.html" class="hover:text-green-600 transition-colors">Data</a>
-                    <a href="contact.html" class="hover:text-green-600 transition-colors text-green-500">Contact</a>
+                    class="w-10 h-10 md:w-12 md:h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white shadow-lg relative overflow-hidden">
+                    <div class="absolute inset-0 bg-emerald-500 opacity-20 animate-pulse"></div>
+                    <i class="fas fa-globe-asia text-lg relative z-10"></i>
                 </div>
-
-                <div class="flex items-center gap-4">
-                    <button onclick="toggleMobileMenu()"
-                        class="lg:hidden w-10 h-10 bg-slate-100 rounded-xl flex items-center justify-center text-slate-900">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
+                <h1 class="text-xl md:text-2xl font-black tracking-tighter text-slate-900 uppercase">Innovate<span
+                        class="text-emerald-500">OS</span></h1>
             </div>
-        </nav>
 
-        <div id="mobile-menu" class="fixed inset-0 z-[1001] bg-white flex flex-col p-8 lg:hidden">
-            <div class="flex justify-between items-center mb-10">
-                <h2 class="text-2xl font-black">MENU</h2>
+            <div
+                class="hidden lg:flex items-center gap-10 font-black text-[10px] uppercase tracking-[0.3em] text-slate-500">
+                <a href="index.html" class="hover:text-emerald-500 transition-colors">Home</a>
+                <a href="about.html" class="hover:text-emerald-500 transition-colors">About</a>
+
+                <div class="relative group">
+                    <button
+                        class="hover:text-emerald-500 transition-colors flex items-center gap-2 uppercase tracking-[0.2em] font-black focus:outline-none py-2">
+                        Tools <i
+                            class="fas fa-chevron-down text-[9px] transition-transform duration-300 group-hover:rotate-180"></i>
+                    </button>
+                    <div
+                        class="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-3 group-hover:translate-y-0 overflow-hidden flex flex-col z-50">
+                        <a href="simulator.html"
+                            class="p-4 hover:bg-slate-50 hover:text-emerald-600 transition-colors flex items-center gap-4 border-b border-slate-50 group/item">
+                            <div
+                                class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                <i class="fas fa-vr-cardboard text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="block text-xs font-black uppercase tracking-widest text-slate-900">Lab
+                                    Simulasi</span>
+                                <span
+                                    class="block text-[10px] text-slate-500 tracking-normal mt-0.5 capitalize">Simulasi
+                                    dampak bencana</span>
+                            </div>
+                        </a>
+                        <a href="kalkulator.html"
+                            class="p-4 hover:bg-slate-50 hover:text-blue-600 transition-colors flex items-center gap-4 group/item">
+                            <div
+                                class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center flex-shrink-0 group-hover/item:scale-110 transition-transform">
+                                <i class="fas fa-leaf text-lg"></i>
+                            </div>
+                            <div>
+                                <span
+                                    class="block text-xs font-black uppercase tracking-widest text-slate-900">Kalkulator
+                                    Emisi</span>
+                                <span class="block text-[10px] text-slate-500 tracking-normal mt-0.5 capitalize">Hitung
+                                    jejak karbonmu</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a href="bencana.html" class="hover:text-emerald-500 transition-colors">Data</a>
+                <a href="contact.html" class="text-emerald-500 hover:text-emerald-600 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
                 <button onclick="toggleMobileMenu()"
-                    class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl">
-                    <i class="fas fa-times"></i>
+                    class="lg:hidden w-11 h-11 bg-white border border-slate-100 rounded-2xl flex items-center justify-center text-slate-900 shadow-sm active:scale-95 transition-transform">
+                    <i class="fas fa-bars"></i>
                 </button>
             </div>
-            <div class="flex flex-col gap-6 text-xl font-bold text-slate-600">
-                <a href="index.html" onclick="toggleMobileMenu()">Home</a>
-                <a href="about.html" onclick="toggleMobileMenu()">About</a>
-                <a href="simulator.html" onclick="toggleMobileMenu()">Simulasi</a>
-                <a href="bencana.html" onclick="toggleMobileMenu()">Data Bencana</a>
-                <a href="contact.html" onclick="toggleMobileMenu()" class="text-green-500">Contact</a>
-            </div>
         </div>
+    </nav>
 
-<main class="flex-grow pt-32 pb-20 px-4 md:px-6 relative overflow-hidden">
-    <div class="absolute top-0 right-0 -z-10 w-[500px] h-[500px] bg-emerald-50 rounded-full blur-[120px] opacity-60"></div>
-    <div class="absolute bottom-0 left-0 -z-10 w-[500px] h-[500px] bg-blue-50 rounded-full blur-[120px] opacity-60"></div>
-
-    <div class="max-w-7xl mx-auto">
-        <div class="mb-20 text-center gs-reveal">
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-slate-200 shadow-sm rounded-full text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 mb-6">
-                <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                Response Center 
-            </div>
-            <h2 class="text-5xl md:text-7xl font-black text-slate-900 tracking-tight leading-[0.9]">
-                Let's <span class="text-transparent bg-clip-text bg-gradient-to-br from-emerald-500 to-blue-600">Connect.</span>
-            </h2>
-            <p class="text-slate-500 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
-                Laporkan anomali atau hubungi tim teknis kami. Kami menggunakan AI untuk memproses laporan Anda secara *real-time*.
-            </p>
+    <div id="mobile-menu"
+        class="fixed inset-0 z-[2000] bg-white/95 backdrop-blur-2xl flex flex-col p-8 lg:hidden transition-transform duration-500 translate-x-full">
+        <div class="flex justify-between items-center mb-10">
+            <h2 class="text-2xl font-black italic">MENU.</h2>
+            <button onclick="toggleMobileMenu()"
+                class="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center text-xl"><i
+                    class="fas fa-times"></i></button>
         </div>
+        <div class="flex flex-col gap-6 text-xl font-bold text-slate-600 uppercase">
+            <a href="index.html" onclick="toggleMobileMenu()">Home</a>
+            <a href="about.html" onclick="toggleMobileMenu()">About</a>
 
-        <div class="grid lg:grid-cols-12 gap-8 items-start">
-            
-            <div class="lg:col-span-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6 gs-reveal">
-                
-                <div class="group contact-card bg-slate-900 p-8 rounded-[2.5rem] text-white shadow-2xl overflow-hidden relative">
-                    <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform">
-                        <i class="fas fa-phone-alt text-6xl"></i>
-                    </div>
-                    <h3 class="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2">Hotline 24/7</h3>
-                    <p class="text-2xl font-bold mb-1">0800-1-INNOVATE</p>
-                    <p class="text-slate-400 text-xs font-medium italic">Emergency Response Team</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                        <div class="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Email</p>
-                        <p class="text-sm font-bold text-slate-800">support@innovate.id</p>
-                    </div>
-                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-md transition-all">
-                        <div class="w-10 h-10 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mb-4">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Office</p>
-                        <p class="text-sm font-bold text-slate-800">Jakarta, ID</p>
-                    </div>
-                </div>
-
-                <div class="rounded-[2.5rem] overflow-hidden h-[280px] border border-white shadow-2xl relative group">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126920.24151325126!2d106.789153!3d-6.229728!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3e16723abbf%3A0x1d300890f3f268b5!2sJakarta!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" 
-                        class="w-full h-full grayscale contrast-125 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" allowfullscreen="" loading="lazy"></iframe>
-                    <div class="absolute inset-0 pointer-events-none ring-1 ring-inset ring-black/5 rounded-[2.5rem]"></div>
-                </div>
+            <div class="flex flex-col gap-4 py-2 border-y border-slate-100 my-2">
+                <span class="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">Tools & Layanan</span>
+                <a href="simulator.html" class="hover:text-emerald-500 transition-colors flex items-center gap-3"
+                    onclick="toggleMobileMenu()"><i class="fas fa-vr-cardboard text-sm"></i> Lab Simulasi</a>
+                <a href="kalkulator.html" class="flex items-center gap-3" onclick="toggleMobileMenu()"><i
+                        class="fas fa-leaf text-sm"></i> Kalkulator Emisi</a>
             </div>
 
-            <div class="lg:col-span-7 gs-reveal">
-                <div class="bg-white/70 backdrop-blur-xl p-8 md:p-12 rounded-[3rem] shadow-2xl shadow-slate-200/50 border border-white relative">
-                    
-                    <div class="mb-10">
-                        <h3 class="text-2xl font-bold text-slate-900 tracking-tight">Formulir Laporan</h3>
-                        <p class="text-slate-500 text-sm mt-1 font-medium">Lengkapi data untuk verifikasi cepat oleh sistem.</p>
-                    </div>
-
-                    <form onsubmit="handleFormSubmit(event)" class="space-y-8">
-                        <div class="grid md:grid-cols-2 gap-8">
-                            <div class="relative">
-                                <input type="text" required class="peer w-full bg-transparent border-b-2 border-slate-200 py-3 font-bold text-slate-800 outline-none focus:border-emerald-500 transition-all placeholder-transparent" placeholder="Nama">
-                                <label class="absolute left-0 -top-3.5 text-slate-400 text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:text-emerald-500">Nama Pelapor</label>
-                            </div>
-                            <div class="relative">
-                                <input type="text" required class="peer w-full bg-transparent border-b-2 border-slate-200 py-3 font-bold text-slate-800 outline-none focus:border-emerald-500 transition-all placeholder-transparent" placeholder="Lokasi">
-                                <label class="absolute left-0 -top-3.5 text-slate-400 text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:text-emerald-500">Lokasi Kejadian</label>
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <p class="text-[10px] font-black uppercase tracking-widest text-slate-400">Kategori Laporan</p>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="cat" class="hidden peer" required>
-                                    <div class="px-4 py-3 rounded-2xl border-2 border-slate-100 bg-slate-50 text-center text-xs font-bold text-slate-500 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">Banjir</div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="cat" class="hidden peer">
-                                    <div class="px-4 py-3 rounded-2xl border-2 border-slate-100 bg-slate-50 text-center text-xs font-bold text-slate-500 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">Kebakaran</div>
-                                </label>
-                                <label class="cursor-pointer">
-                                    <input type="radio" name="cat" class="hidden peer">
-                                    <div class="px-4 py-3 rounded-2xl border-2 border-slate-100 bg-slate-50 text-center text-xs font-bold text-slate-500 peer-checked:border-emerald-500 peer-checked:bg-emerald-50 peer-checked:text-emerald-700 transition-all">Polusi</div>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="space-y-3">
-                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Bukti Visual</label>
-                            <div class="upload-area group p-8 rounded-[2rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 transition-all flex flex-col items-center justify-center bg-slate-50/50" onclick="document.getElementById('fileInput').click()">
-                                <div class="w-12 h-12 bg-white rounded-2xl shadow-sm flex items-center justify-center text-slate-400 group-hover:text-emerald-500 transition-colors mb-3">
-                                    <i class="fas fa-cloud-upload-alt text-xl"></i>
-                                </div>
-                                <p class="text-sm font-bold text-slate-600">Drop files or click to upload</p>
-                                <p class="text-[9px] text-slate-400 font-bold uppercase mt-1 tracking-widest">Max 4 files • High Res Recommended</p>
-                                <input type="file" id="fileInput" class="hidden" multiple accept="image/*" onchange="previewImages()">
-                            </div>
-                            <div id="imagePreviewGrid" class="grid grid-cols-4 gap-4"></div>
-                        </div>
-
-                        <button type="submit" id="submitBtn" class="w-full bg-slate-900 text-white py-6 rounded-2xl font-black uppercase tracking-[0.2em] hover:bg-emerald-600 hover:-translate-y-1 transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-3 active:scale-95">
-                            <span>Kirim Laporan</span>
-                            <i class="fas fa-arrow-right text-xs"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-
+            <a href="bencana.html" onclick="toggleMobileMenu()">Data Bencana</a>
+            <a href="contact.html" onclick="toggleMobileMenu()" class="text-emerald-500">Contact</a>
         </div>
     </div>
-</main>
+
+    <div class="mesh-bg"></div>
+    <div class="bg-grid"></div>
+    <div class="blob bg-emerald-200 w-[500px] h-[500px] rounded-full top-[-10%] left-[-10%]"></div>
+    <div class="blob bg-blue-100 w-[600px] h-[600px] rounded-full bottom-[10%] right-[-10%]"
+        style="animation-delay: -5s;"></div>
+
+    <main class="flex-grow pt-40 pb-20 px-4 md:px-8 relative overflow-hidden bg-[#f8fafc]">
+        <div class="absolute top-0 left-0 w-full h-full -z-10 pointer-events-none">
+            <div class="absolute top-[-5%] right-0 w-[500px] h-[500px] bg-emerald-100/30 rounded-full blur-[120px]">
+            </div>
+            <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-100/20 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative">
+            <div class="mb-16 text-center header-content">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-1.5 bg-white shadow-sm border border-slate-200 rounded-full text-[10px] font-bold uppercase tracking-widest text-emerald-600 mb-6">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+                    Response Center: East Java
+                </div>
+                <h2 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight mb-6">
+                    Let's <span
+                        class="text-transparent bg-clip-text bg-gradient-to-br from-emerald-500 to-blue-600 italic">Connect.</span>
+                </h2>
+                <p class="text-slate-500 text-base md:text-lg max-w-2xl mx-auto leading-relaxed font-medium">
+                    Sistem AI <span class="text-slate-900 font-bold">INNOVATE OS</span> siap memverifikasi laporan
+                    anomali wilayah Malang secara real-time.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 md:gap-12 items-start">
+
+                <div class="lg:col-span-5 flex flex-col gap-6 left-column">
+
+                    <div
+                        class="group relative bg-slate-900 p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl overflow-hidden border border-slate-800 shrink-0">
+                        <h3 class="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400 mb-4">AETHER CODE
+                            | UNMER</h3>
+                        <p class="text-2xl md:text-4xl font-black mb-2 tracking-tight break-words">0800-1-AETHERCODE</p>
+                        <div class="flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest">
+                            <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+                            Emergency Response Team
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div
+                            class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-center">
+                            <p class="text-[10px] font-black text-slate-400 uppercase mb-1">Email Support</p>
+                            <p class="text-sm font-bold text-slate-800 truncate">aethercode@innovate.os</p>
+                        </div>
+                        <div
+                            class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex flex-col justify-center">
+                            <p class="text-[10px] font-black text-slate-400 uppercase mb-1">System Status</p>
+                            <p class="text-sm font-bold text-emerald-600 italic">Encrypted & Online</p>
+                        </div>
+                    </div>
+
+                    <div
+                        class="rounded-[2.5rem] overflow-hidden h-[250px] md:h-[320px] border-[8px] md:border-[12px] border-white shadow-xl relative group bg-slate-100 shrink-0">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.2134575807914!2d112.6131448!3d-7.9768297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e78828399999999%3A0x6767676767676767!2sMalang!5e0!3m2!1sen!2sid!4v1"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 right-column">
+                    <div
+                        class="bg-white p-8 md:p-14 rounded-[2.5rem] md:rounded-[3.5rem] shadow-[0_25px_70px_-15px_rgba(0,0,0,0.05)] border border-slate-50">
+                        <div class="mb-10 md:mb-12">
+                            <h3 class="text-2xl md:text-3xl font-black italic text-slate-900 tracking-tighter mb-2">
+                                Formulir Intelijen.</h3>
+                            <p class="text-slate-500 font-medium text-sm md:text-base">Lengkapi parameter data untuk
+                                verifikasi cepat.</p>
+                        </div>
+
+                        <form id="reportForm" onsubmit="handleFormSubmit(event)" class="space-y-8 md:space-y-10">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+                                <div class="relative group">
+                                    <input type="text" id="inputNama" required
+                                        class="peer w-full bg-transparent border-b-2 border-slate-100 py-3 font-bold text-slate-900 outline-none focus:border-emerald-500 transition-all placeholder-transparent"
+                                        placeholder="Nama">
+                                    <label
+                                        class="absolute left-0 -top-4 text-slate-400 text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-emerald-500">Nama
+                                        Pelapor</label>
+                                </div>
+                                <div class="relative group">
+                                    <input type="text" id="inputLokasi" required
+                                        class="peer w-full bg-transparent border-b-2 border-slate-100 py-3 font-bold text-slate-900 outline-none focus:border-emerald-500 transition-all placeholder-transparent"
+                                        placeholder="Lokasi">
+                                    <label
+                                        class="absolute left-0 -top-4 text-slate-400 text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:top-3 peer-focus:-top-4 peer-focus:text-emerald-500">Titik
+                                        Lokasi Kejadian</label>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Kategori
+                                    Laporan</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="cat" value="Banjir" class="hidden peer" required>
+                                        <div
+                                            class="py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-center text-xs font-bold text-slate-500 peer-checked:border-emerald-500 peer-checked:bg-white peer-checked:text-emerald-700 peer-checked:shadow-lg transition-all uppercase">
+                                            🌊 Banjir</div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="cat" value="Kebakaran" class="hidden peer">
+                                        <div
+                                            class="py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-center text-xs font-bold text-slate-500 peer-checked:border-orange-500 peer-checked:bg-white peer-checked:text-orange-700 peer-checked:shadow-lg transition-all uppercase">
+                                            🔥 Kebakaran</div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="cat" value="Polusi" class="hidden peer">
+                                        <div
+                                            class="py-4 rounded-2xl border-2 border-slate-50 bg-slate-50/50 text-center text-xs font-bold text-slate-500 peer-checked:border-blue-500 peer-checked:bg-white peer-checked:text-blue-700 peer-checked:shadow-lg transition-all uppercase">
+                                            🌫️ Polusi</div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Deskripsi
+                                    Analitik</label>
+                                <textarea id="inputDeskripsi" required
+                                    class="w-full bg-slate-50 border border-slate-100 rounded-[2rem] p-6 font-medium text-slate-800 outline-none focus:border-emerald-500 focus:bg-white transition-all h-36 resize-none shadow-inner"
+                                    placeholder="Ceritakan detail anomali..."></textarea>
+                            </div>
+
+                            <div class="space-y-4">
+                                <label class="text-[10px] font-black uppercase tracking-widest text-slate-400">Bukti
+                                    Visual</label>
+                                <div class="upload-area group p-8 rounded-[2.5rem] border-2 border-dashed border-slate-200 hover:border-emerald-400 transition-all cursor-pointer flex flex-col items-center justify-center bg-white"
+                                    onclick="document.getElementById('fileInput').click()">
+                                    <i
+                                        class="fas fa-camera text-2xl text-slate-300 group-hover:text-emerald-500 mb-2 transition-colors"></i>
+                                    <p class="text-xs font-bold text-slate-400 uppercase tracking-widest text-center">
+                                        Lampirkan Foto</p>
+                                    <input type="file" id="fileInput" class="hidden" accept="image/*"
+                                        onchange="previewImages()">
+                                </div>
+                                <div id="imagePreviewGrid" class="flex flex-wrap gap-3"></div>
+                            </div>
+
+                            <div class="pt-4">
+                                <button type="submit" id="submitBtn"
+                                    class="w-full bg-slate-900 text-white py-5 md:py-6 rounded-[2rem] font-black uppercase tracking-[0.3em] text-xs md:text-sm hover:bg-emerald-600 hover:shadow-2xl hover:shadow-emerald-500/20 transition-all active:scale-95 flex items-center justify-center gap-3">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Kirim Laporan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
     <footer class="relative bg-white border-t border-slate-200 pt-16 pb-8 overflow-hidden z-10">
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-1/2 bg-green-50 rounded-[100%] blur-3xl -z-10 pointer-events-none"></div>
+        <div
+            class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[80%] h-1/2 bg-green-50 rounded-[100%] blur-3xl -z-10 pointer-events-none">
+        </div>
 
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
                 <div class="md:col-span-5 space-y-6">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
+                        <div
+                            class="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white shadow-lg">
                             <i class="fas fa-globe-asia text-lg animate-pulse"></i>
                         </div>
-                        <h2 class="text-2xl font-black tracking-tighter leading-none text-slate-900">INNOVATE<span class="text-green-600">OS</span></h2>
+                        <h2 class="text-2xl font-black tracking-tighter leading-none text-slate-900">INNOVATE<span
+                                class="text-green-600">OS</span></h2>
                     </div>
                     <p class="text-slate-500 leading-relaxed max-w-sm font-medium">
-                        Sistem intelijen lingkungan real-time. Melindungi ekosistem bumi dengan analisis data dan pemantauan satelit 24/7.
+                        Sistem intelijen lingkungan real-time. Melindungi ekosistem bumi dengan analisis data dan
+                        pemantauan satelit 24/7.
                     </p>
                     <div class="flex gap-4">
-                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-github"></i></a>
-                        <a href="#" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i
+                                class="fab fa-twitter"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i
+                                class="fab fa-github"></i></a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all hover:-translate-y-1 shadow-sm"><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
 
                 <div class="md:col-span-3 space-y-6">
                     <h3 class="font-black text-slate-900 uppercase tracking-widest text-xs">Menu Platform</h3>
                     <ul class="space-y-4 text-slate-500 font-bold text-sm">
-                        <li><a href="#home" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i> Home</a></li>
-                        <li><a href="simulator.html" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>Simulasi Bencana</a></li>
-                        <li><a href="bencana.html" class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i> Crisis Archive</a></li>
+                        <li><a href="#home"
+                                class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i
+                                    class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>
+                                Home</a></li>
+                        <li><a href="simulator.html"
+                                class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i
+                                    class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>Simulasi
+                                Bencana</a></li>
+                        <li><a href="bencana.html"
+                                class="hover:text-green-600 transition-colors flex items-center gap-2 group"><i
+                                    class="fas fa-angle-right text-[10px] text-slate-300 group-hover:text-green-500 group-hover:translate-x-1 transition-all"></i>
+                                Crisis Archive</a></li>
                     </ul>
                 </div>
 
                 <div class="md:col-span-4 space-y-6">
                     <h3 class="font-black text-slate-900 uppercase tracking-widest text-xs">System Status</h3>
-                    <div class="bg-white border border-slate-200 p-5 rounded-2xl flex items-start gap-4 shadow-sm hover:border-green-300 hover:shadow-md transition-all cursor-default">
+                    <div
+                        class="bg-white border border-slate-200 p-5 rounded-2xl flex items-start gap-4 shadow-sm hover:border-green-300 hover:shadow-md transition-all cursor-default">
                         <div class="mt-1 relative flex h-3 w-3 shrink-0">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                         </div>
                         <div>
                             <p class="text-sm font-black text-slate-800">All Systems Operational</p>
-                            <p class="text-xs text-slate-500 mt-1 font-medium">Satelit LEO tersinkronisasi. Last update: <span class="text-green-600 font-bold">12ms ago</span></p>
+                            <p class="text-xs text-slate-500 mt-1 font-medium">Satelit LEO tersinkronisasi. Last update:
+                                <span class="text-green-600 font-bold">12ms ago</span>
+                            </p>
                         </div>
                     </div>
-                    <button onclick="scrollToId('contact')" class="w-full py-4 px-4 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    <button onclick="window.location.href='contact.html'"
+                        class="w-full py-4 px-4 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
                         Buat Laporan Darurat
                     </button>
                 </div>
             </div>
 
             <div class="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-[10px] md:text-xs font-black uppercase text-slate-400 tracking-widest text-center md:text-left">© 2026 INNOVATE OS. Environmental Intelligence.</p>
+                <p
+                    class="text-[10px] md:text-xs font-black uppercase text-slate-400 tracking-widest text-center md:text-left">
+                    © 2026 AETHER CODE | UNMER. Environmental Intelligence.</p>
                 <div class="flex gap-6 text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-wider">
                     <a href="#" class="hover:text-slate-900 transition-colors">Privacy</a>
                     <a href="#" class="hover:text-slate-900 transition-colors">Terms</a>
@@ -293,65 +587,274 @@
         </div>
     </footer>
 
-    <script>
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+    <div id="aiModal"
+        class="fixed inset-0 z-[10000] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-500">
+        <div class="absolute inset-0 bg-slate-200/60 backdrop-blur-xl"></div>
 
-        // --- MULTI IMAGE PREVIEW LOGIC ---
+        <div id="aiModalContent"
+            class="relative w-full max-w-4xl max-h-[95vh] overflow-y-auto bg-white rounded-[2rem] shadow-2xl border border-slate-200 scale-95 opacity-0 transition-all duration-500">
+
+            <div
+                class="sticky top-0 z-10 px-6 md:px-8 py-5 border-b border-slate-100 flex items-center justify-between bg-white/80 backdrop-blur-md">
+                <div class="flex items-center gap-3">
+                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                    <h3 class="font-bold text-slate-500 uppercase tracking-[0.2em] text-[10px]">Neural Link Validation
+                    </h3>
+                </div>
+                <span
+                    class="text-[9px] font-mono text-emerald-600/70 font-bold hidden sm:block">SECURE_UPLINK_v.5.1</span>
+            </div>
+
+            <div class="p-6 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+
+                <div
+                    class="relative w-full h-48 sm:h-64 md:h-[350px] bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 group">
+                    <img id="aiModalImage" src="" class="w-full h-full object-cover opacity-80 mix-blend-multiply">
+                    <div class="scanner-line"></div>
+                    <div class="absolute inset-0 pointer-events-none border border-emerald-500/20 m-4 rounded-xl"></div>
+                    <div
+                        class="absolute top-4 left-4 text-[8px] font-mono text-emerald-600 opacity-60 uppercase tracking-widest font-bold">
+                        Target_Visual_Acquisition
+                    </div>
+                </div>
+
+                <div class="flex flex-col justify-center space-y-6 md:space-y-8">
+                    <div>
+                        <h4
+                            class="text-2xl md:text-3xl font-black text-slate-900 italic tracking-tighter leading-none mb-3">
+                            VERIFIKASI <span class="text-emerald-500">AI.</span>
+                        </h4>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">
+                            Algoritma mendeteksi kecocokan visual <span class="text-slate-900 font-bold">98.2%</span>
+                            dengan indeks anomali satelit.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end border-b border-slate-100 pb-2">
+                            <span
+                                class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Koordinat</span>
+                            <span class="text-xs md:text-sm font-bold text-slate-800" id="aiModalLokasi">-</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3 md:gap-4">
+                            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                                <p class="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Estimasi
+                                    Korban</p>
+                                <p class="text-xl md:text-2xl font-black text-emerald-600">120+ <span
+                                        class="text-[10px] text-slate-400 font-medium">Jiwa</span></p>
+                            </div>
+                            <div class="bg-red-50 p-4 rounded-2xl border border-red-100">
+                                <p class="text-[8px] font-black text-red-400 uppercase tracking-widest mb-1">Level
+                                    Risiko</p>
+                                <p class="text-xl md:text-2xl font-black text-red-600 uppercase italic">Kritis</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-2 pt-2">
+                        <button onclick="triggerSuccess()" id="btnConfirmAI"
+                            class="w-full py-4 bg-slate-900 text-white rounded-xl font-black uppercase tracking-[0.2em] text-[10px] hover:bg-emerald-500 transition-all shadow-xl active:scale-95">
+                            Konfirmasi Laporan
+                        </button>
+                        <button onclick="closeAIModal()"
+                            class="w-full py-3 text-slate-400 font-bold uppercase tracking-widest text-[9px] hover:text-slate-900 transition-colors">
+                            Batalkan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="successModal"
+        class="fixed inset-0 z-[10001] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
+
+        <div class="absolute inset-0 bg-slate-200/70 backdrop-blur-2xl"></div>
+
+        <div id="successModalContent"
+            class="relative w-full max-w-md bg-white rounded-[3rem] p-12 text-center scale-90 opacity-0 transition-all duration-500 shadow-[0_32px_64px_-15px_rgba(0,0,0,0.1)]">
+
+            <div
+                class="w-20 h-20 bg-slate-900 rounded-full mx-auto mb-8 flex items-center justify-center text-emerald-400 shadow-2xl relative">
+                <div class="absolute inset-0 rounded-full border border-emerald-500/30 animate-ping"></div>
+                <i class="fas fa-check text-2xl"></i>
+            </div>
+
+            <h3 class="text-3xl font-black italic text-slate-900 tracking-tighter mb-3 uppercase">
+                Transmission Sent.
+            </h3>
+
+            <p class="text-slate-500 font-medium mb-10 leading-relaxed text-sm">
+                Laporan Anda telah berhasil dienkripsi dan dikirim ke
+                <span class="text-slate-900 font-bold underline decoration-emerald-500/30 decoration-4">
+                    INNOVATE Intelligence Core
+                </span>.
+            </p>
+
+            <button onclick="closeSuccessModal()"
+                class="w-full py-4 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] hover:bg-emerald-600 active:scale-95 transition-all shadow-xl shadow-slate-200">
+                Selesai & Kembali
+            </button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+            tl.from(".header-content", {
+                y: -50,
+                opacity: 0,
+                duration: 1.2
+            })
+                .from(".left-column", {
+                    x: -100,
+                    opacity: 0,
+                    duration: 1
+                }, "-=0.8")
+                .from(".right-column", {
+                    x: 100,
+                    opacity: 0,
+                    duration: 1
+                }, "-=1")
+                .from("#reportForm > div, #reportForm > button", {
+                    y: 20,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1
+                }, "-=0.5");
+        });
+
+        function previewImages() {
+            const file = document.getElementById('fileInput').files[0];
+            const preview = document.getElementById('imagePreviewGrid');
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.innerHTML = `
+                    <div class="relative w-20 h-20 rounded-xl overflow-hidden border-2 border-emerald-500 animate-bounce-short">
+                        <img src="${e.target.result}" class="w-full h-full object-cover">
+                    </div>
+                `;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes bounce-short {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .animate-bounce-short {
+            animation: bounce-short 0.5s ease-in-out;
+        }
+    </style>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('translate-x-full');
+        }
+
+        let firstImageDataUrl = null;
+
         function previewImages() {
             const input = document.getElementById('fileInput');
             const grid = document.getElementById('imagePreviewGrid');
             grid.innerHTML = "";
 
-            if (input.files) {
-                const filesArray = Array.from(input.files).slice(0, 4); // Limit to 4 images
-                filesArray.forEach((file, index) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const div = document.createElement('div');
-                        div.className = "h-20 md:h-24 rounded-xl overflow-hidden border border-slate-200 shadow-sm relative group animate-fade-in";
-                        div.innerHTML = `
-                            <img src="${e.target.result}" class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-red-500/80 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all cursor-pointer" onclick="this.parentElement.remove()">
-                                <i class="fas fa-trash-alt text-white"></i>
-                            </div>
-                        `;
-                        grid.appendChild(div);
-                    }
-                    reader.readAsDataURL(file);
-                });
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    firstImageDataUrl = e.target.result;
+                    grid.innerHTML = `
+                    <div class="h-24 w-24 rounded-2xl overflow-hidden border border-emerald-500/30 shadow-2xl animate-pulse relative">
+                        <img src="${e.target.result}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-emerald-500/10"></div>
+                    </div>
+                `;
+                }
+                reader.readAsDataURL(input.files[0]);
             }
         }
 
-        // --- FORM SUBMIT SIMULATION ---
         function handleFormSubmit(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
             const originalContent = btn.innerHTML;
-            
+
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-circle-notch animate-spin"></i> <span>Mengirim Laporan...</span>';
-            btn.classList.replace('bg-slate-900', 'bg-emerald-500');
+            btn.innerHTML = '<i class="fas fa-circle-notch animate-spin mr-2"></i> Sinkronisasi Satelit...';
 
             setTimeout(() => {
-                alert('Laporan Berhasil Terkirim! Sistem Intelijen INNOVATE OS akan memverifikasi bukti visual Anda segera.');
+                document.getElementById('aiModalLokasi').innerText = document.getElementById('inputLokasi').value;
+                document.getElementById('aiModalImage').src = firstImageDataUrl || "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800";
+
+                const modal = document.getElementById('aiModal');
+                const content = document.getElementById('aiModalContent');
+                modal.classList.add('modal-active');
+                setTimeout(() => {
+                    content.classList.add('modal-scale-up');
+                    content.style.opacity = "1";
+                }, 50);
+
                 btn.disabled = false;
                 btn.innerHTML = originalContent;
-                btn.classList.replace('bg-emerald-500', 'bg-slate-900');
-                e.target.reset();
-                document.getElementById('imagePreviewGrid').innerHTML = "";
-            }, 2000);
+            }, 1500);
         }
 
-        // --- GSAP REVEAL ---
-        window.onload = () => {
-            gsap.registerPlugin(ScrollTrigger);
-            gsap.utils.toArray('.gs-reveal').forEach((elem, i) => {
-                gsap.from(elem, {
-                    scrollTrigger: { trigger: elem, start: "top 90%" },
-                    y: 30, opacity: 0, duration: 0.8, delay: i * 0.1, ease: "power2.out"
-                });
-            });
-        };
+        function closeAIModal() {
+            const modal = document.getElementById('aiModal');
+            const content = document.getElementById('aiModalContent');
+            content.classList.remove('modal-scale-up');
+            content.style.opacity = "0";
+            setTimeout(() => modal.classList.remove('modal-active'), 300);
+        }
+
+        function triggerSuccess() {
+            const btnConfirm = document.getElementById('btnConfirmAI');
+            btnConfirm.disabled = true;
+            btnConfirm.innerHTML = '<i class="fas fa-sync animate-spin"></i> UPLOADING...';
+
+            setTimeout(() => {
+                closeAIModal();
+
+                setTimeout(() => {
+                    const sModal = document.getElementById('successModal');
+                    const sContent = document.getElementById('successModalContent');
+                    sModal.classList.add('modal-active');
+                    setTimeout(() => {
+                        sContent.classList.add('modal-scale-up');
+                        sContent.style.opacity = "1";
+                    }, 50);
+                }, 400);
+            }, 1500);
+        }
+        function closeSuccessModal() {
+            const sModal = document.getElementById('successModal');
+            const sContent = document.getElementById('successModalContent');
+
+            sContent.classList.remove('modal-scale-up');
+            sContent.style.opacity = "0";
+            sModal.style.opacity = "0";
+
+            setTimeout(() => {
+                sModal.classList.remove('modal-active');
+                sModal.classList.add('invisible');
+            }, 300);
+        }
     </script>
 </body>
+
 </html>

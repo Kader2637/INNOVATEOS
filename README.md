@@ -1,69 +1,76 @@
-# 🌍 INNOVATE OS— Environmental Intelligence System
+# 🌍 INNOVATE OS — Global Environmental Intelligence System
 
-**INNOVATE OS** adalah platform intelijen lingkungan berbasis web statis yang menggabungkan visualisasi **Satelit LEO**, simulasi **AI Vision**, dan pengelolaan **Big Data** krisis lingkungan di Indonesia. 
+[![Platform](https://img.shields.io/badge/Platform-Web-emerald?style=for-the-badge)](https://github.com/)
+[![Framework](https://img.shields.io/badge/Architecture-Static_Modern-blue?style=for-the-badge)](https://tailwindcss.com/)
+[![Security](https://img.shields.io/badge/Protocol-AETHER_CODE-black?style=for-the-badge)](https://github.com/)
 
-Proyek ini dibangun menggunakan **HTML5**, **Tailwind CSS**, dan berbagai library animasi modern untuk menciptakan pengalaman pengguna yang interaktif dan futuristik tanpa memerlukan instalasi backend yang rumit.
+**INNOVATE OS** adalah platform intelijen lingkungan mutakhir yang dirancang untuk memantau, mensimulasikan, dan mengarsipkan anomali ekosistem secara global. Menggabungkan estetika futuristik dengan fungsionalitas tingkat tinggi melalui pemrosesan **Big Data**, **Predictive Analytics**, dan protokol **AETHER CODE**.
 
 ---
 
 ## 🚀 Fitur Utama
 
 ### 1. **Neural Intelligence Dashboard (Home)**
-* **AI Vision Scanner:** Simulasi pemindaian citra satelit real-time untuk mendeteksi anomali vegetasi dan deforestasi.
-* **Real-time Event Toasts:** Sistem notifikasi dinamis yang memunculkan peringatan bencana terbaru secara otomatis.
-* **Danger Marquee Strip:** Baris peringatan bahaya (Siaga 1, Waspada) yang bergerak untuk informasi cepat.
+* **AI Vision Scanner:** Simulasi pemindaian citra satelit real-time untuk deteksi anomali vegetasi dan deforestasi.
+* **Security Protocol Strip:** *Marquee* status keamanan real-time (Siaga 1, Waspada) untuk mendukung keputusan cepat.
 
-### 2. **3D Global Monitoring (About)**
-* **Interactive 3D Earth:** Visualisasi Bumi berputar dengan atmosfer dinamis menggunakan CSS murni.
-* **Mission Overview:** Penjelasan filosofi dan jembatan antara teknologi luar angkasa dengan kelestarian alam.
+### 2. **Disaster Impact Calculator (Kalkulator)**
+* **Mathematical Analytics:** Kalkulator khusus pada `kalkulator.html` untuk menghitung estimasi kerugian finansial (Triliun IDR) dan dampak radius secara presisi.
+* **Parameter Logic:** Mengolah input angka mentah menjadi data statistik yang mudah dipahami.
 
-### 3. **Advanced Simulation Lab (Simulasi)**
-* **8 Skenario Bencana:** Simulasi detail untuk Banjir, Longsor, Gempa, Kebakaran, Limbah, Badai, Erupsi, dan Polusi.
-* **Impact Engine:** Kalkulasi estimasi korban jiwa, kerugian infrastruktur (Triliun Rupiah), dan radius kerusakan dalam KM².
-* **Interactive Projections:** Grafik garis eskalasi bencana berbasis waktu menggunakan Chart.js.
+### 3. **Advanced Simulation Lab (Simulator)**
+* **Disaster Scenario Engine:** Lab simulasi pada `simulator.html` yang memvisualisasikan 8 skenario bencana (Banjir, Api, Polusi, dll).
+* **Interactive Projections:** Visualisasi grafik eskalasi bencana berbasis waktu menggunakan **Chart.js**.
 
-### 4. **Crisis Archive & Data (Data)**
-* **Big Data Management:** Arsip kejadian krisis nasional yang dilengkapi dengan sistem **Pagination** (6 kartu per halaman).
-* **Live Filtering:** Fitur pencarian wilayah dan kategori bencana yang bekerja secara instan.
-* **Intelligence Modal:** Pop-up detail yang menampilkan koordinat GPS, status mitigasi, dan tren statistik 7 hari terakhir.
+### 4. **3D Global Monitoring (About)**
+* **Interactive 3D Earth:** Visualisasi bola dunia interaktif berbasis CSS 3D dengan rotasi atmosferik dinamis pada `about.html`.
 
-### 5. **Public Reporting Center (Contact)**
-* **Multi-Image Upload Preview:** Warga dapat mengunggah bukti foto kejadian dengan preview instan sebelum dikirim ke sistem.
-* **Grey-Scale Map Integration:** Peta lokasi markas besar yang disesuaikan dengan estetika dashboard.
+### 5. **Crisis Archive & Big Data (Data)**
+* **Smart Database Management:** Arsip kejadian krisis nasional dengan sistem navigasi *seamless pagination* di `data.html`.
+* **Live Filtering:** Fitur penyaringan cerdas berdasarkan kategori insiden secara instan.
+
+### 6. **AI-Powered Reporting Center (Contact)**
+* **Neural Link Validation:** Sistem verifikasi cerdas pada `contact.html` yang mensimulasikan pemindaian AI terhadap bukti foto yang diunggah.
+* **Autonomous Verification:** AI melakukan *cross-check* visual dengan indeks anomali satelit (98.2% Accuracy) sebelum data dikirim.
+* **Metadata Extraction:** Ekstraksi otomatis koordinat lokasi, estimasi korban, dan level risiko melalui modal interaktif yang futuristik.
+* **AETHER Encryption:** Protokol pengiriman data yang dienkripsi secara visual untuk menjamin integritas laporan intelijen publik.
+
+
 
 ---
 
 ## 🛠️ Teknologi & Library
 
-* **Framework:** HTML5 / Vanilla JavaScript.
-* **Styling:** [Tailwind CSS CDN](https://tailwindcss.com/) (JIT Engine).
-* **Animations:** [GSAP](https://greensock.com/gsap/) (ScrollTrigger & Staggered Motion).
-* **Data Visualization:** [Chart.js](https://www.chartjs.org/).
-* **Slider/Carousel:** [Flickity](https://flickity.metafizzy.co/).
-* **Icons:** FontAwesome 6.4.0.
-* **Fonts:** Plus Jakarta Sans & Space Grotesk (Google Fonts).
+| Component | Technology | Use Case |
+| :--- | :--- | :--- |
+| **Core** | HTML5 / Vanilla JavaScript | Logika sistem & AI Validation Simulation |
+| **Styling** | Tailwind CSS (JIT Engine) | UI/UX Futuristik & Responsivitas |
+| **Animations** | GSAP & ScrollTrigger | Motion graphics & scanner effects |
+| **Data Viz** | Chart.js | Grafik statistik & Impact Engine |
+| **Carousel** | Flickity | Navigasi konten interaktif |
+| **Iconography** | FontAwesome 6.4.0 | Elemen visual & simbol sistem |
 
 ---
 
 ## 💻 Cara Menjalankan Proyek
 
-Karena proyek ini menggunakan teknologi statis, tidak diperlukan instalasi server atau `npm install`.
-
-1. **Download/Clone** semua file proyek.
-2. Pastikan Anda memiliki koneksi internet (untuk memuat library dari CDN).
-3. **Buka File:**
-   * Klik kanan pada `index.html` -> Open with Browser (Chrome/Edge/Firefox).
-   * **Rekomendasi:** Gunakan ekstensi **Live Server** di VS Code untuk pengalaman navigasi antar halaman yang lebih mulus.
+1.  **Clone Repository:**
+    ```bash
+    git clone [https://github.com/username/innovate-os.git](https://github.com/username/innovate-os.git)
+    ```
+2.  **Koneksi Internet:** Diperlukan untuk memuat library via CDN.
+3.  **Eksekusi:** Buka `index.html` menggunakan browser atau ekstensi **Live Server** di VS Code.
 
 ---
 
-## 📂 Struktur File
+## 📂 Struktur Direktori
 
 ```text
 innovate-os/
-├── index.html       # Halaman Utama (Hero & AI Vision)
-├── about.html       # Halaman Visi & 3D Earth
-├── simulator.html    # Laboratorium Simulasi 8 Bencana
+├── index.html       # Gateway Utama (AI Vision Hub)
+├── about.html       # Dokumentasi Misi & 3D Global Earth
+├── kalkulator.html  # Impact Engine Calculator
+├── simulator.html   # Advanced Simulation Lab
 ├── data.html        # Database Arsip & Pagination
-├── contact.html     # Pusat Laporan & Kontak
-└── README.md        # Dokumentasi Proyek
+├── contact.html     # Reporting Center & AI Validation Link
+└── README.md        # Dokumentasi Teknis Sistem
