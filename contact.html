@@ -568,9 +568,9 @@
                         </div>
                     </div>
                     <button onclick="window.location.href='contact.html'"
-    class="w-full py-4 px-4 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
-    Buat Laporan Darurat
-</button>
+                        class="w-full py-4 px-4 bg-slate-900 text-white rounded-xl font-black text-xs uppercase tracking-widest hover:bg-green-600 transition-all shadow-lg hover:shadow-xl hover:-translate-y-1">
+                        Buat Laporan Darurat
+                    </button>
                 </div>
             </div>
 
@@ -588,72 +588,77 @@
     </footer>
 
     <div id="aiModal"
-        class="fixed inset-0 z-[10000] flex items-center justify-center p-4 md:p-6 opacity-0 invisible transition-all duration-500">
+        class="fixed inset-0 z-[10000] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-500">
         <div class="absolute inset-0 bg-slate-200/60 backdrop-blur-xl"></div>
 
         <div id="aiModalContent"
-            class="relative w-full max-w-4xl bg-white rounded-[2rem] shadow-2xl border border-slate-200 overflow-hidden scale-95 opacity-0 transition-all duration-500">
+            class="relative w-full max-w-4xl max-h-[95vh] overflow-y-auto bg-white rounded-[2rem] shadow-2xl border border-slate-200 scale-95 opacity-0 transition-all duration-500">
 
-            <div class="px-8 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <div
+                class="sticky top-0 z-10 px-6 md:px-8 py-5 border-b border-slate-100 flex items-center justify-between bg-white/80 backdrop-blur-md">
                 <div class="flex items-center gap-3">
                     <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                     <h3 class="font-bold text-slate-500 uppercase tracking-[0.2em] text-[10px]">Neural Link Validation
                     </h3>
                 </div>
-                <span class="text-[9px] font-mono text-emerald-600/70 font-bold">SECURE_UPLINK_v.5.1</span>
+                <span
+                    class="text-[9px] font-mono text-emerald-600/70 font-bold hidden sm:block">SECURE_UPLINK_v.5.1</span>
             </div>
 
-            <div class="p-8 md:p-12 grid md:grid-cols-2 gap-10">
+            <div class="p-6 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
+
                 <div
-                    class="relative w-full h-64 md:h-[350px] bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 group">
+                    class="relative w-full h-48 sm:h-64 md:h-[350px] bg-slate-100 rounded-2xl overflow-hidden border border-slate-200 group">
                     <img id="aiModalImage" src="" class="w-full h-full object-cover opacity-80 mix-blend-multiply">
                     <div class="scanner-line"></div>
                     <div class="absolute inset-0 pointer-events-none border border-emerald-500/20 m-4 rounded-xl"></div>
                     <div
-                        class="absolute top-6 left-6 text-[8px] font-mono text-emerald-600 opacity-60 uppercase tracking-widest font-bold">
+                        class="absolute top-4 left-4 text-[8px] font-mono text-emerald-600 opacity-60 uppercase tracking-widest font-bold">
                         Target_Visual_Acquisition
                     </div>
                 </div>
 
-                <div class="flex flex-col justify-center space-y-8">
+                <div class="flex flex-col justify-center space-y-6 md:space-y-8">
                     <div>
-                        <h4 class="text-3xl font-black text-slate-900 italic tracking-tighter leading-none mb-2">
-                            VERIFIKASI
-                            <span class="text-emerald-500">AI.</span>
+                        <h4
+                            class="text-2xl md:text-3xl font-black text-slate-900 italic tracking-tighter leading-none mb-3">
+                            VERIFIKASI <span class="text-emerald-500">AI.</span>
                         </h4>
-                        <p class="text-slate-500 text-sm font-medium leading-relaxed">Algoritma mendeteksi kecocokan
-                            visual 98.2% dengan indeks anomali satelit.</p>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed">
+                            Algoritma mendeteksi kecocokan visual <span class="text-slate-900 font-bold">98.2%</span>
+                            dengan indeks anomali satelit.
+                        </p>
                     </div>
 
                     <div class="space-y-4">
                         <div class="flex justify-between items-end border-b border-slate-100 pb-2">
                             <span
-                                class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Koordinat</span>
-                            <span class="text-sm font-bold text-slate-800" id="aiModalLokasi">-</span>
+                                class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Koordinat</span>
+                            <span class="text-xs md:text-sm font-bold text-slate-800" id="aiModalLokasi">-</span>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-2 gap-3 md:gap-4">
                             <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
-                                <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Estimasi
+                                <p class="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Estimasi
                                     Korban</p>
-                                <p class="text-2xl font-black text-emerald-600">120+ <span
-                                        class="text-[10px] text-slate-400">Jiwa</span></p>
+                                <p class="text-xl md:text-2xl font-black text-emerald-600">120+ <span
+                                        class="text-[10px] text-slate-400 font-medium">Jiwa</span></p>
                             </div>
                             <div class="bg-red-50 p-4 rounded-2xl border border-red-100">
-                                <p class="text-[9px] font-black text-red-400 uppercase tracking-widest mb-1">Level
+                                <p class="text-[8px] font-black text-red-400 uppercase tracking-widest mb-1">Level
                                     Risiko</p>
-                                <p class="text-2xl font-black text-red-600 uppercase italic">Kritis</p>
+                                <p class="text-xl md:text-2xl font-black text-red-600 uppercase italic">Kritis</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-3">
+                    <div class="flex flex-col gap-2 pt-2">
                         <button onclick="triggerSuccess()" id="btnConfirmAI"
-                            class="w-full py-4 bg-slate-900 text-white rounded-xl font-black uppercase tracking-[0.2em] text-[10px] hover:bg-emerald-500 transition-all shadow-xl shadow-slate-200">
+                            class="w-full py-4 bg-slate-900 text-white rounded-xl font-black uppercase tracking-[0.2em] text-[10px] hover:bg-emerald-500 transition-all shadow-xl active:scale-95">
                             Konfirmasi Laporan
                         </button>
                         <button onclick="closeAIModal()"
-                            class="w-full py-4 text-slate-400 font-bold uppercase tracking-widest text-[9px] hover:text-slate-900 transition-colors">
+                            class="w-full py-3 text-slate-400 font-bold uppercase tracking-widest text-[9px] hover:text-slate-900 transition-colors">
                             Batalkan
                         </button>
                     </div>
@@ -661,7 +666,6 @@
             </div>
         </div>
     </div>
-
     <div id="successModal"
         class="fixed inset-0 z-[10001] flex items-center justify-center p-4 opacity-0 invisible transition-all duration-300">
 
