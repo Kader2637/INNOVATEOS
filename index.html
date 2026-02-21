@@ -844,7 +844,8 @@
             document.getElementById('modalImg').src = d.img;
             document.getElementById('modalTypeBadge').innerText = type;
 
-            const gal = document.getElementById('modalGallery'); 
+            const gal = document.getElementById('modalGallery');
+            const tipe = d.tipe.toLowerCase().trim(); 
 
             if (d.tipe === "Buang Sampah") {
                 gal.innerHTML = `
