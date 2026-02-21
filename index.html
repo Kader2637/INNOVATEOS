@@ -1084,7 +1084,7 @@
             document.getElementById('modalTypeBadge').innerText = type;
 
             const gal = document.getElementById('modalGallery');
-             let images = "";
+            let images = "";
 
 
             if (type === "Buang Sampah") {
@@ -1096,37 +1096,51 @@
                 `;
             } else if (type === "Limbah Pabrik") {
                 images = `
-                    <div onclick="changeImage('image/gambarLimbahPabrik1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarLimbahPabrik1.jpg" class="w-full h-full object-cover"></div>
-                    <div onclick="changeImage('image/gambarLimbahPabrik2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarLimbahPabrik2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/limbah1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/limbah1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/limbah2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/limbah2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/limbah3.jpeg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/limbah4.jpeg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/limbah4.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/limbah3.jpg" class="w-full h-full object-cover"></div>
                 `;
             } else if (type === "Deforestasi") {
                 images = `
-                    <div onclick="changeImage('image/gambarDeforestasi1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarDeforestasi1.jpg" class="w-full h-full object-cover"></div>
-                    <div onclick="changeImage('image/gambarDeforestasi2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarDeforestasi2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/deforestasi1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/deforestasi1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/deforestasi2.jpeg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/deforestasi2.jpeg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/deforestasi3.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/deforestasi3.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/deforestasi4.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/deforestasi4.jpg" class="w-full h-full object-cover"></div>
                 `;
             } else if (type === "Kebakaran") {
                 images = `
-                    <div onclick="changeImage('image/gambarKebakaran1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran1.jpg" class="w-full h-full object-cover"></div>
-                    <div onclick="changeImage('image/gambarKebakaran2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/kebakaran1.jpeg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran1.jpeg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/kebakaran2.webp')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran2.webp" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/kebakaran3.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/kebakaran4.webp')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarKebakaran2.webp" class="w-full h-full object-cover"></div>
                 `;
             } else if (type === "Tambahan Illegal") {
                 images = `
-                    <div onclick="changeImage('image/gambarTambahanIllegal1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTambahanIllegal1.jpg" class="w-full h-full object-cover"></div>
-                    <div onclick="changeImage('image/gambarTambahanIllegal2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTambahanIllegal2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/tambang1.jpeg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/tambang1.jpeg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/tambang2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/tambang2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/tambang3.jpeg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/tambang3.jpeg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/tambang4.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/tambang4.jpg" class="w-full h-full object-cover"></div>
                 `;
             } else if (type === "Emisi Kendaraan") {
                 images = `
                     <div onclick="changeImage('image/gambarEmisiKendaraan1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarEmisiKendaraan1.jpg" class="w-full h-full object-cover"></div>
                     <div onclick="changeImage('image/gambarEmisiKendaraan2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarEmisiKendaraan2.jpg" class="w-full h-full object-cover"></div>
-                `;
+                    <div onclick="changeImage('image/gambarEmisiKendaraan2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarEmisiKendaraan2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarEmisiKendaraan2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarEmisiKendaraan2.jpg" class="w-full h-full object-cover"></div>
+                    `;
             } else if (type === "Tumpahan Minyak") {
                 images = `
                     <div onclick="changeImage('image/gambarTumpahanMinyak1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTumpahanMinyak1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarTumpahanMinyak2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTumpahanMinyak2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarTumpahanMinyak2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTumpahanMinyak2.jpg" class="w-full h-full object-cover"></div>
                     <div onclick="changeImage('image/gambarTumpahanMinyak2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarTumpahanMinyak2.jpg" class="w-full h-full object-cover"></div>
                 `;
             } else if (type === "Overfishing") {
                 images = `
                     <div onclick="changeImage('image/gambarOverfishing1.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarOverfishing1.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarOverfishing2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarOverfishing2.jpg" class="w-full h-full object-cover"></div>
+                    <div onclick="changeImage('image/gambarOverfishing2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarOverfishing2.jpg" class="w-full h-full object-cover"></div>
                     <div onclick="changeImage('image/gambarOverfishing2.jpg')" class="aspect-square bg-slate-200 rounded-xl overflow-hidden cursor-pointer"><img src="image/gambarOverfishing2.jpg" class="w-full h-full object-cover"></div>
                 `;
             }
