@@ -866,8 +866,7 @@
                     <div class="absolute top-0 left-0 w-1 h-full bg-blue-500 animate-pulse"></div>
                     <p class="text-[9px] text-blue-400 font-bold uppercase tracking-widest mb-2"><i
                             class="fas fa-terminal mr-1"></i> System Observation</p>
-                    <p id="simModalAiDesc" class="text-slate-300 font-mono text-xs leading-relaxed">Mengunduh data
-                        observasi...</p>
+                    <p id="simModalAiDesc" class="text-xs font-mono text-blue-600 leading-relaxed"></p>
                 </div>
 
                 <div class="mb-6 bg-emerald-50 border border-emerald-100 rounded-2xl p-5 shadow-sm">
@@ -1216,7 +1215,6 @@
         }
 
         let simChartInstance = null;
-
         function openSimModal(id) {
             const data = SIM_DATA.find(x => x.id === id);
             if (!data) return;
@@ -1228,10 +1226,12 @@
             document.getElementById('simModalImg').src = data.img;
             document.getElementById('simModalIcon').className = `fas fa-${data.icon} animate-pulse`;
 
+            // Bagian System Observation
             const aiDescElement = document.getElementById('simModalAiDesc');
             aiDescElement.innerHTML = "";
+
             let i = 0;
-            const fullText = data.aiDesc || "";
+            const fullText = data.aiDesc || "Menganalisis data...";
 
             function typeWriter() {
                 if (i < fullText.length) {
@@ -1243,28 +1243,26 @@
 
             const mitigasiContainer = document.getElementById('simModalMitigasi');
             mitigasiContainer.innerHTML = "";
-
-            if (data.mitigasi && data.mitigasi.length > 0) {
+            if (data.mitigasi) {
                 data.mitigasi.forEach((step, index) => {
                     mitigasiContainer.innerHTML += `
                 <li class="flex items-start gap-3 bg-white p-3 rounded-xl border border-emerald-100 shadow-sm transition-all hover:translate-x-2 duration-300" style="transition-delay: ${index * 100}ms">
-                    <div class="mt-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-200">
+                    <div class="mt-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0">
                         <i class="fas fa-check text-[10px]"></i>
                     </div>
                     <span class="text-slate-700 text-xs font-semibold">${step}</span>
-                </li>
-            `;
+                </li>`;
                 });
             }
 
             const modal = document.getElementById('simModal');
             const card = document.getElementById('simModalCard');
-
             modal.classList.remove('hidden');
+
             setTimeout(() => {
                 card.classList.remove('scale-95', 'opacity-0');
                 card.classList.add('scale-100', 'opacity-100');
-                typeWriter();
+                typeWriter(); // Memulai teks observasi
             }, 10);
 
             renderSimChart();
