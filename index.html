@@ -36,6 +36,25 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        #simModalAiDesc::after {
+            content: "|";
+            animation: blink 0.8s infinite;
+            color: #3b82f6;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+        }
+
         :root {
             --primary: #16a34a;
             --secondary: #0f172a;
@@ -806,7 +825,92 @@
             </div>
         </div>
     </div>
+    <div id="simModal"
+        class="fixed inset-0 z-[9999] hidden flex items-center justify-center p-4 md:p-6 transition-all duration-300">
+        <div class="absolute inset-0 bg-slate-900/80 backdrop-blur-md" onclick="closeSimModal()"></div>
 
+        <div id="simModalCard"
+            class="relative bg-white w-full max-w-6xl max-h-[95vh] overflow-y-auto rounded-[2.5rem] shadow-2xl scale-95 opacity-0 transition-all duration-300 ease-out border border-slate-100 flex flex-col md:flex-row">
+
+            <button onclick="closeSimModal()"
+                class="absolute top-5 right-5 w-10 h-10 bg-white/20 backdrop-blur-xl border border-white/50 rounded-full flex items-center justify-center text-white hover:bg-red-500 hover:border-red-500 transition-all z-50 shadow-lg md:text-slate-500 md:bg-slate-100 md:border-transparent">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <div class="w-full md:w-2/5 relative h-72 md:h-auto overflow-hidden bg-slate-900 shrink-0">
+                <img id="simModalImg" src=""
+                    class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-screen">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8 right-8 z-10">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/20 backdrop-blur-md text-blue-300 text-[9px] font-black uppercase tracking-[0.2em] rounded-full mb-3 border border-blue-500/30">
+                        <i id="simModalIcon" class="fas fa-microchip animate-pulse"></i> TARGET IDENTIFIED
+                    </div>
+                    <h2 id="simModalTitle"
+                        class="text-3xl md:text-4xl font-black text-white leading-tight mb-2 tracking-tighter">Judul
+                    </h2>
+                    <p id="simModalDesc" class="text-slate-400 text-sm font-medium leading-relaxed">Deskripsi singkat
+                    </p>
+                </div>
+            </div>
+
+            <div class="w-full md:w-3/5 p-6 md:p-10 bg-slate-50 flex flex-col overflow-y-auto custom-scrollbar">
+
+                <h3
+                    class="text-slate-400 font-bold text-[10px] uppercase tracking-[0.3em] mb-4 border-b border-slate-200 pb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span> Real-time AI Diagnostic
+                </h3>
+
+                <div class="mb-5 bg-slate-900 rounded-2xl p-5 shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1 h-full bg-blue-500 animate-pulse"></div>
+                    <p class="text-[9px] text-blue-400 font-bold uppercase tracking-widest mb-2"><i
+                            class="fas fa-terminal mr-1"></i> System Observation</p>
+                    <p id="simModalAiDesc" class="text-slate-300 font-mono text-xs leading-relaxed">Mengunduh data
+                        observasi...</p>
+                </div>
+
+                <div class="mb-6 bg-emerald-50 border border-emerald-100 rounded-2xl p-5 shadow-sm">
+                    <p class="text-[9px] text-emerald-700 font-black uppercase tracking-widest mb-3"><i
+                            class="fas fa-shield-alt mr-1"></i> Recommended Protocols (Mitigasi)</p>
+                    <ul id="simModalMitigasi" class="text-slate-600 text-xs font-medium space-y-2.5 list-none">
+                    </ul>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div
+                        class="bg-white p-4 md:p-5 rounded-2xl border border-red-100 shadow-sm relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 w-16 h-16 bg-red-50 rounded-full blur-xl -mr-4 -mt-4 transition-transform group-hover:scale-150">
+                        </div>
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1 relative z-10">
+                            Proyeksi Kerugian</p>
+                        <p id="simModalCost" class="text-xl md:text-2xl font-black text-red-600 relative z-10">Rp 0</p>
+                    </div>
+                    <div
+                        class="bg-white p-4 md:p-5 rounded-2xl border border-amber-100 shadow-sm relative overflow-hidden group">
+                        <div
+                            class="absolute top-0 right-0 w-16 h-16 bg-amber-50 rounded-full blur-xl -mr-4 -mt-4 transition-transform group-hover:scale-150">
+                        </div>
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1 relative z-10">
+                            Skala Dampak</p>
+                        <p id="simModalDam"
+                            class="text-lg md:text-xl font-black text-amber-600 relative z-10 leading-tight">-</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Eskalasi Insiden (5
+                            Tahun)</span>
+                    </div>
+                    <div class="h-32 w-full">
+                        <canvas id="simChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         function selectFilter(value, text, iconClass, textColor, bgColor) {
             document.getElementById('typeFilter').value = value;
@@ -821,24 +925,79 @@
         const KOTA = ["Jakarta", "Bandung", "Surabaya", "Medan", "Makassar", "Bali", "Papua", "Aceh"];
         const TIPE = ["Banjir", "Kebakaran", "Gempa", "Polusi"];
         const IMGS = [
-            "https://images.unsplash.com/photo-1545048702-793eec75f20c?w=800", // Banjir
-            "https://images.unsplash.com/photo-1602989981628-9366e5d8b2d1?w=800", // Kebakaran
-            "https://images.unsplash.com/photo-1584839083835-9ae733f2c300?w=800", // Gempa
-            "https://images.unsplash.com/photo-1611273233597-393290234731?w=800"  // Polusi
+            "image/data-bencana/banjirpapua1.jpg", // Banjir
+            "image/data-bencana/kebakaran1.jpeg", // Kebakaran
+            "image/data-bencana/gempa1.jpeg", // Gempa
+            "image/data-bencana/emisi4.jpg"  // Polusi
         ];
 
-        // --- DATA SETUP IMPACT SIMULATOR (8 ITEMS) ---
+        // --- DATA SETUP IMPACT SIMULATOR
         const SIM_DATA = [
-            { id: 's1', title: "Buang Sampah", icon: "trash", color: "red", desc: "Penyumbatan drainase utama.", cost: "15 Miliar", dam: "1200 KK Banjir", img: IMGS[0] },
-            { id: 's2', title: "Limbah Pabrik", icon: "industry", color: "slate", desc: "Pencemaran air tanah B3.", cost: "120 Miliar", dam: "500 Keracunan", img: IMGS[3] },
-            { id: 's3', title: "Deforestasi", icon: "tree", color: "green", desc: "Longsor di daerah hulu pegunungan.", cost: "450 Miliar", dam: "3 Desa Hancur", img: IMGS[1] },
-            { id: 's4', title: "Kebakaran", icon: "fire", color: "orange", desc: "Kabut asap lintas batas.", cost: "500 Miliar", dam: "Sekolah Diliburkan", img: IMGS[1] },
-            { id: 's5', title: "Tambang Ilegal", icon: "hammer", color: "yellow", desc: "Kerusakan struktur tanah masif.", cost: "2 Triliun", dam: "Ekosistem Mati", img: IMGS[2] },
-            { id: 's6', title: "Emisi Kendaraan", icon: "smog", color: "gray", desc: "Penyakit ISPA di kota besar.", cost: "80 Miliar", dam: "Kesehatan Menurun", img: IMGS[3] },
-            { id: 's7', title: "Tumpahan Minyak", icon: "oil-well", color: "black", desc: "Laut tercemar minyak mentah.", cost: "1.5 Triliun", dam: "Nelayan Rugi", img: IMGS[0] },
-            { id: 's8', title: "Overfishing", icon: "fish", color: "blue", desc: "Ketidakseimbangan ekosistem laut.", cost: "300 Miliar", dam: "Terumbu Rusak", img: IMGS[0] }
+            {
+                id: 's1', title: "Krisis Drainase Kota", icon: "trash", color: "red",
+                desc: "Penyumbatan drainase utama akibat penumpukan material non-organik.",
+                aiDesc: "Sistem mendeteksi anomali: 78% jalur air utama tertutup tumpukan plastik padat. Simulasi topografi menunjukkan curah hujan >50mm/jam akan langsung memicu banjir bandang di 4 kecamatan sekitarnya.",
+                mitigasi: ["Terjunkan alat berat pengeruk di sektor A-1.", "Aktifkan pompa penyedot air otomatis.", "Broadcast SMS peringatan evakuasi ke radius 2KM."],
+                cost: "15 Miliar", dam: "1200 KK Terdampak",
+                img: "https://sudutkota.id/wp-content/uploads/2025/10/IMG_20251022_192637.jpg"
+            },
+            {
+                id: 's2', title: "Kebocoran Limbah B3", icon: "industry", color: "slate",
+                desc: "Pencemaran air tanah akibat limbah beracun industri.",
+                aiDesc: "Spektrometri air hilir sungai menunjukkan lonjakan Merkuri (Hg) dan Timbal (Pb) 400% di atas ambang batas. Ekosistem air tawar diproyeksikan mati dalam 12 hari jika aliran tidak dihentikan.",
+                mitigasi: ["Segel darurat pipa pembuangan utama pabrik.", "Injeksi agen biokimia penetral ke aliran sungai.", "Kirim tim medis untuk screening warga pesisir."],
+                cost: "120 Miliar", dam: "500 Terindikasi Keracunan",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTR_pxQLHMPugUJCJs9-a8vam4vhQA3g9JYtA&s"
+            },
+            {
+                id: 's3', title: "Deforestasi Masif", icon: "tree", color: "green",
+                desc: "Pembabatan hutan di daerah hulu pegunungan.",
+                aiDesc: "Citra satelit LEO mengonfirmasi hilangnya 450 hektar tutupan kanopi hutan dalam 72 jam terakhir. Indeks kestabilan tanah menurun drastis, meningkatkan risiko longsor tipe translasi sebesar 85%.",
+                mitigasi: ["Kirim drone patroli untuk memetakan jalur logistik ilegal.", "Pembuatan terasering darurat pencegah longsor.", "Operasi penegakan hukum aparat gabungan."],
+                cost: "450 Miliar", dam: "Risiko Longsor 3 Desa",
+                img: "https://siej.or.id/sites/default/files/styles/medium/public/articles/Deforestasi%20%281%29.png?itok=BQ8CLkZi"
+            },
+            {
+                id: 's4', title: "Hotspot Kebakaran", icon: "fire", color: "orange",
+                desc: "Eskalasi titik panas menjadi kebakaran lahan gambut.",
+                aiDesc: "Sensor inframerah termal mendeteksi 45 titik api cluster baru. Analisis arah angin memprediksi kabut asap akan menyelimuti area bandara internasional dan 2 kota tetangga dalam 6 jam.",
+                mitigasi: ["Deploy 3 unit helikopter Water Bombing.", "Perintahkan traktor membuat sekat bakar (fireline).", "Distribusikan respirator N95 ke klinik daerah."],
+                cost: "500 Miliar", dam: "ISPU Kritis, Sekolah Tutup",
+                img: "https://gdb.voanews.com/f39ef1d1-c419-406a-a896-c7dea751ed78_w1080_h608.jpg"
+            },
+            {
+                id: 's5', title: "Eksploitasi Tambang", icon: "hammer", color: "yellow",
+                desc: "Kerusakan struktur tanah akibat tambang ilegal.",
+                aiDesc: "Pemindaian LiDAR mendeteksi perubahan kontur ekstrem sedalam 20 meter. Vegetasi sekitar mati akibat asidifikasi tanah (pH < 4.0). Ada risiko runtuhnya batuan induk di dekat pemukiman.",
+                mitigasi: ["Penutupan paksa dan penyitaan aset tambang.", "Remediasi lapisan atas tanah (topsoil).", "Evakuasi pekerja tambang dan warga sekitar."],
+                cost: "2 Triliun", dam: "Ekosistem Hancur Total",
+                img: "https://cdn.antaranews.com/cache/1200x800/2016/08/20160830antarafoto-tambang-emas-di-taman-nasional-29082016-fs-2.jpg"
+            },
+            {
+                id: 's6', title: "Krisis Kualitas Udara", icon: "smog", color: "gray",
+                desc: "Akumulasi emisi gas buang kendaraan dan pabrik.",
+                aiDesc: "Jaringan sensor kota mendeteksi AQI menembus level 200 (Sangat Tidak Sehat). Lapisan inversi termal di atmosfer mencegah polutan terurai, menciptakan efek kubah asap beracun.",
+                mitigasi: ["Aktivasi protokol ganjil-genap darurat.", "Tembakkan water-mist generator di jalan protokol.", "Tutup sementara operasional pabrik berbahan batu bara."],
+                cost: "80 Miliar", dam: "Lonjakan Kasus ISPA",
+                img: "https://radarjabar.disway.id/upload/24ba0e6c8945fa9d6b2f56e254a097aa.jpg"
+            },
+            {
+                id: 's7', title: "Tumpahan Minyak Mentah", icon: "oil-well", color: "red",
+                desc: "Kebocoran pipa bawah laut atau insiden kapal tanker.",
+                aiDesc: "Analisis gelombang mikro mendeteksi lapisan minyak seluas 12 mil persegi. Arus dominan memproyeksikan tumpahan akan menghantam zona konservasi terumbu karang dan habitat mangrove dalam 14 jam.",
+                mitigasi: ["Deploy kapal penyapu minyak (oil skimmer).", "Pasang Oil Boom sepanjang 5KM di bibir konservasi.", "Penyemprotan chemical dispersant skala terkontrol."],
+                cost: "1.5 Triliun", dam: "Mati Massal Biota Laut",
+                img: "https://indomgb.s3.amazonaws.com/wp-content/uploads/2019/07/22061239/tumpahan-3-minyak-pertamina-karawang-nelayan.jpeg"
+            },
+            {
+                id: 's8', title: "Overfishing Destruktif", icon: "fish", color: "blue",
+                desc: "Aktivitas kapal penangkap ikan menggunakan pukat harimau.",
+                aiDesc: "Pelacakan radar laut memonitor 5 kapal tanpa izin menyapu dasar laut di area terumbu karang. Regenerasi populasi ikan terancam kolaps, memicu efek domino pada rantai makanan.",
+                mitigasi: ["Intersepsi oleh kapal patroli TNI AL.", "Penenggelaman terumbu karang buatan (biorock).", "Pemberlakuan kuota tangkap ketat & zonasi ulang."],
+                cost: "300 Miliar", dam: "Kehancuran Terumbu Karang",
+                img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSVb37Ng5ctmq2R1mo1osOnAIaY_Y9TF410g&s"
+            }
         ];
-
         let DB_MASTER = [];
         // Generate 60 Items Dummy Data
         for (let i = 1; i <= 60; i++) {
@@ -1017,7 +1176,6 @@
             });
         }
 
-        // --- RENDER SIMULATOR ---
         function renderSim() {
             const colorMap = {
                 red: { bg: 'bg-red-50', text: 'text-red-600', hoverBg: 'group-hover:bg-red-600', border: 'hover:border-red-500', shadow: 'group-hover:shadow-red-100', line: 'bg-red-600' },
@@ -1033,7 +1191,7 @@
             document.getElementById('simulatorGrid').innerHTML = SIM_DATA.map(s => {
                 const c = colorMap[s.color] || colorMap.blue;
                 return `
-                <div onclick="openSim('${s.id}')"
+                <div onclick="openSimModal('${s.id}')"
                     class="group relative bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 ${c.border} shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer overflow-hidden flex flex-col items-center text-center hover:-translate-y-3">
                     
                     <div class="absolute inset-0 ${c.bg} opacity-0 group-hover:opacity-40 transition-opacity duration-500"></div>
@@ -1050,13 +1208,111 @@
                     <div class="absolute bottom-0 left-0 w-full h-2 ${c.line} scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left"></div>
                     
                     <div class="mt-6 relative z-10 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-                        <span class="text-[10px] font-black uppercase tracking-[0.2em] ${c.text}">Mulai Simulasi <i class="fas fa-arrow-right ml-1"></i></span>
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] ${c.text}">Mulai Analisis AI <i class="fas fa-crosshairs ml-1 animate-spin-slow"></i></span>
                     </div>
                 </div>
                 `;
             }).join('');
         }
 
+        let simChartInstance = null;
+
+        function openSimModal(id) {
+            const data = SIM_DATA.find(x => x.id === id);
+            if (!data) return;
+
+            document.getElementById('simModalTitle').innerText = data.title;
+            document.getElementById('simModalDesc').innerText = data.desc;
+            document.getElementById('simModalCost').innerText = "IDR " + data.cost;
+            document.getElementById('simModalDam').innerText = data.dam;
+            document.getElementById('simModalImg').src = data.img;
+            document.getElementById('simModalIcon').className = `fas fa-${data.icon} animate-pulse`;
+
+            const aiDescElement = document.getElementById('simModalAiDesc');
+            aiDescElement.innerHTML = "";
+            let i = 0;
+            const fullText = data.aiDesc || "";
+
+            function typeWriter() {
+                if (i < fullText.length) {
+                    aiDescElement.innerHTML += fullText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 15);
+                }
+            }
+
+            const mitigasiContainer = document.getElementById('simModalMitigasi');
+            mitigasiContainer.innerHTML = "";
+
+            if (data.mitigasi && data.mitigasi.length > 0) {
+                data.mitigasi.forEach((step, index) => {
+                    mitigasiContainer.innerHTML += `
+                <li class="flex items-start gap-3 bg-white p-3 rounded-xl border border-emerald-100 shadow-sm transition-all hover:translate-x-2 duration-300" style="transition-delay: ${index * 100}ms">
+                    <div class="mt-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0 shadow-lg shadow-emerald-200">
+                        <i class="fas fa-check text-[10px]"></i>
+                    </div>
+                    <span class="text-slate-700 text-xs font-semibold">${step}</span>
+                </li>
+            `;
+                });
+            }
+
+            const modal = document.getElementById('simModal');
+            const card = document.getElementById('simModalCard');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                card.classList.remove('scale-95', 'opacity-0');
+                card.classList.add('scale-100', 'opacity-100');
+                typeWriter();
+            }, 10);
+
+            renderSimChart();
+            if (typeof lenis !== 'undefined') lenis.stop();
+        }
+        function closeSimModal() {
+            const modal = document.getElementById('simModal');
+            const card = document.getElementById('simModalCard');
+
+            card.classList.add('scale-95', 'opacity-0');
+            card.classList.remove('scale-100', 'opacity-100');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                // Reset teks AI agar saat buka yang lain tidak bertumpuk
+                document.getElementById('simModalAiDesc').innerHTML = "Initializing...";
+                if (typeof lenis !== 'undefined') lenis.start();
+            }, 300);
+        }
+        function renderSimChart() {
+            const ctx = document.getElementById('simChart').getContext('2d');
+            if (simChartInstance) simChartInstance.destroy();
+
+            const randomData = Array.from({ length: 5 }, () => Math.floor(Math.random() * 80) + 20);
+            randomData.sort((a, b) => a - b);
+
+            simChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Thn 1', 'Thn 2', 'Thn 3', 'Thn 4', 'Thn 5'],
+                    datasets: [{
+                        label: 'Proyeksi Dampak (%)',
+                        data: randomData,
+                        backgroundColor: 'rgba(239, 68, 68, 0.8)', // Merah Danger
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { border: { dash: [4, 4] }, grid: { color: '#f1f5f9' }, beginAtZero: true }
+                    }
+                }
+            });
+        }
         function initMarquee() {
             const content = DB_MASTER.slice(0, 15).map(i => `<div class="mx-8 font-bold text-slate-700 text-xs uppercase flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>${i.kota}: ${i.tipe} TERMONITOR</div>`).join('');
             document.getElementById('running-text-box').innerHTML = content + content;
