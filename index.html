@@ -36,43 +36,33 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Container Terminal */
         .terminal-window {
-            background: #0f172a;
-            /* Slate 900 */
+            background: #020617;
             border: 1px solid #1e293b;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
         }
 
         #simModalAiDesc {
-            color: #e2e8f0;
-            /* Slate 200 (Putih Abu-abu) */
-            font-family: 'Fira Code', 'Courier New', monospace;
-            text-shadow: 0 0 5px rgba(226, 232, 240, 0.3);
+            color: #cbd5e1;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
             min-height: 80px;
-            /* Biar container gak kempis saat kosong */
-            display: block !important;
-            opacity: 1 !important;
+            border-right: 8px solid #94a3b8;
+            padding-right: 4px;
+            display: inline;
+            animation: blink-cursor 0.8s step-end infinite;
         }
 
-        /* Efek Kursor Berkedip di akhir teks */
-        #simModalAiDesc::after {
-            content: "|";
-            animation: blink 1s infinite;
-            color: #3b82f6;
-            /* Kursor biru */
-            margin-left: 2px;
-        }
+        @keyframes blink-cursor {
 
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
+            from,
+            to {
+                border-color: transparent
             }
 
             50% {
-                opacity: 0;
+                border-color: #94a3b8
             }
         }
 
@@ -883,12 +873,16 @@
                     <span class="w-2 h-2 bg-emerald-500 rounded-full animate-ping"></span> Real-time AI Diagnostic
                 </h3>
 
-                <div class="mb-5 bg-slate-900 rounded-2xl p-5 shadow-inner relative">
-                    <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                    <p class="text-[9px] text-blue-400 font-bold uppercase tracking-widest mb-2">
-                        <i class="fas fa-terminal mr-1"></i> System Observation
-                    </p>
-                    <p id="simModalAiDesc" class="text-xs font-mono text-blue-400 leading-relaxed"></p>
+                <div class="mb-5 terminal-window rounded-2xl p-5 border border-slate-800">
+                    <div class="flex justify-between items-center mb-3 border-b border-slate-800 pb-2">
+                        <div class="flex gap-1.5">
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-700 "></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-700"></div>
+                        </div>
+                        <p class="text-[9px] text-slate-500 font-mono tracking-widest uppercase">Console | Aether code</p>
+                    </div>
+                    <p id="simModalAiDesc"></p>
                 </div>
 
                 <div class="mb-6 bg-emerald-50 border border-emerald-100 rounded-2xl p-5 shadow-sm">
@@ -1241,7 +1235,20 @@
             const data = SIM_DATA.find(x => x.id === id);
             if (!data) return;
 
-            // Reset konten
+            const aiDescElement = document.getElementById('simModalAiDesc');
+            aiDescElement.textContent = "";
+
+            let i = 0;
+            const fullText = data.aiDesc || "";
+
+            function typeWriter() {
+                if (i < fullText.length) {
+                    aiDescElement.textContent += fullText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 20);
+                }
+            }
+
             document.getElementById('simModalTitle').innerText = data.title;
             document.getElementById('simModalDesc').innerText = data.desc;
             document.getElementById('simModalCost').innerText = "IDR " + data.cost;
@@ -1249,50 +1256,29 @@
             document.getElementById('simModalImg').src = data.img;
             document.getElementById('simModalIcon').className = `fas fa-${data.icon} animate-pulse`;
 
-            const aiDescElement = document.getElementById('simModalAiDesc');
-            aiDescElement.innerHTML = "";
-            let i = 0;
-            const fullText = data.aiDesc || "";
-
-            function typeWriter() {
-                const aiDescElement = document.getElementById('simModalAiDesc');
-                aiDescElement.style.opacity = "1";
-                aiDescElement.style.display = "block";
-
-                if (i < fullText.length) {
-                    aiDescElement.textContent += fullText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 25);
-                }
-            }
-
             const mitigasiContainer = document.getElementById('simModalMitigasi');
             mitigasiContainer.innerHTML = data.mitigasi.map(step => `
-        <li class="flex items-start gap-3 bg-white p-3 rounded-xl border border-emerald-100 shadow-sm">
+        <li class="flex items-start gap-3 bg-white p-3 rounded-xl border border-slate-100 shadow-sm">
             <div class="mt-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0">
                 <i class="fas fa-check text-[10px]"></i>
             </div>
-            <span class="text-slate-700 text-[11px] md:text-xs font-semibold">${step}</span>
+            <span class="text-slate-700 text-xs font-bold leading-tight">${step}</span>
         </li>
     `).join('');
 
             const modal = document.getElementById('simModal');
             const card = document.getElementById('simModalCard');
 
-            // Tampilkan modal
             modal.classList.remove('hidden');
-            modal.classList.add('flex'); // Pastikan flex aktif untuk centering
+            modal.classList.add('flex');
 
             setTimeout(() => {
-                card.classList.remove('scale-95', 'opacity-0', 'translate-y-10');
-                card.classList.add('scale-100', 'opacity-100', 'translate-y-0');
-                typeWriter();
+                card.classList.remove('scale-95', 'opacity-0');
+                card.classList.add('scale-100', 'opacity-100');
+                setTimeout(typeWriter, 400);
             }, 50);
 
-            renderSimChart();
-
-            // Lock scroll body agar modal bisa di-scroll di mobile
-            document.body.style.overflow = 'hidden';
+            if (window.renderSimChart) renderSimChart();
             if (typeof lenis !== 'undefined') lenis.stop();
         }
         function closeSimModal() {
