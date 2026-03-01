@@ -5,14 +5,14 @@
 [![Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://innovate-os.vercel.app/)
 [![Security](https://img.shields.io/badge/Protocol-AETHER_CODE-black?style=for-the-badge)](https://github.com/)
 
-**INNOVATE OS** adalah platform intelijen lingkungan mutakhir yang dirancang untuk memantau, mensimulasikan, dan mengarsipkan anomali ekosistem secara global. Menggabungkan estetika futuristik dengan fungsionalitas tingkat tinggi melalui pemrosesan **Big Data**, **Predictive Analytics**, dan protokol **AETHER CODE**.
+**INNOVATE OS** adalah platform **Web Edukasi Interaktif** yang dikembangkan oleh **AETHER CODE | UNMER**. Project ini dirancang untuk memberikan pemahaman mendalam mengenai krisis lingkungan global melalui visualisasi data modern dan alat simulasi yang dapat dioperasikan langsung oleh pengguna.
+
 
 ---
 
 ## 🌐 Live Access
-Sistem ini telah dideploy secara otomatis dan dapat diakses melalui:
+Akses platform edukasi melalui tautan berikut:
 👉 **[https://innovate-os.vercel.app/](https://innovate-os.vercel.app/)**
-
 
 ---
 
