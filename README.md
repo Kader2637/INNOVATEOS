@@ -63,7 +63,7 @@ Akses platform edukasi melalui tautan berikut:
 
 1.  **Clone Repository:**
     ```bash
-    git clone [https://github.com/username/innovate-os.git](https://github.com/username/innovate-os.git)
+    git clone [https://github.com/Kader2637/INNOVATEOS.git](https://github.com/Kader2637/INNOVATEOS.git)
     ```
 2.  **Koneksi Internet:** Diperlukan untuk memuat library via CDN.
 3.  **Eksekusi:** Buka `index.html` menggunakan browser atau ekstensi **Live Server** di VS Code.
