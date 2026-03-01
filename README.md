@@ -1,12 +1,21 @@
 # 🌍 INNOVATE OS — Global Environmental Intelligence System
 
-[![Platform](https://img.shields.io/badge/Platform-Web-emerald?style=for-the-badge)](https://github.com/)
+[![Platform](https://img.shields.io/badge/Platform-Web-emerald?style=for-the-badge)](https://innovate-os.vercel.app/)
 [![Framework](https://img.shields.io/badge/Architecture-Static_Modern-blue?style=for-the-badge)](https://tailwindcss.com/)
+[![Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://innovate-os.vercel.app/)
 [![Security](https://img.shields.io/badge/Protocol-AETHER_CODE-black?style=for-the-badge)](https://github.com/)
 
 **INNOVATE OS** adalah platform intelijen lingkungan mutakhir yang dirancang untuk memantau, mensimulasikan, dan mengarsipkan anomali ekosistem secara global. Menggabungkan estetika futuristik dengan fungsionalitas tingkat tinggi melalui pemrosesan **Big Data**, **Predictive Analytics**, dan protokol **AETHER CODE**.
 
 ---
+
+## 🌐 Live Access
+Sistem ini telah dideploy secara otomatis dan dapat diakses melalui:
+👉 **[https://innovate-os.vercel.app/](https://innovate-os.vercel.app/)**
+
+
+---
+
 
 ## 🚀 Fitur Utama
 
@@ -34,8 +43,6 @@
 * **Autonomous Verification:** AI melakukan *cross-check* visual dengan indeks anomali satelit (98.2% Accuracy) sebelum data dikirim.
 * **Metadata Extraction:** Ekstraksi otomatis koordinat lokasi, estimasi korban, dan level risiko melalui modal interaktif yang futuristik.
 * **AETHER Encryption:** Protokol pengiriman data yang dienkripsi secara visual untuk menjamin integritas laporan intelijen publik.
-
-
 
 ---
 
