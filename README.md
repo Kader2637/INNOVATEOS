@@ -1,83 +1,165 @@
-# 🌍 INNOVATE OS — Global Environmental Intelligence System
+<p align="center">
 
-[![Platform](https://img.shields.io/badge/Platform-Web-emerald?style=for-the-badge)](https://innovate-os.vercel.app/)
-[![Framework](https://img.shields.io/badge/Architecture-Static_Modern-blue?style=for-the-badge)](https://tailwindcss.com/)
-[![Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://innovate-os.vercel.app/)
-[![Security](https://img.shields.io/badge/Protocol-AETHER_CODE-black?style=for-the-badge)](https://github.com/)
+# 🌍 INNOVATE OS
 
-**INNOVATE OS** adalah platform **Web Edukasi Interaktif** yang dikembangkan oleh **AETHER CODE | UNMER**. Project ini dirancang untuk memberikan pemahaman mendalam mengenai krisis lingkungan global melalui visualisasi data modern dan alat simulasi yang dapat dioperasikan langsung oleh pengguna.
+### Global Environmental Intelligence System  
+### 🛰️ AETHER CODE | UNMER
 
+<br>
 
----
+<a href="https://innovate-os.vercel.app/" target="_blank">
+  <img src="https://img.shields.io/badge/🚀_LIVE_DEMO-Open_Web_App-00C853?style=for-the-badge&logo=vercel&logoColor=white" />
+</a>
+<a href="https://github.com/Kader2637/INNOVATEOS" target="_blank">
+  <img src="https://img.shields.io/badge/💻_SOURCE_CODE-GitHub_Repository-181717?style=for-the-badge&logo=github" />
+</a>
 
-## 🌐 Live Access
-Akses platform edukasi melalui tautan berikut:
-👉 **[https://innovate-os.vercel.app/](https://innovate-os.vercel.app/)**
+<br><br>
 
----
+<img src="https://img.shields.io/badge/Platform-Web_App-0A66C2?style=flat-square" />
+<img src="https://img.shields.io/badge/Architecture-Static_Modern-8E24AA?style=flat-square" />
+<img src="https://img.shields.io/badge/Deployment-Vercel-000000?style=flat-square&logo=vercel" />
+<img src="https://img.shields.io/badge/Security-AETHER_Protocol-37474F?style=flat-square" />
 
-
-## 🚀 Fitur Utama
-
-### 1. **Neural Intelligence Dashboard (Home)**
-* **AI Vision Scanner:** Simulasi pemindaian citra satelit real-time untuk deteksi anomali vegetasi dan deforestasi.
-* **Security Protocol Strip:** *Marquee* status keamanan real-time (Siaga 1, Waspada) untuk mendukung keputusan cepat.
-
-### 2. **Disaster Impact Calculator (Kalkulator)**
-* **Mathematical Analytics:** Kalkulator khusus pada `kalkulator.html` untuk menghitung estimasi kerugian finansial (Triliun IDR) dan dampak radius secara presisi.
-* **Parameter Logic:** Mengolah input angka mentah menjadi data statistik yang mudah dipahami.
-
-### 3. **Advanced Simulation Lab (Simulator)**
-* **Disaster Scenario Engine:** Lab simulasi pada `simulator.html` yang memvisualisasikan 8 skenario bencana (Banjir, Api, Polusi, dll).
-* **Interactive Projections:** Visualisasi grafik eskalasi bencana berbasis waktu menggunakan **Chart.js**.
-
-### 4. **3D Global Monitoring (About)**
-* **Interactive 3D Earth:** Visualisasi bola dunia interaktif berbasis CSS 3D dengan rotasi atmosferik dinamis pada `about.html`.
-
-### 5. **Crisis Archive & Big Data (Data)**
-* **Smart Database Management:** Arsip kejadian krisis nasional dengan sistem navigasi *seamless pagination* di `data.html`.
-* **Live Filtering:** Fitur penyaringan cerdas berdasarkan kategori insiden secara instan.
-
-### 6. **AI-Powered Reporting Center (Contact)**
-* **Neural Link Validation:** Sistem verifikasi cerdas pada `contact.html` yang mensimulasikan pemindaian AI terhadap bukti foto yang diunggah.
-* **Autonomous Verification:** AI melakukan *cross-check* visual dengan indeks anomali satelit (98.2% Accuracy) sebelum data dikirim.
-* **Metadata Extraction:** Ekstraksi otomatis koordinat lokasi, estimasi korban, dan level risiko melalui modal interaktif yang futuristik.
-* **AETHER Encryption:** Protokol pengiriman data yang dienkripsi secara visual untuk menjamin integritas laporan intelijen publik.
+</p>
 
 ---
 
-## 🛠️ Teknologi & Library
+## 🔗 Project Links
 
-| Component | Technology | Use Case |
-| :--- | :--- | :--- |
-| **Core** | HTML5 / Vanilla JavaScript | Logika sistem & AI Validation Simulation |
-| **Styling** | Tailwind CSS (JIT Engine) | UI/UX Futuristik & Responsivitas |
-| **Animations** | GSAP & ScrollTrigger | Motion graphics & scanner effects |
-| **Data Viz** | Chart.js | Grafik statistik & Impact Engine |
-| **Carousel** | Flickity | Navigasi konten interaktif |
-| **Iconography** | FontAwesome 6.4.0 | Elemen visual & simbol sistem |
+| Platform | Link |
+|----------|------|
+| 🚀 **Live Application** | https://innovate-os.vercel.app/ |
+| 💻 **GitHub Repository** | https://github.com/Kader2637/INNOVATEOS |
 
 ---
 
-## 💻 Cara Menjalankan Proyek
+## 🧠 About The Project
 
-1.  **Clone Repository:**
-    ```bash
-    git clone [https://github.com/Kader2637/INNOVATEOS.git](https://github.com/Kader2637/INNOVATEOS.git)
-    ```
-2.  **Koneksi Internet:** Diperlukan untuk memuat library via CDN.
-3.  **Eksekusi:** Buka `index.html` menggunakan browser atau ekstensi **Live Server** di VS Code.
+**INNOVATE OS** adalah platform **Web Edukasi Interaktif** yang dikembangkan oleh tim  
+**AETHER CODE | UNMER** untuk meningkatkan kesadaran global terhadap krisis lingkungan.
+
+Platform ini memadukan teknologi visual modern dengan simulasi berbasis AI untuk menyajikan pemahaman komprehensif mengenai dampak bencana dan perubahan lingkungan global.
+
+### ✨ Platform Highlights
+- 🌍 Real-time environmental visualization
+- 🤖 AI-powered interactive simulations
+- 📊 Mathematical disaster impact analysis
+- 🛰️ Futuristic global monitoring system
+- 📡 Smart crisis reporting technology
 
 ---
 
-## 📂 Struktur Direktori
+## 🚀 Core Features
+
+### 🧠 Neural Intelligence Dashboard
+- AI satellite vision simulation
+- Real-time environmental anomaly detection
+- Security alert status system
+
+### 🧮 Disaster Impact Calculator
+- Financial loss estimation engine
+- Impact radius computation
+- Smart statistical interpretation
+
+### 🧪 Advanced Simulation Laboratory
+- 8 interactive disaster scenarios
+- Time-based escalation charts
+- Dynamic visual analytics powered by Chart.js
+
+### 🌎 3D Global Monitoring System
+- Interactive rotating 3D Earth
+- Atmospheric animation effects
+- Immersive global visualization
+
+### 🗂️ Crisis Archive & Intelligence Data
+- National crisis database
+- Seamless pagination system
+- Real-time category filtering
+
+### 🤖 AI Reporting & Verification Center
+- AI-based image validation simulation
+- Automated visual cross-checking
+- Metadata extraction system
+- Secure encrypted reporting pipeline
+
+---
+
+## 🛠️ Tech Stack
+
+### 🎨 Frontend & Core
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-FFCA28?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
+</p>
+
+### 📊 Visualization & Animation
+<p align="center">
+  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Flickity-333333?style=for-the-badge"/>
+</p>
+
+### 🎯 UI Assets
+<p align="center">
+  <img src="https://img.shields.io/badge/Font_Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Google_Fonts-4285F4?style=for-the-badge&logo=googlefonts&logoColor=white"/>
+</p>
+
+---
+
+## 💻 Installation & Usage
+
+INNOVATE OS adalah **Static Web Application**, tidak memerlukan backend server.
+
+### 🔹 Run Locally
+
+1️⃣ Clone repository
+```bash
+git clone https://github.com/Kader2637/INNOVATEOS.git
+```
+
+2️⃣ Buka folder project
+
+3️⃣ Jalankan file `index.html` di browser  
+atau gunakan **Live Server** di VS Code
+
+---
+
+## 📂 Project Structure
 
 ```text
 innovate-os/
-├── index.html       # Gateway Utama (AI Vision Hub)
-├── about.html       # Dokumentasi Misi & 3D Global Earth
-├── kalkulator.html  # Impact Engine Calculator
-├── simulator.html   # Advanced Simulation Lab
-├── data.html        # Database Arsip & Pagination
-├── contact.html     # Reporting Center & AI Validation Link
-└── README.md        # Dokumentasi Teknis Sistem
+├── index.html
+├── about.html
+├── kalkulator.html
+├── simulator.html
+├── data.html
+├── contact.html
+└── README.md
+```
+
+---
+
+## 📱 Responsive Design
+
+- 🖥️ Desktop → Advanced analytical dashboard layout  
+- 📱 Mobile → Adaptive UI with touch-friendly controls  
+
+---
+
+## 🔐 Security Framework
+
+- AETHER Visual Encryption  
+- Secure Public Reporting Pipeline  
+- Intelligent Data Validation System  
+- Futuristic Threat Monitoring Interface  
+
+---
+
+## ❤️ Developed By
+
+### 🚀 AETHER CODE | UNMER
+*Innovating Environmental Intelligence Through Technology*
